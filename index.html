@@ -1,0 +1,4027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<title>Rumba Fastfood & Dhindo Ghar</title>
+<meta name="description" content="Rumba Fastfood and Dhindo Ghar - Food, rooms and hospitality in Gajuri, Dhading.">
+<meta name="keywords" content="Rumba Fastfood, Dhindo Ghar, Gajuri, Dhading, hotel, food, rooms">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Times New Roman",Times,serif;
+    background:#f5f3ef;
+    color:#111827;
+    overflow-x:hidden;
+}
+
+button,
+input,
+textarea,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* =========================
+   VARIABLES
+========================= */
+
+:root{
+    --navy:#101827;
+    --navy2:#172338;
+    --purple:#56346b;
+    --purple2:#76518c;
+    --cream:#f5f3ef;
+    --white:#ffffff;
+    --gold:#c9a45c;
+    --muted:#737373;
+    --border:#dedbd4;
+    --green:#26734d;
+    --red:#b63b3b;
+    --shadow:0 18px 50px rgba(16,24,39,.10);
+    --radius:22px;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+#pageLoader{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:var(--navy);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.5s;
+}
+
+.loaderBox{
+    text-align:center;
+    color:white;
+}
+
+.loaderLogo{
+    width:76px;
+    height:76px;
+    border:1px solid rgba(255,255,255,.3);
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    margin:auto;
+    font-size:25px;
+    letter-spacing:2px;
+}
+
+.loaderLine{
+    width:130px;
+    height:2px;
+    background:rgba(255,255,255,.15);
+    margin:25px auto 12px;
+    overflow:hidden;
+}
+
+.loaderLine span{
+    display:block;
+    width:45%;
+    height:100%;
+    background:var(--gold);
+    animation:load 1.1s infinite;
+}
+
+@keyframes load{
+    0%{transform:translateX(-100%)}
+    100%{transform:translateX(300%)}
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:9000;
+    background:rgba(245,243,239,.94);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(0,0,0,.07);
+}
+
+.nav{
+    width:min(1440px,94%);
+    margin:auto;
+    height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:max-content;
+}
+
+.logoMark{
+    width:45px;
+    height:45px;
+    background:var(--navy);
+    color:white;
+    border-radius:15px;
+    display:grid;
+    place-items:center;
+    font-size:18px;
+    letter-spacing:1px;
+}
+
+.logoText strong{
+    display:block;
+    font-size:19px;
+}
+
+.logoText span{
+    display:block;
+    font-size:11px;
+    color:var(--muted);
+    margin-top:2px;
+}
+
+.navLinks{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.navLinks a{
+    padding:11px 14px;
+    border-radius:12px;
+    font-size:15px;
+    transition:.2s;
+}
+
+.navLinks a:hover{
+    background:white;
+}
+
+.navRight{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.navBtn{
+    border:0;
+    background:var(--navy);
+    color:white;
+    padding:11px 15px;
+    border-radius:13px;
+    font-size:14px;
+}
+
+.loginBtn{
+    border:1px solid var(--border);
+    background:white;
+    color:var(--navy);
+}
+
+.mobileMenuBtn{
+    display:none;
+    border:1px solid var(--border);
+    background:white;
+    width:44px;
+    height:44px;
+    border-radius:13px;
+    font-size:24px;
+    line-height:1;
+}
+
+.mobileMenu{
+    display:none;
+    position:absolute;
+    top:82px;
+    right:3%;
+    width:230px;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:10px;
+    box-shadow:var(--shadow);
+}
+
+.mobileMenu.open{
+    display:block;
+}
+
+.mobileMenu a,
+.mobileMenu button{
+    width:100%;
+    display:block;
+    border:0;
+    background:none;
+    text-align:left;
+    padding:13px;
+    border-radius:12px;
+    font-size:16px;
+}
+
+.mobileMenu a:hover,
+.mobileMenu button:hover{
+    background:#f4f2ee;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    width:min(1440px,94%);
+    margin:25px auto 0;
+    min-height:590px;
+    position:relative;
+    overflow:hidden;
+    border-radius:32px;
+    background:var(--navy);
+}
+
+.banner{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transition:opacity .7s;
+    pointer-events:none;
+}
+
+.banner.active{
+    opacity:1;
+}
+
+.banner img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.bannerOverlay{
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(90deg,
+        rgba(7,13,25,.88) 0%,
+        rgba(7,13,25,.57) 42%,
+        rgba(7,13,25,.12) 100%);
+}
+
+.heroContent{
+    position:absolute;
+    z-index:2;
+    left:7%;
+    top:50%;
+    transform:translateY(-50%);
+    max-width:600px;
+    color:white;
+}
+
+.heroEyebrow{
+    color:#e7cf96;
+    font-size:14px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-size:clamp(42px,6vw,82px);
+    line-height:.94;
+    font-weight:500;
+    margin-bottom:22px;
+}
+
+.hero h1 span{
+    color:#dcc28a;
+}
+
+.heroText{
+    color:#e6e6e6;
+    font-size:18px;
+    line-height:1.55;
+    max-width:520px;
+}
+
+.heroActions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:28px;
+}
+
+.primary{
+    background:white;
+    color:var(--navy);
+    border:0;
+    padding:14px 20px;
+    border-radius:14px;
+    font-size:15px;
+    font-weight:bold;
+}
+
+.secondary{
+    background:rgba(255,255,255,.09);
+    color:white;
+    border:1px solid rgba(255,255,255,.3);
+    padding:14px 20px;
+    border-radius:14px;
+    font-size:15px;
+}
+
+.bannerDots{
+    position:absolute;
+    bottom:25px;
+    left:7%;
+    z-index:4;
+    display:flex;
+    gap:7px;
+}
+
+.bannerDots button{
+    width:30px;
+    height:4px;
+    border:0;
+    background:rgba(255,255,255,.35);
+    border-radius:5px;
+}
+
+.bannerDots button.active{
+    background:white;
+}
+
+/* =========================
+   QUICK STRIP
+========================= */
+
+.quickStrip{
+    width:min(1250px,90%);
+    margin:-35px auto 70px;
+    position:relative;
+    z-index:5;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    background:white;
+    border:1px solid var(--border);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+}
+
+.quickItem{
+    padding:22px;
+    text-align:center;
+    border-right:1px solid var(--border);
+}
+
+.quickItem:last-child{
+    border-right:0;
+}
+
+.quickItem strong{
+    display:block;
+    font-size:19px;
+}
+
+.quickItem span{
+    display:block;
+    color:var(--muted);
+    font-size:13px;
+    margin-top:5px;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+section{
+    width:min(1250px,90%);
+    margin:0 auto 100px;
+}
+
+.sectionHead{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.sectionTitle small{
+    display:block;
+    color:var(--purple);
+    font-size:13px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:7px;
+}
+
+.sectionTitle h2{
+    font-size:clamp(30px,4vw,50px);
+    font-weight:500;
+}
+
+.sectionTitle p{
+    color:var(--muted);
+    margin-top:8px;
+    font-size:15px;
+}
+
+.viewAll{
+    border:1px solid var(--border);
+    background:white;
+    border-radius:12px;
+    padding:11px 15px;
+}
+
+/* =========================
+   ROOMS / FOOD
+========================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    overflow:hidden;
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:var(--shadow);
+}
+
+.cardImage{
+    height:250px;
+    position:relative;
+    background:#ddd;
+}
+
+.cardImage img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.cardTag{
+    position:absolute;
+    top:13px;
+    left:13px;
+    background:rgba(16,24,39,.88);
+    color:white;
+    padding:7px 10px;
+    border-radius:10px;
+    font-size:12px;
+}
+
+.cardBody{
+    padding:20px;
+}
+
+.cardTop{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.card h3{
+    font-size:24px;
+    font-weight:500;
+}
+
+.price{
+    color:var(--purple);
+    font-size:19px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.cardDesc{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.5;
+    margin:10px 0 15px;
+}
+
+.cardMeta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-bottom:17px;
+}
+
+.meta{
+    padding:6px 9px;
+    background:#f3f1ed;
+    border-radius:8px;
+    font-size:12px;
+}
+
+.cardActions{
+    display:flex;
+    gap:8px;
+}
+
+.cardActions button{
+    flex:1;
+    border:0;
+    padding:12px;
+    border-radius:12px;
+    font-size:14px;
+}
+
+.bookBtn,
+.orderBtn{
+    background:var(--navy);
+    color:white;
+}
+
+.detailBtn{
+    background:#f0eee9;
+    color:var(--navy);
+}
+
+/* =========================
+   FEATURED FOOD
+========================= */
+
+.foodGrid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.foodCard{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.foodImg{
+    height:210px;
+}
+
+.foodImg img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.foodInfo{
+    padding:16px;
+}
+
+.foodInfo h3{
+    font-size:20px;
+    font-weight:500;
+}
+
+.foodInfoRow{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:10px;
+}
+
+.foodInfo button{
+    border:0;
+    background:var(--navy);
+    color:white;
+    border-radius:10px;
+    padding:9px 12px;
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:50px;
+    align-items:center;
+}
+
+.aboutVisual{
+    min-height:450px;
+    border-radius:30px;
+    overflow:hidden;
+    position:relative;
+    background:var(--navy);
+}
+
+.aboutVisual img{
+    width:100%;
+    height:100%;
+    min-height:450px;
+    object-fit:cover;
+}
+
+.aboutBox{
+    position:absolute;
+    bottom:20px;
+    left:20px;
+    right:20px;
+    background:rgba(255,255,255,.93);
+    padding:20px;
+    border-radius:18px;
+}
+
+.aboutText h2{
+    font-size:48px;
+    font-weight:500;
+    line-height:1;
+}
+
+.aboutText p{
+    color:#5f5f5f;
+    line-height:1.7;
+    margin-top:18px;
+}
+
+.featureList{
+    margin-top:25px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.feature{
+    padding:14px;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:13px;
+}
+
+/* =========================
+   RATING
+========================= */
+
+.ratingSection{
+    background:var(--navy);
+    color:white;
+    border-radius:30px;
+    padding:45px;
+}
+
+.ratingLayout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    gap:50px;
+}
+
+.ratingNumber{
+    font-size:75px;
+    line-height:1;
+    color:#dec486;
+}
+
+.stars{
+    color:#d7b76e;
+    letter-spacing:3px;
+    margin:10px 0;
+}
+
+.ratingSummary{
+    color:#aaa;
+    font-size:14px;
+}
+
+.reviewList{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.review{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:16px;
+    padding:18px;
+}
+
+.reviewName{
+    font-weight:bold;
+}
+
+.reviewText{
+    color:#c9c9c9;
+    font-size:14px;
+    line-height:1.5;
+    margin-top:8px;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contactGrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.contactCard{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:25px;
+}
+
+.contactCard strong{
+    display:block;
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.contactCard span{
+    color:var(--muted);
+}
+
+.contactCard a{
+    display:inline-block;
+    margin-top:12px;
+    color:var(--purple);
+    font-weight:bold;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:var(--navy);
+    color:white;
+    padding:60px 5% 25px;
+}
+
+.footerInner{
+    width:min(1250px,100%);
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:35px;
+}
+
+.footerBrand h2{
+    font-size:30px;
+    font-weight:500;
+}
+
+.footerBrand p{
+    color:#a9afba;
+    line-height:1.6;
+    margin-top:12px;
+    max-width:430px;
+}
+
+.footerCol h4{
+    color:#ddd;
+    margin-bottom:15px;
+}
+
+.footerCol a{
+    display:block;
+    color:#9da5b2;
+    margin:9px 0;
+}
+
+.footerBottom{
+    width:min(1250px,100%);
+    margin:40px auto 0;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.1);
+    color:#777f8c;
+    font-size:13px;
+}
+
+/* =========================
+   AI BUTTON
+========================= */
+
+.aiButton{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    z-index:7000;
+    width:66px;
+    height:66px;
+    border:0;
+    border-radius:22px;
+    background:var(--purple);
+    color:white;
+    box-shadow:0 15px 40px rgba(86,52,107,.35);
+    font-weight:bold;
+    font-size:13px;
+}
+
+.aiButton span{
+    display:block;
+    font-size:22px;
+    margin-bottom:2px;
+}
+
+/* =========================
+   AI PANEL
+========================= */
+
+.aiPanel{
+    position:fixed;
+    z-index:8000;
+    right:22px;
+    bottom:100px;
+    width:min(430px,calc(100vw - 25px));
+    height:min(690px,calc(100vh - 125px));
+    background:#f7f5f1;
+    border:1px solid var(--border);
+    border-radius:28px;
+    box-shadow:0 25px 80px rgba(0,0,0,.25);
+    display:none;
+    flex-direction:column;
+    overflow:hidden;
+}
+
+.aiPanel.open{
+    display:flex;
+}
+
+.aiHeader{
+    background:var(--navy);
+    color:white;
+    padding:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.aiTitle{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.aiIcon{
+    width:40px;
+    height:40px;
+    background:var(--purple);
+    border-radius:13px;
+    display:grid;
+    place-items:center;
+}
+
+.aiHeader small{
+    display:block;
+    color:#9da6b4;
+    margin-top:3px;
+}
+
+.aiClose{
+    background:none;
+    border:0;
+    color:white;
+    font-size:25px;
+}
+
+.aiQuick{
+    display:flex;
+    gap:7px;
+    overflow-x:auto;
+    padding:12px;
+    background:white;
+    border-bottom:1px solid var(--border);
+}
+
+.aiQuick button{
+    white-space:nowrap;
+    border:1px solid var(--border);
+    background:#f7f5f1;
+    border-radius:20px;
+    padding:8px 12px;
+}
+
+.aiMessages{
+    flex:1;
+    overflow-y:auto;
+    padding:15px;
+}
+
+.aiMsg{
+    max-width:86%;
+    margin-bottom:12px;
+}
+
+.aiMsg.user{
+    margin-left:auto;
+}
+
+.aiBubble{
+    padding:12px 14px;
+    border-radius:16px;
+    background:white;
+    border:1px solid var(--border);
+    line-height:1.45;
+    font-size:14px;
+}
+
+.aiMsg.user .aiBubble{
+    background:var(--navy);
+    color:white;
+    border:0;
+}
+
+.aiCard{
+    margin-top:10px;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+}
+
+.aiCard img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+}
+
+.aiCardBody{
+    padding:13px;
+}
+
+.aiCardBody strong{
+    display:block;
+    font-size:18px;
+}
+
+.aiCardBody span{
+    color:var(--purple);
+    font-weight:bold;
+}
+
+.aiCardBody button{
+    width:100%;
+    margin-top:10px;
+    border:0;
+    background:var(--navy);
+    color:white;
+    padding:10px;
+    border-radius:10px;
+}
+
+.aiInput{
+    display:flex;
+    gap:7px;
+    padding:12px;
+    background:white;
+    border-top:1px solid var(--border);
+}
+
+.aiInput input{
+    flex:1;
+    min-width:0;
+    border:1px solid var(--border);
+    outline:0;
+    border-radius:14px;
+    padding:12px;
+}
+
+.aiSend{
+    width:45px;
+    border:0;
+    border-radius:13px;
+    background:var(--purple);
+    color:white;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:10000;
+    background:rgba(0,0,0,.58);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.open{
+    display:flex;
+}
+
+.modalBox{
+    width:min(560px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:#f8f6f2;
+    border-radius:25px;
+    padding:25px;
+    position:relative;
+}
+
+.modalClose{
+    position:absolute;
+    right:18px;
+    top:15px;
+    width:38px;
+    height:38px;
+    border:0;
+    border-radius:50%;
+    background:white;
+    font-size:22px;
+}
+
+.modalBox h2{
+    font-size:32px;
+    font-weight:500;
+    margin-bottom:20px;
+}
+
+.formGroup{
+    margin-bottom:14px;
+}
+
+.formGroup label{
+    display:block;
+    font-size:13px;
+    color:#666;
+    margin-bottom:6px;
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select{
+    width:100%;
+    border:1px solid var(--border);
+    background:white;
+    padding:13px;
+    border-radius:12px;
+    outline:0;
+}
+
+.formGroup textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.formBtn{
+    width:100%;
+    border:0;
+    background:var(--navy);
+    color:white;
+    padding:14px;
+    border-radius:13px;
+    font-size:16px;
+}
+
+.ratingInput{
+    display:flex;
+    gap:5px;
+}
+
+.ratingInput button{
+    border:0;
+    background:none;
+    font-size:29px;
+    color:#ccc;
+}
+
+.ratingInput button.selected{
+    color:#c39b48;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+#toastBox{
+    position:fixed;
+    right:20px;
+    top:95px;
+    z-index:20000;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.toast{
+    background:var(--navy);
+    color:white;
+    padding:13px 16px;
+    border-radius:13px;
+    box-shadow:var(--shadow);
+    animation:toastIn .3s;
+}
+
+@keyframes toastIn{
+    from{transform:translateX(30px);opacity:0}
+    to{transform:translateX(0);opacity:1}
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+    grid-column:1/-1;
+    padding:45px;
+    text-align:center;
+    color:var(--muted);
+    background:white;
+    border:1px dashed var(--border);
+    border-radius:20px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+    .navLinks{
+        display:none;
+    }
+
+    .mobileMenuBtn{
+        display:block;
+    }
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .foodGrid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .about{
+        grid-template-columns:1fr;
+    }
+
+    .footerInner{
+        grid-template-columns:2fr 1fr 1fr;
+    }
+}
+
+@media(max-width:760px){
+
+    body{
+        padding-bottom:env(safe-area-inset-bottom);
+    }
+
+    header{
+        position:sticky;
+    }
+
+    .nav{
+        height:68px;
+        width:94%;
+    }
+
+    .logoText strong{
+        font-size:16px;
+    }
+
+    .logoText span{
+        font-size:9px;
+    }
+
+    .logoMark{
+        width:40px;
+        height:40px;
+    }
+
+    .navRight .navBtn{
+        display:none;
+    }
+
+    .hero{
+        min-height:560px;
+        width:94%;
+        border-radius:25px;
+        margin-top:12px;
+    }
+
+    .heroContent{
+        left:7%;
+        right:7%;
+        top:52%;
+    }
+
+    .hero h1{
+        font-size:47px;
+    }
+
+    .heroText{
+        font-size:15px;
+    }
+
+    .quickStrip{
+        width:94%;
+        margin:-20px auto 55px;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .quickItem{
+        border-bottom:1px solid var(--border);
+    }
+
+    .quickItem:nth-child(2){
+        border-right:0;
+    }
+
+    .quickItem:nth-child(3),
+    .quickItem:nth-child(4){
+        border-bottom:0;
+    }
+
+    section{
+        width:94%;
+        margin-bottom:70px;
+    }
+
+    .sectionHead{
+        align-items:start;
+    }
+
+    .sectionTitle h2{
+        font-size:34px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .foodGrid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .foodImg{
+        height:160px;
+    }
+
+    .foodInfo{
+        padding:12px;
+    }
+
+    .foodInfo h3{
+        font-size:17px;
+    }
+
+    .foodInfoRow{
+        display:block;
+    }
+
+    .foodInfo button{
+        width:100%;
+        margin-top:8px;
+    }
+
+    .aboutVisual,
+    .aboutVisual img{
+        min-height:320px;
+    }
+
+    .aboutText h2{
+        font-size:39px;
+    }
+
+    .featureList{
+        grid-template-columns:1fr;
+    }
+
+    .ratingSection{
+        padding:28px 20px;
+    }
+
+    .ratingLayout{
+        grid-template-columns:1fr;
+        gap:25px;
+    }
+
+    .reviewList{
+        grid-template-columns:1fr;
+    }
+
+    .contactGrid{
+        grid-template-columns:1fr;
+    }
+
+    .footerInner{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footerBrand{
+        grid-column:1/-1;
+    }
+
+    .aiButton{
+        right:15px;
+        bottom:15px;
+    }
+
+    .aiPanel{
+        right:10px;
+        bottom:88px;
+        width:calc(100vw - 20px);
+        height:calc(100vh - 105px);
+        border-radius:24px;
+    }
+}
+
+@media(max-width:420px){
+    .hero h1{
+        font-size:42px;
+    }
+
+    .foodGrid{
+        grid-template-columns:1fr;
+    }
+
+    .footerInner{
+        grid-template-columns:1fr;
+    }
+
+    .footerBrand{
+        grid-column:auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     LOADER
+========================= -->
+
+<div id="pageLoader">
+    <div class="loaderBox">
+        <div class="loaderLogo">R</div>
+        <div class="loaderLine"><span></span></div>
+        <div>Rumba</div>
+    </div>
+</div>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+<div class="nav">
+
+    <a href="#home" class="logo">
+        <div class="logoMark">R</div>
+        <div class="logoText">
+            <strong>Rumba</strong>
+            <span>Fastfood & Dhindo Ghar</span>
+        </div>
+    </a>
+
+    <nav class="navLinks">
+        <a href="#home">Home</a>
+        <a href="#rooms">Rooms</a>
+        <a href="#food">Food</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="navRight">
+        <button class="navBtn" onclick="openAI()">Rumba AI</button>
+        <button class="navBtn loginBtn" id="loginBtn">Google Login</button>
+        <button class="mobileMenuBtn" id="mobileMenuBtn">⋮</button>
+    </div>
+
+</div>
+
+<div class="mobileMenu" id="mobileMenu">
+    <a href="#home">Home</a>
+    <a href="#rooms">Rooms</a>
+    <a href="#food">Food</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <button onclick="openAI()">Rumba AI</button>
+    <button id="mobileLoginBtn">Google Login</button>
+</div>
+
+</header>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<main id="home">
+
+<div class="hero" id="hero">
+
+    <div id="bannerContainer"></div>
+
+    <div class="heroContent">
+
+        <div class="heroEyebrow">
+            Gajuri · Dhading · Nepal
+        </div>
+
+        <h1>
+            Taste the
+            <span>real Nepal.</span>
+        </h1>
+
+        <div class="heroText">
+            Fast food, traditional Dhindo, comfortable rooms and
+            a warm place to stop, eat and stay.
+        </div>
+
+        <div class="heroActions">
+            <button class="primary" onclick="scrollToFood()">
+                Explore Food
+            </button>
+
+            <button class="secondary" onclick="scrollToRooms()">
+                View Rooms
+            </button>
+
+            <button class="secondary" onclick="openAI()">
+                Ask Rumba AI
+            </button>
+        </div>
+
+    </div>
+
+    <div class="bannerDots" id="bannerDots"></div>
+
+</div>
+
+<!-- QUICK INFORMATION -->
+
+<div class="quickStrip">
+
+    <div class="quickItem">
+        <strong>Food</strong>
+        <span>Fresh & local</span>
+    </div>
+
+    <div class="quickItem">
+        <strong>Rooms</strong>
+        <span>Comfortable stay</span>
+    </div>
+
+    <div class="quickItem">
+        <strong>Gajuri</strong>
+        <span>Dhading, Nepal</span>
+    </div>
+
+    <div class="quickItem">
+        <strong id="ratingQuick">—</strong>
+        <span>Customer rating</span>
+    </div>
+
+</div>
+
+<!-- =========================
+     ROOMS
+========================= -->
+
+<section id="rooms">
+
+<div class="sectionHead">
+
+    <div class="sectionTitle">
+        <small>Stay</small>
+        <h2>Our Rooms</h2>
+        <p>Choose a room and book directly.</p>
+    </div>
+
+    <button class="viewAll" onclick="openAIWith('best room')">
+        Find a room
+    </button>
+
+</div>
+
+<div class="grid" id="roomsGrid">
+    <div class="empty">Loading rooms...</div>
+</div>
+
+</section>
+
+<!-- =========================
+     FOOD
+========================= -->
+
+<section id="food">
+
+<div class="sectionHead">
+
+    <div class="sectionTitle">
+        <small>Eat</small>
+        <h2>Food & Dhindo</h2>
+        <p>Discover what is available today.</p>
+    </div>
+
+    <button class="viewAll" onclick="openAIWith('best food')">
+        Recommend food
+    </button>
+
+</div>
+
+<div class="foodGrid" id="foodGrid">
+    <div class="empty">Loading food...</div>
+</div>
+
+</section>
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section id="about">
+
+<div class="about">
+
+    <div class="aboutVisual">
+
+        <img id="aboutImage"
+             src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1200&q=85"
+             alt="Rumba food">
+
+        <div class="aboutBox">
+            <strong>Rumba Fastfood & Dhindo Ghar</strong>
+            <span>Gajuri, Dhading</span>
+        </div>
+
+    </div>
+
+    <div class="aboutText">
+
+        <small style="color:#56346b;letter-spacing:2px;">
+            RUMBA
+        </small>
+
+        <h2>Food, stay & local hospitality.</h2>
+
+        <p id="aboutText">
+            A place in Gajuri where traditional taste and modern
+            fast food meet comfortable hospitality.
+        </p>
+
+        <div class="featureList">
+
+            <div class="feature">
+                <strong>Dhindo</strong>
+                <div>Traditional Nepal</div>
+            </div>
+
+            <div class="feature">
+                <strong>Fast Food</strong>
+                <div>Quick & fresh</div>
+            </div>
+
+            <div class="feature">
+                <strong>Rooms</strong>
+                <div>Relax & stay</div>
+            </div>
+
+            <div class="feature">
+                <strong>Local</strong>
+                <div>Gajuri, Dhading</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- =========================
+     RATINGS
+========================= -->
+
+<section>
+
+<div class="ratingSection">
+
+    <div class="ratingLayout">
+
+        <div>
+
+            <div class="ratingNumber" id="averageRating">
+                —
+            </div>
+
+            <div class="stars" id="averageStars">
+                ★★★★★
+            </div>
+
+            <div class="ratingSummary">
+                Based on customer ratings
+            </div>
+
+            <button
+                class="primary"
+                style="margin-top:20px"
+                onclick="openRatingModal('hotel','hotel','Rumba Fastfood & Dhindo Ghar')">
+                Rate Rumba
+            </button>
+
+        </div>
+
+        <div>
+
+            <div class="sectionTitle">
+                <small style="color:#d5bd7c">Customer voice</small>
+                <h2 style="color:white">What people say</h2>
+            </div>
+
+            <div class="reviewList" id="reviewList">
+                <div class="review">
+                    Loading reviews...
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section id="contact">
+
+<div class="sectionHead">
+
+    <div class="sectionTitle">
+        <small>Reach us</small>
+        <h2>Contact</h2>
+        <p>Talk to Rumba directly.</p>
+    </div>
+
+</div>
+
+<div class="contactGrid">
+
+    <div class="contactCard">
+        <strong>Phone</strong>
+        <span>Call Rumba</span>
+        <a href="tel:+9779841541691">
+            +977 984-1541691
+        </a>
+    </div>
+
+    <div class="contactCard">
+        <strong>WhatsApp</strong>
+        <span>Bookings & orders</span>
+        <a href="https://wa.me/9779841541691" target="_blank">
+            Open WhatsApp
+        </a>
+    </div>
+
+    <div class="contactCard">
+        <strong>Location</strong>
+        <span>Gajuri, Dhading, Nepal</span>
+        <a href="https://maps.app.goo.gl/MyUkmEkMCYmoafPH7"
+           target="_blank">
+            Open Maps
+        </a>
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<div class="footerInner">
+
+    <div class="footerBrand">
+
+        <h2>Rumba</h2>
+
+        <p>
+            Fastfood, Dhindo Ghar and comfortable rooms
+            in Gajuri, Dhading.
+        </p>
+
+    </div>
+
+    <div class="footerCol">
+
+        <h4>Explore</h4>
+
+        <a href="#home">Home</a>
+        <a href="#rooms">Rooms</a>
+        <a href="#food">Food</a>
+        <a href="#about">About</a>
+
+    </div>
+
+    <div class="footerCol">
+
+        <h4>Contact</h4>
+
+        <a href="tel:+9779841541691">
+            +977 984-1541691
+        </a>
+
+        <a href="mailto:bishalxtha17@gmail.com">
+            Email
+        </a>
+
+    </div>
+
+    <div class="footerCol">
+
+        <h4>Visit</h4>
+
+        <a href="https://maps.app.goo.gl/MyUkmEkMCYmoafPH7"
+           target="_blank">
+            Google Maps
+        </a>
+
+        <a href="https://wa.me/9779841541691"
+           target="_blank">
+            WhatsApp
+        </a>
+
+    </div>
+
+</div>
+
+<div class="footerBottom">
+    © <span id="year"></span> Rumba Fastfood & Dhindo Ghar
+</div>
+
+</footer>
+
+<!-- =========================
+     AI
+========================= -->
+
+<button class="aiButton" onclick="openAI()">
+    <span>R</span>
+    AI
+</button>
+
+<div class="aiPanel" id="aiPanel">
+
+    <div class="aiHeader">
+
+        <div class="aiTitle">
+
+            <div class="aiIcon">R</div>
+
+            <div>
+                <strong>Rumba AI</strong>
+                <small id="aiStatus">
+                    Your local Rumba assistant
+                </small>
+            </div>
+
+        </div>
+
+        <button class="aiClose" onclick="closeAI()">×</button>
+
+    </div>
+
+    <div class="aiQuick">
+
+        <button onclick="sendAI('Hi')">Hi</button>
+
+        <button onclick="sendAI('Best food')">
+            Best Food
+        </button>
+
+        <button onclick="sendAI('Best room')">
+            Best Room
+        </button>
+
+        <button onclick="sendAI('What can I order?')">
+            Recommend
+        </button>
+
+        <button onclick="sendAI('Contact')">
+            Contact
+        </button>
+
+    </div>
+
+    <div class="aiMessages" id="aiMessages"></div>
+
+    <div class="aiInput">
+
+        <input
+            id="aiInput"
+            type="text"
+            autocomplete="off"
+            placeholder="Ask Rumba AI...">
+
+        <button
+            class="aiSend"
+            onclick="sendAI()">
+            →
+        </button>
+
+    </div>
+
+</div>
+
+<!-- =========================
+     BOOKING MODAL
+========================= -->
+
+<div class="modal" id="bookingModal">
+
+<div class="modalBox">
+
+    <button class="modalClose"
+            onclick="closeModal('bookingModal')">
+        ×
+    </button>
+
+    <h2>Book Room</h2>
+
+    <form id="bookingForm">
+
+        <input type="hidden" id="bookingRoomId">
+        <input type="hidden" id="bookingRoomName">
+
+        <div class="formGroup">
+            <label>Room</label>
+            <input id="bookingRoomDisplay" readonly>
+        </div>
+
+        <div class="formGroup">
+            <label>Your Name</label>
+            <input id="bookingName" required>
+        </div>
+
+        <div class="formGroup">
+            <label>Phone</label>
+            <input id="bookingPhone"
+                   type="tel"
+                   required
+                   placeholder="+977">
+        </div>
+
+        <div class="formGroup">
+            <label>Check In</label>
+            <input id="checkIn"
+                   type="date"
+                   required>
+        </div>
+
+        <div class="formGroup">
+            <label>Check Out</label>
+            <input id="checkOut"
+                   type="date"
+                   required>
+        </div>
+
+        <div class="formGroup">
+            <label>Guests</label>
+            <select id="bookingGuests">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5+</option>
+            </select>
+        </div>
+
+        <div class="formGroup">
+            <label>Message</label>
+            <textarea id="bookingMessage"
+                      placeholder="Anything we should know?"></textarea>
+        </div>
+
+        <button class="formBtn" type="submit">
+            Send Booking Request
+        </button>
+
+    </form>
+
+</div>
+
+</div>
+
+<!-- =========================
+     ORDER MODAL
+========================= -->
+
+<div class="modal" id="orderModal">
+
+<div class="modalBox">
+
+    <button class="modalClose"
+            onclick="closeModal('orderModal')">
+        ×
+    </button>
+
+    <h2>Order Food</h2>
+
+    <form id="orderForm">
+
+        <input type="hidden" id="orderFoodId">
+        <input type="hidden" id="orderFoodName">
+        <input type="hidden" id="orderFoodPrice">
+
+        <div class="formGroup">
+            <label>Food</label>
+            <input id="orderFoodDisplay" readonly>
+        </div>
+
+        <div class="formGroup">
+            <label>Your Name</label>
+            <input id="orderName" required>
+        </div>
+
+        <div class="formGroup">
+            <label>Phone</label>
+            <input id="orderPhone"
+                   type="tel"
+                   required>
+        </div>
+
+        <div class="formGroup">
+            <label>Quantity</label>
+            <select id="orderQuantity">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>10</option>
+            </select>
+        </div>
+
+        <div class="formGroup">
+            <label>Message</label>
+            <textarea id="orderMessage"
+                      placeholder="Delivery / pickup / special request"></textarea>
+        </div>
+
+        <button class="formBtn" type="submit">
+            Send Order Request
+        </button>
+
+    </form>
+
+</div>
+
+</div>
+
+<!-- =========================
+     RATING MODAL
+========================= -->
+
+<div class="modal" id="ratingModal">
+
+<div class="modalBox">
+
+    <button class="modalClose"
+            onclick="closeModal('ratingModal')">
+        ×
+    </button>
+
+    <h2>Rate Rumba</h2>
+
+    <form id="ratingForm">
+
+        <input type="hidden" id="ratingTargetType">
+        <input type="hidden" id="ratingTargetId">
+        <input type="hidden" id="ratingTargetName">
+
+        <div class="formGroup">
+            <label>Rating</label>
+
+            <div class="ratingInput">
+
+                <button type="button" data-rating="1">★</button>
+                <button type="button" data-rating="2">★</button>
+                <button type="button" data-rating="3">★</button>
+                <button type="button" data-rating="4">★</button>
+                <button type="button" data-rating="5">★</button>
+
+            </div>
+
+        </div>
+
+        <div class="formGroup">
+            <label>Your Review</label>
+
+            <textarea
+                id="ratingReview"
+                placeholder="Tell us about your experience"></textarea>
+
+        </div>
+
+        <button class="formBtn" type="submit">
+            Submit Rating
+        </button>
+
+    </form>
+
+</div>
+
+</div>
+
+<div id="toastBox"></div>
+
+<!-- =========================
+     FIREBASE
+========================= -->
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    collection,
+    doc,
+    getDoc,
+    getDocs,
+    setDoc,
+    addDoc,
+    updateDoc,
+    query,
+    limit,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCpe1GUs7pnHTki7wTq3gQT6PfIFec7wt8",
+    authDomain: "rumba-fastfood-and-dhindo-ghar.firebaseapp.com",
+    projectId: "rumba-fastfood-and-dhindo-ghar",
+    storageBucket: "rumba-fastfood-and-dhindo-ghar.firebasestorage.app",
+    messagingSenderId: "761242605317",
+    appId: "1:761242605317:web:9b46e9e9a0d2efdbc4c96c",
+    measurementId: "G-RY5TGZ0VTM"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const provider = new GoogleAuthProvider();
+
+
+/* =====================================================
+   GLOBAL DATA
+===================================================== */
+
+let currentUser = null;
+
+let rooms = [];
+let foods = [];
+let banners = [];
+let ratings = [];
+
+let selectedRating = 0;
+
+const WHATSAPP = "9779841541691";
+
+const fallbackBanner = {
+    title:"Taste the real Nepal.",
+    subtitle:"Fastfood, Dhindo and comfortable rooms in Gajuri.",
+    image:
+    "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1800&q=85"
+};
+
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+window.showToast = function(message){
+
+    const box = document.getElementById("toastBox");
+
+    const toast = document.createElement("div");
+
+    toast.className = "toast";
+    toast.textContent = message;
+
+    box.appendChild(toast);
+
+    setTimeout(()=>{
+        toast.remove();
+    },3000);
+};
+
+
+window.closeModal = function(id){
+
+    document.getElementById(id).classList.remove("open");
+};
+
+
+window.scrollToFood = function(){
+
+    document.getElementById("food")
+        .scrollIntoView({behavior:"smooth"});
+};
+
+
+window.scrollToRooms = function(){
+
+    document.getElementById("rooms")
+        .scrollIntoView({behavior:"smooth"});
+};
+
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+
+function formatPrice(price){
+
+    if(price === undefined || price === null || price === ""){
+        return "Price on request";
+    }
+
+    const number = Number(price);
+
+    if(Number.isNaN(number)){
+        return String(price);
+    }
+
+    return "Rs. " + number.toLocaleString("en-IN");
+}
+
+
+function getImage(item){
+
+    return item?.imageUrl ||
+           item?.image ||
+           fallbackBanner.image;
+}
+
+
+function whatsapp(message){
+
+    const url =
+        "https://wa.me/" +
+        WHATSAPP +
+        "?text=" +
+        encodeURIComponent(message);
+
+    window.open(url,"_blank");
+}
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+async function login(){
+
+    try{
+
+        await signInWithPopup(auth,provider);
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast("Google login was not completed.");
+
+    }
+}
+
+
+async function logout(){
+
+    try{
+
+        await signOut(auth);
+
+        showToast("Logged out.");
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+}
+
+
+function updateLoginButton(){
+
+    const buttons = [
+        document.getElementById("loginBtn"),
+        document.getElementById("mobileLoginBtn")
+    ];
+
+    buttons.forEach(button=>{
+
+        if(!button) return;
+
+        if(currentUser){
+
+            const name =
+                currentUser.displayName ||
+                currentUser.email?.split("@")[0] ||
+                "User";
+
+            button.textContent = "Hi, " + name;
+
+            button.onclick = logout;
+
+        }else{
+
+            button.textContent = "Google Login";
+
+            button.onclick = login;
+
+        }
+
+    });
+}
+
+
+/* =====================================================
+   USER PROFILE
+===================================================== */
+
+async function saveUser(){
+
+    if(!currentUser) return;
+
+    const userRef =
+        doc(db,"users",currentUser.uid);
+
+    const existing =
+        await getDoc(userRef);
+
+    const data = {
+
+        uid:currentUser.uid,
+
+        name:
+            currentUser.displayName ||
+            "Rumba Customer",
+
+        email:
+            currentUser.email || "",
+
+        photoURL:
+            currentUser.photoURL || "",
+
+        role:
+            existing.exists()
+                ? existing.data().role || "customer"
+                : "customer",
+
+        lastLogin:
+            serverTimestamp()
+
+    };
+
+    if(!existing.exists()){
+
+        data.createdAt = serverTimestamp();
+
+    }
+
+    await setDoc(
+        userRef,
+        data,
+        {merge:true}
+    );
+}
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+onAuthStateChanged(auth,async user=>{
+
+    currentUser = user;
+
+    updateLoginButton();
+
+    if(user){
+
+        try{
+            await saveUser();
+        }catch(error){
+            console.error("User save error:",error);
+        }
+
+        const name =
+            user.displayName ||
+            user.email?.split("@")[0] ||
+            "there";
+
+        addAIMessage(
+            "ai",
+            "Hi, " +
+            escapeHTML(name) +
+            ". Welcome to Rumba. I can help you find food, rooms, prices, contact details and more."
+        );
+
+    }
+
+});
+
+
+/* =====================================================
+   LOAD BANNERS
+===================================================== */
+
+async function loadBanners(){
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                query(
+                    collection(db,"banners"),
+                    limit(20)
+                )
+            );
+
+        banners =
+            snapshot.docs
+                .map(doc=>({
+                    id:doc.id,
+                    ...doc.data()
+                }))
+                .filter(item =>
+                    item.active !== false
+                )
+                .sort((a,b)=>
+                    Number(a.order || 0) -
+                    Number(b.order || 0)
+                );
+
+    }catch(error){
+
+        console.error("Banner error:",error);
+
+        banners = [];
+
+    }
+
+    renderBanners();
+}
+
+
+function renderBanners(){
+
+    const container =
+        document.getElementById("bannerContainer");
+
+    const dots =
+        document.getElementById("bannerDots");
+
+    const list =
+        banners.length
+            ? banners
+            : [fallbackBanner];
+
+    container.innerHTML = "";
+
+    dots.innerHTML = "";
+
+    list.forEach((banner,index)=>{
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "banner " +
+            (index === 0 ? "active" : "");
+
+        div.innerHTML = `
+
+            <img
+                src="${escapeHTML(getImage(banner))}"
+                alt="${escapeHTML(banner.title || "Rumba")}">
+
+            <div class="bannerOverlay"></div>
+
+        `;
+
+        container.appendChild(div);
+
+        const dot =
+            document.createElement("button");
+
+        if(index === 0){
+            dot.classList.add("active");
+        }
+
+        dot.onclick = ()=>{
+            showBanner(index);
+        };
+
+        dots.appendChild(dot);
+
+    });
+
+    window.currentBanner = 0;
+
+    clearInterval(window.bannerTimer);
+
+    if(list.length > 1){
+
+        window.bannerTimer =
+            setInterval(()=>{
+
+                showBanner(
+                    (window.currentBanner + 1) % list.length
+                );
+
+            },3000);
+
+    }
+
+}
+
+
+function showBanner(index){
+
+    const bannersDOM =
+        document.querySelectorAll(".banner");
+
+    const dots =
+        document.querySelectorAll(".bannerDots button");
+
+    bannersDOM.forEach((item,i)=>{
+        item.classList.toggle("active",i === index);
+    });
+
+    dots.forEach((item,i)=>{
+        item.classList.toggle("active",i === index);
+    });
+
+    window.currentBanner = index;
+}
+
+
+/* =====================================================
+   LOAD ROOMS
+===================================================== */
+
+async function loadRooms(){
+
+    const grid =
+        document.getElementById("roomsGrid");
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                query(
+                    collection(db,"rooms"),
+                    limit(50)
+                )
+            );
+
+        rooms =
+            snapshot.docs
+                .map(doc=>({
+                    id:doc.id,
+                    ...doc.data()
+                }))
+                .filter(room =>
+                    room.available !== false
+                );
+
+        renderRooms();
+
+    }catch(error){
+
+        console.error("Rooms error:",error);
+
+        grid.innerHTML = `
+            <div class="empty">
+                Rooms are temporarily unavailable.
+            </div>
+        `;
+
+    }
+
+}
+
+
+function renderRooms(){
+
+    const grid =
+        document.getElementById("roomsGrid");
+
+    if(!rooms.length){
+
+        grid.innerHTML = `
+            <div class="empty">
+                Rooms will appear here soon.
+            </div>
+        `;
+
+        return;
+    }
+
+    grid.innerHTML =
+        rooms.map(room=>`
+
+        <article class="card">
+
+            <div class="cardImage">
+
+                <img
+                    src="${escapeHTML(getImage(room))}"
+                    alt="${escapeHTML(room.name || "Room")}">
+
+                <div class="cardTag">
+                    ${escapeHTML(
+                        room.floor
+                        ? "Floor " + room.floor
+                        : "Room"
+                    )}
+                </div>
+
+            </div>
+
+            <div class="cardBody">
+
+                <div class="cardTop">
+
+                    <h3>
+                        ${escapeHTML(
+                            room.name || "Comfort Room"
+                        )}
+                    </h3>
+
+                    <div class="price">
+                        ${formatPrice(room.price)}
+                    </div>
+
+                </div>
+
+                <div class="cardDesc">
+                    ${escapeHTML(
+                        room.description ||
+                        "Comfortable room for your stay."
+                    )}
+                </div>
+
+                <div class="cardMeta">
+
+                    ${
+                        room.capacity
+                        ? `<span class="meta">
+                            ${escapeHTML(room.capacity)} guests
+                           </span>`
+                        : ""
+                    }
+
+                    ${
+                        room.amenities
+                        ? `<span class="meta">
+                            ${escapeHTML(room.amenities)}
+                           </span>`
+                        : ""
+                    }
+
+                </div>
+
+                <div class="cardActions">
+
+                    <button
+                        class="bookBtn"
+                        onclick="openBooking('${room.id}')">
+                        Book Now
+                    </button>
+
+                    <button
+                        class="detailBtn"
+                        onclick="askRoom('${room.id}')">
+                        Ask AI
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    `).join("");
+
+}
+
+
+/* =====================================================
+   LOAD FOOD
+===================================================== */
+
+async function loadFoods(){
+
+    const grid =
+        document.getElementById("foodGrid");
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                query(
+                    collection(db,"foods"),
+                    limit(100)
+                )
+            );
+
+        foods =
+            snapshot.docs
+                .map(doc=>({
+                    id:doc.id,
+                    ...doc.data()
+                }))
+                .filter(food =>
+                    food.available !== false
+                );
+
+        renderFoods();
+
+    }catch(error){
+
+        console.error("Food error:",error);
+
+        grid.innerHTML = `
+            <div class="empty">
+                Food menu is temporarily unavailable.
+            </div>
+        `;
+
+    }
+
+}
+
+
+function renderFoods(){
+
+    const grid =
+        document.getElementById("foodGrid");
+
+    if(!foods.length){
+
+        grid.innerHTML = `
+            <div class="empty">
+                Food items will appear here soon.
+            </div>
+        `;
+
+        return;
+    }
+
+    grid.innerHTML =
+        foods.map(food=>`
+
+        <article class="foodCard">
+
+            <div class="foodImg">
+
+                <img
+                    src="${escapeHTML(getImage(food))}"
+                    alt="${escapeHTML(food.name || "Food")}">
+
+            </div>
+
+            <div class="foodInfo">
+
+                <h3>
+                    ${escapeHTML(food.name || "Food")}
+                </h3>
+
+                <div class="foodInfoRow">
+
+                    <strong class="price">
+                        ${formatPrice(food.price)}
+                    </strong>
+
+                    <button
+                        onclick="openOrder('${food.id}')">
+                        Order
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    `).join("");
+
+}
+
+
+/* =====================================================
+   LOAD SETTINGS
+===================================================== */
+
+async function loadSettings(){
+
+    try{
+
+        const snap =
+            await getDoc(
+                doc(db,"siteSettings","general")
+            );
+
+        if(!snap.exists()) return;
+
+        const data = snap.data();
+
+        if(data.about){
+
+            document.getElementById("aboutText")
+                .textContent = data.about;
+
+        }
+
+        if(data.aboutImage){
+
+            document.getElementById("aboutImage")
+                .src = data.aboutImage;
+
+        }
+
+        if(data.phone){
+
+            document.querySelectorAll(
+                'a[href^="tel:"]'
+            ).forEach(a=>{
+
+                a.href =
+                    "tel:" +
+                    String(data.phone)
+                    .replace(/\D/g,"");
+
+                a.textContent = data.phone;
+
+            });
+
+        }
+
+    }catch(error){
+
+        console.error("Settings error:",error);
+
+    }
+
+}
+
+
+/* =====================================================
+   RATINGS
+===================================================== */
+
+async function loadRatings(){
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                query(
+                    collection(db,"ratings"),
+                    limit(100)
+                )
+            );
+
+        ratings =
+            snapshot.docs.map(doc=>({
+                id:doc.id,
+                ...doc.data()
+            }));
+
+        renderRatings();
+
+    }catch(error){
+
+        console.error("Rating error:",error);
+
+    }
+
+}
+
+
+function renderRatings(){
+
+    const hotelRatings =
+        ratings.filter(
+            r =>
+            r.targetType === "hotel" ||
+            !r.targetType
+        );
+
+    const allNumbers =
+        hotelRatings
+            .map(r=>Number(r.rating))
+            .filter(n=>n >= 1 && n <= 5);
+
+    const average =
+        allNumbers.length
+            ? allNumbers.reduce((a,b)=>a+b,0)
+              / allNumbers.length
+            : 0;
+
+    const averageText =
+        average
+            ? average.toFixed(1)
+            : "—";
+
+    document.getElementById("averageRating")
+        .textContent = averageText;
+
+    document.getElementById("ratingQuick")
+        .textContent =
+        average
+            ? average.toFixed(1) + " / 5"
+            : "New";
+
+    const reviewList =
+        document.getElementById("reviewList");
+
+    if(!hotelRatings.length){
+
+        reviewList.innerHTML = `
+            <div class="review">
+                Be the first to rate Rumba.
+            </div>
+        `;
+
+        return;
+    }
+
+    reviewList.innerHTML =
+        hotelRatings
+        .slice(0,4)
+        .map(r=>`
+
+            <div class="review">
+
+                <div class="reviewName">
+                    ${escapeHTML(
+                        r.userName || "Customer"
+                    )}
+                </div>
+
+                <div class="stars">
+                    ${"★".repeat(
+                        Math.max(
+                            0,
+                            Math.min(5,Number(r.rating)||0)
+                        )
+                    )}
+                </div>
+
+                <div class="reviewText">
+                    ${escapeHTML(
+                        r.review || "Good experience."
+                    )}
+                </div>
+
+            </div>
+
+        `).join("");
+
+}
+
+
+/* =====================================================
+   BOOKING
+===================================================== */
+
+window.openBooking = function(roomId){
+
+    const room =
+        rooms.find(r=>r.id === roomId);
+
+    if(!room) return;
+
+    document.getElementById("bookingRoomId")
+        .value = room.id;
+
+    document.getElementById("bookingRoomName")
+        .value = room.name || "Room";
+
+    document.getElementById("bookingRoomDisplay")
+        .value =
+        (room.name || "Room") +
+        " — " +
+        formatPrice(room.price);
+
+    if(currentUser){
+
+        document.getElementById("bookingName")
+            .value =
+            currentUser.displayName || "";
+
+    }
+
+    document.getElementById("bookingModal")
+        .classList.add("open");
+
+};
+
+
+document.getElementById("bookingForm")
+.addEventListener("submit",async e=>{
+
+    e.preventDefault();
+
+    if(!currentUser){
+
+        showToast("Please login with Google first.");
+
+        await login();
+
+        return;
+    }
+
+    const roomId =
+        document.getElementById("bookingRoomId").value;
+
+    const room =
+        rooms.find(r=>r.id === roomId);
+
+    if(!room) return;
+
+    const data = {
+
+        userId:currentUser.uid,
+
+        userName:
+            document.getElementById("bookingName").value.trim(),
+
+        phone:
+            document.getElementById("bookingPhone").value.trim(),
+
+        roomId:room.id,
+
+        roomName:
+            room.name || "Room",
+
+        price:
+            room.price || "",
+
+        checkIn:
+            document.getElementById("checkIn").value,
+
+        checkOut:
+            document.getElementById("checkOut").value,
+
+        guests:
+            document.getElementById("bookingGuests").value,
+
+        message:
+            document.getElementById("bookingMessage").value.trim(),
+
+        status:"pending",
+
+        createdAt:serverTimestamp()
+
+    };
+
+    try{
+
+        await addDoc(
+            collection(db,"bookings"),
+            data
+        );
+
+        closeModal("bookingModal");
+
+        const message =
+`Hello Rumba Fastfood & Dhindo Ghar,
+
+I want to book a room.
+
+Room: ${data.roomName}
+Price: ${formatPrice(data.price)}
+Name: ${data.userName}
+Phone: ${data.phone}
+Check-in: ${data.checkIn}
+Check-out: ${data.checkOut}
+Guests: ${data.guests}
+
+Message:
+${data.message || "No additional message."}`;
+
+        whatsapp(message);
+
+        showToast("Booking request saved.");
+
+        e.target.reset();
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast("Could not save booking.");
+
+    }
+
+});
+
+
+/* =====================================================
+   FOOD ORDER
+===================================================== */
+
+window.openOrder = function(foodId){
+
+    const food =
+        foods.find(f=>f.id === foodId);
+
+    if(!food) return;
+
+    document.getElementById("orderFoodId")
+        .value = food.id;
+
+    document.getElementById("orderFoodName")
+        .value = food.name || "Food";
+
+    document.getElementById("orderFoodPrice")
+        .value = food.price || "";
+
+    document.getElementById("orderFoodDisplay")
+        .value =
+        (food.name || "Food") +
+        " — " +
+        formatPrice(food.price);
+
+    if(currentUser){
+
+        document.getElementById("orderName")
+            .value =
+            currentUser.displayName || "";
+
+    }
+
+    document.getElementById("orderModal")
+        .classList.add("open");
+
+};
+
+
+document.getElementById("orderForm")
+.addEventListener("submit",async e=>{
+
+    e.preventDefault();
+
+    if(!currentUser){
+
+        showToast("Please login with Google first.");
+
+        await login();
+
+        return;
+    }
+
+    const foodId =
+        document.getElementById("orderFoodId").value;
+
+    const food =
+        foods.find(f=>f.id === foodId);
+
+    if(!food) return;
+
+    const quantity =
+        Number(
+            document.getElementById("orderQuantity").value
+        );
+
+    const data = {
+
+        userId:currentUser.uid,
+
+        userName:
+            document.getElementById("orderName").value.trim(),
+
+        phone:
+            document.getElementById("orderPhone").value.trim(),
+
+        foodId:food.id,
+
+        foodName:
+            food.name || "Food",
+
+        price:
+            Number(food.price) || 0,
+
+        quantity:quantity,
+
+        message:
+            document.getElementById("orderMessage").value.trim(),
+
+        status:"pending",
+
+        createdAt:serverTimestamp()
+
+    };
+
+    try{
+
+        await addDoc(
+            collection(db,"orders"),
+            data
+        );
+
+        closeModal("orderModal");
+
+        const total =
+            data.price * data.quantity;
+
+        const message =
+`Hello Rumba Fastfood & Dhindo Ghar,
+
+I want to order food.
+
+Food: ${data.foodName}
+Price: ${formatPrice(data.price)}
+Quantity: ${data.quantity}
+Estimated total: ${formatPrice(total)}
+
+Name: ${data.userName}
+Phone: ${data.phone}
+
+Message:
+${data.message || "No additional message."}`;
+
+        whatsapp(message);
+
+        showToast("Order request saved.");
+
+        e.target.reset();
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast("Could not save order.");
+
+    }
+
+});
+
+
+/* =====================================================
+   RATING MODAL
+===================================================== */
+
+window.openRatingModal =
+function(targetType,targetId,targetName){
+
+    if(!currentUser){
+
+        showToast("Login with Google to rate.");
+
+        login();
+
+        return;
+    }
+
+    document.getElementById("ratingTargetType")
+        .value = targetType;
+
+    document.getElementById("ratingTargetId")
+        .value = targetId;
+
+    document.getElementById("ratingTargetName")
+        .value = targetName;
+
+    selectedRating = 0;
+
+    document.querySelectorAll(
+        ".ratingInput button"
+    ).forEach(button=>{
+        button.classList.remove("selected");
+    });
+
+    document.getElementById("ratingModal")
+        .classList.add("open");
+
+};
+
+
+document.querySelectorAll(
+    ".ratingInput button"
+).forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        selectedRating =
+            Number(button.dataset.rating);
+
+        document.querySelectorAll(
+            ".ratingInput button"
+        ).forEach(item=>{
+
+            item.classList.toggle(
+                "selected",
+                Number(item.dataset.rating)
+                <= selectedRating
+            );
+
+        });
+
+    });
+
+});
+
+
+document.getElementById("ratingForm")
+.addEventListener("submit",async e=>{
+
+    e.preventDefault();
+
+    if(!currentUser){
+
+        showToast("Please login first.");
+
+        return;
+    }
+
+    if(selectedRating < 1){
+
+        showToast("Select a rating first.");
+
+        return;
+    }
+
+    const targetType =
+        document.getElementById(
+            "ratingTargetType"
+        ).value;
+
+    const targetId =
+        document.getElementById(
+            "ratingTargetId"
+        ).value;
+
+    const targetName =
+        document.getElementById(
+            "ratingTargetName"
+        ).value;
+
+    const ratingId =
+        targetType +
+        "_" +
+        targetId +
+        "_" +
+        currentUser.uid;
+
+    const data = {
+
+        userId:currentUser.uid,
+
+        userName:
+            currentUser.displayName ||
+            "Customer",
+
+        userPhoto:
+            currentUser.photoURL || "",
+
+        targetType:targetType,
+
+        targetId:targetId,
+
+        targetName:targetName,
+
+        rating:selectedRating,
+
+        review:
+            document.getElementById(
+                "ratingReview"
+            ).value.trim(),
+
+        createdAt:serverTimestamp()
+
+    };
+
+    try{
+
+        await setDoc(
+            doc(db,"ratings",ratingId),
+            data,
+            {merge:true}
+        );
+
+        closeModal("ratingModal");
+
+        showToast("Thank you for your rating.");
+
+        document.getElementById("ratingForm").reset();
+
+        await loadRatings();
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast("Could not save rating.");
+
+    }
+
+});
+
+
+/* =====================================================
+   AI
+===================================================== */
+
+window.openAI = function(){
+
+    const panel =
+        document.getElementById("aiPanel");
+
+    panel.classList.add("open");
+
+    const messages =
+        document.getElementById("aiMessages");
+
+    if(!messages.children.length){
+
+        addAIMessage(
+            "ai",
+            currentUser
+            ? "Hi, " +
+              escapeHTML(
+                  currentUser.displayName ||
+                  "there"
+              ) +
+              ". What would you like?"
+            : "Hi. I am Rumba AI. Ask me about food, rooms, prices, booking, ordering, location or contact."
+        );
+
+    }
+
+    setTimeout(()=>{
+        document.getElementById("aiInput").focus();
+    },100);
+
+};
+
+
+window.closeAI = function(){
+
+    document
+        .getElementById("aiPanel")
+        .classList.remove("open");
+
+};
+
+
+window.openAIWith = function(text){
+
+    openAI();
+
+    setTimeout(()=>{
+        sendAI(text);
+    },200);
+
+};
+
+
+function addAIMessage(type,html){
+
+    const container =
+        document.getElementById("aiMessages");
+
+    const div =
+        document.createElement("div");
+
+    div.className =
+        "aiMsg " + type;
+
+    div.innerHTML =
+        `<div class="aiBubble">${html}</div>`;
+
+    container.appendChild(div);
+
+    container.scrollTop =
+        container.scrollHeight;
+
+}
+
+
+function addAIProductCard(type,item){
+
+    const container =
+        document.getElementById("aiMessages");
+
+    const div =
+        document.createElement("div");
+
+    div.className = "aiMsg ai";
+
+    const isRoom = type === "room";
+
+    div.innerHTML = `
+
+        <div class="aiBubble">
+
+            ${isRoom
+                ? "I found this room for you:"
+                : "This food may be a good choice:"
+            }
+
+        </div>
+
+        <div class="aiCard">
+
+            <img
+                src="${escapeHTML(getImage(item))}"
+                alt="${escapeHTML(
+                    item.name || ""
+                )}">
+
+            <div class="aiCardBody">
+
+                <strong>
+                    ${escapeHTML(
+                        item.name ||
+                        (isRoom ? "Room" : "Food")
+                    )}
+                </strong>
+
+                <span>
+                    ${formatPrice(item.price)}
+                </span>
+
+                <button
+                    onclick="${
+                        isRoom
+                        ? `openBooking('${item.id}')`
+                        : `openOrder('${item.id}')`
+                    }">
+
+                    ${
+                        isRoom
+                        ? "Book Now"
+                        : "Order Now"
+                    }
+
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+    container.appendChild(div);
+
+    container.scrollTop =
+        container.scrollHeight;
+
+}
+
+
+window.askRoom = function(id){
+
+    openAI();
+
+    setTimeout(()=>{
+
+        const room =
+            rooms.find(r=>r.id === id);
+
+        if(room){
+
+            addAIMessage(
+                "user",
+                "Tell me about this room"
+            );
+
+            addAIProductCard("room",room);
+
+        }
+
+    },100);
+
+};
+
+
+function normalize(text){
+
+    return String(text || "")
+        .toLowerCase()
+        .trim();
+
+}
+
+
+async function aiResponse(raw){
+
+    const text =
+        normalize(raw);
+
+    /* GREETING */
+
+    if(
+        /^(hi|hello|hey|namaste|नमस्ते|good morning|good evening|good afternoon)\b/i
+        .test(text)
+    ){
+
+        const name =
+            currentUser?.displayName;
+
+        return {
+            text:
+                name
+                ? `Hi ${escapeHTML(name)}. Welcome to Rumba.`
+                : "Hi. Welcome to Rumba Fastfood & Dhindo Ghar."
+        };
+
+    }
+
+
+    /* THANKS */
+
+    if(
+        text.includes("thank") ||
+        text.includes("thanks") ||
+        text.includes("धन्यवाद")
+    ){
+
+        return {
+            text:"You're welcome. I am here whenever you need Rumba."
+        };
+
+    }
+
+
+    /* BEST FOOD */
+
+    if(
+        text.includes("best food") ||
+        text.includes("recommend food") ||
+        text.includes("food recommend") ||
+        text.includes("what should i eat") ||
+        text.includes("what can i eat") ||
+        text.includes("hungry") ||
+        text.includes("food")
+    ){
+
+        if(!foods.length){
+
+            return {
+                text:"The food menu is being updated. Please contact Rumba directly."
+            };
+
+        }
+
+        const item =
+            foods.find(f=>f.featured) ||
+            foods[0];
+
+        return {
+            text:"Here is a food option from the current Rumba menu.",
+            food:item
+        };
+
+    }
+
+
+    /* BEST ROOM */
+
+    if(
+        text.includes("best room") ||
+        text.includes("room") ||
+        text.includes("stay") ||
+        text.includes("hotel") ||
+        text.includes("sleep")
+    ){
+
+        if(!rooms.length){
+
+            return {
+                text:"I cannot see an available room right now. Please contact Rumba for current availability."
+            };
+
+        }
+
+        const room =
+            rooms.find(r=>r.featured) ||
+            rooms[0];
+
+        return {
+            text:"Here is a room from the current Rumba availability.",
+            room:room
+        };
+
+    }
+
+
+    /* PRICE */
+
+    if(
+        text.includes("price") ||
+        text.includes("cost") ||
+        text.includes("rate") ||
+        text.includes("कति")
+    ){
+
+        return {
+            text:
+                "I can show the current prices directly from Rumba's menu. Try “best food” or “best room”."
+        };
+
+    }
+
+
+    /* BOOK */
+
+    if(
+        text.includes("book") ||
+        text.includes("booking") ||
+        text.includes("reserve")
+    ){
+
+        if(rooms.length){
+
+            return {
+                text:
+                    "Sure. Choose a room below and I will open the booking form.",
+                room:
+                    rooms.find(r=>r.featured) ||
+                    rooms[0]
+            };
+
+        }
+
+        return {
+            text:
+                "Room booking is available when rooms are listed. You can also call Rumba directly."
+        };
+
+    }
+
+
+    /* ORDER */
+
+    if(
+        text.includes("order") ||
+        text.includes("खाना")
+    ){
+
+        if(foods.length){
+
+            return {
+                text:
+                    "Sure. Choose a food item and I will open the order form.",
+                food:
+                    foods.find(f=>f.featured) ||
+                    foods[0]
+            };
+
+        }
+
+        return {
+            text:
+                "The current menu is not loaded yet. Please contact Rumba."
+        };
+
+    }
+
+
+    /* CONTACT */
+
+    if(
+        text.includes("contact") ||
+        text.includes("phone") ||
+        text.includes("call") ||
+        text.includes("whatsapp")
+    ){
+
+        return {
+            text:
+                `You can contact Rumba at +977 984-1541691 or open WhatsApp.`
+        };
+
+    }
+
+
+    /* LOCATION */
+
+    if(
+        text.includes("where") ||
+        text.includes("location") ||
+        text.includes("address") ||
+        text.includes("map") ||
+        text.includes("gajuri")
+    ){
+
+        return {
+            text:
+                `Rumba Fastfood & Dhindo Ghar is in Gajuri, Dhading, Nepal.`
+        };
+
+    }
+
+
+    /* HOURS */
+
+    if(
+        text.includes("open") ||
+        text.includes("time") ||
+        text.includes("hours")
+    ){
+
+        return {
+            text:
+                "For today's exact opening hours, please check the current information or contact Rumba directly."
+        };
+
+    }
+
+
+    /* HELP */
+
+    if(
+        text.includes("help") ||
+        text.includes("what can you do")
+    ){
+
+        return {
+            text:
+                "I can help with food recommendations, rooms, prices, orders, bookings, contact, location, greetings and customer ratings."
+        };
+
+    }
+
+
+    /* DEFAULT */
+
+    return {
+        text:
+            "I can help you with Rumba food, rooms, ordering, booking, prices, location, contact and recommendations. Try “best food” or “best room”."
+    };
+
+}
+
+
+window.sendAI = async function(preset){
+
+    const input =
+        document.getElementById("aiInput");
+
+    const text =
+        String(
+            preset !== undefined
+                ? preset
+                : input.value
+        ).trim();
+
+    if(!text) return;
+
+    if(preset === undefined){
+
+        input.value = "";
+
+    }
+
+    addAIMessage(
+        "user",
+        escapeHTML(text)
+    );
+
+    const response =
+        await aiResponse(text);
+
+    setTimeout(()=>{
+
+        addAIMessage(
+            "ai",
+            response.text
+        );
+
+        if(response.food){
+
+            setTimeout(()=>{
+                addAIProductCard(
+                    "food",
+                    response.food
+                );
+            },100);
+
+        }
+
+        if(response.room){
+
+            setTimeout(()=>{
+                addAIProductCard(
+                    "room",
+                    response.room
+                );
+            },100);
+
+        }
+
+    },180);
+
+};
+
+
+/* =====================================================
+   ENTER KEY AI
+===================================================== */
+
+document.getElementById("aiInput")
+.addEventListener("keydown",e=>{
+
+    if(e.key === "Enter"){
+
+        e.preventDefault();
+
+        sendAI();
+
+    }
+
+});
+
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+document.getElementById("mobileMenuBtn")
+.addEventListener("click",()=>{
+
+    document
+        .getElementById("mobileMenu")
+        .classList.toggle("open");
+
+});
+
+
+document.querySelectorAll(".mobileMenu a")
+.forEach(link=>{
+
+    link.addEventListener("click",()=>{
+
+        document
+            .getElementById("mobileMenu")
+            .classList.remove("open");
+
+    });
+
+});
+
+
+/* =====================================================
+   CLOSE MODAL OUTSIDE
+===================================================== */
+
+document.querySelectorAll(".modal")
+.forEach(modal=>{
+
+    modal.addEventListener("click",e=>{
+
+        if(e.target === modal){
+
+            modal.classList.remove("open");
+
+        }
+
+    });
+
+});
+
+
+/* =====================================================
+   START
+===================================================== */
+
+document.getElementById("year")
+    .textContent =
+    new Date().getFullYear();
+
+document.getElementById("loginBtn")
+    .onclick = login;
+
+document.getElementById("mobileLoginBtn")
+    .onclick = login;
+
+
+/*
+    Load all live Firebase content.
+*/
+
+Promise.all([
+    loadBanners(),
+    loadRooms(),
+    loadFoods(),
+    loadSettings(),
+    loadRatings()
+])
+.finally(()=>{
+
+    setTimeout(()=>{
+
+        const loader =
+            document.getElementById("pageLoader");
+
+        loader.style.opacity = "0";
+
+        setTimeout(()=>{
+            loader.style.display = "none";
+        },500);
+
+    },500);
+
+});
+
+
+/* =====================================================
+   GLOBAL FUNCTIONS
+===================================================== */
+
+window.scrollToFood = scrollToFood;
+window.scrollToRooms = scrollToRooms;
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,5378 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#11182b">
+<title>Rumba — Admin Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --off:#f6f3ed;
+    --paper:#fffdf9;
+    --navy:#11182b;
+    --navy2:#1d2742;
+    --velvet:#71365f;
+    --velvet2:#915276;
+    --green:#28734b;
+    --red:#a33d3d;
+    --gold:#9a7937;
+    --gray:#77736d;
+    --line:#ddd8cf;
+    --shadow:0 15px 45px rgba(17,24,43,.09);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Times New Roman",Times,serif;
+    background:var(--off);
+    color:#181818;
+}
+
+button,
+input,
+textarea,
+select{
+    font-family:"Times New Roman",Times,serif;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* ================= LOGIN ================= */
+
+.login-screen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+    background:
+        linear-gradient(rgba(17,24,43,.92),rgba(17,24,43,.96)),
+        url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+}
+
+.login-card{
+    width:min(460px,100%);
+    background:var(--paper);
+    padding:45px;
+    text-align:center;
+    box-shadow:0 30px 80px rgba(0,0,0,.3);
+}
+
+.logo-circle{
+    width:65px;
+    height:65px;
+    margin:0 auto 20px;
+    background:var(--navy);
+    color:white;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:32px;
+}
+
+.login-card h1{
+    color:var(--navy);
+    font-size:35px;
+    font-weight:normal;
+}
+
+.login-card p{
+    color:var(--gray);
+    line-height:1.6;
+    margin:15px 0 25px;
+}
+
+.google-btn{
+    width:100%;
+    padding:15px;
+    border:0;
+    background:var(--navy);
+    color:white;
+    font-size:17px;
+}
+
+.login-error{
+    margin-top:18px;
+    color:var(--red);
+}
+
+/* ================= LAYOUT ================= */
+
+.app{
+    min-height:100vh;
+}
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:260px;
+    background:var(--navy);
+    color:white;
+    z-index:1000;
+    overflow-y:auto;
+}
+
+.brand{
+    padding:30px 25px;
+    border-bottom:1px solid #303951;
+}
+
+.brand h2{
+    font-size:25px;
+    font-weight:normal;
+}
+
+.brand p{
+    color:#aaa;
+    font-size:13px;
+    margin-top:5px;
+}
+
+.admin-profile{
+    padding:20px 25px;
+    border-bottom:1px solid #303951;
+}
+
+.admin-profile img{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    vertical-align:middle;
+    margin-right:8px;
+}
+
+.admin-profile span{
+    font-size:13px;
+}
+
+.nav-title{
+    color:#8e92a0;
+    padding:20px 25px 8px;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.side-link{
+    display:block;
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#ddd;
+    padding:12px 25px;
+    text-align:left;
+    font-size:16px;
+}
+
+.side-link:hover,
+.side-link.active{
+    background:var(--velvet);
+    color:white;
+}
+
+.logout{
+    margin:20px 25px;
+    width:calc(100% - 50px);
+    border:1px solid #555e73;
+    background:transparent;
+    color:white;
+    padding:11px;
+}
+
+.main{
+    margin-left:260px;
+    min-height:100vh;
+}
+
+.topbar{
+    height:75px;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 35px;
+    position:sticky;
+    top:0;
+    z-index:900;
+}
+
+.topbar h1{
+    font-size:27px;
+    color:var(--navy);
+    font-weight:normal;
+}
+
+.topbar-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.view-site{
+    background:var(--navy);
+    color:white;
+    padding:10px 15px;
+}
+
+.mobile-menu{
+    display:none;
+    border:0;
+    background:none;
+    font-size:28px;
+    color:var(--navy);
+}
+
+.content{
+    padding:30px;
+    max-width:1600px;
+    margin:auto;
+}
+
+.section{
+    display:none;
+}
+
+.section.active{
+    display:block;
+}
+
+/* ================= DASHBOARD ================= */
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.stat{
+    background:var(--paper);
+    border:1px solid var(--line);
+    padding:24px;
+}
+
+.stat-label{
+    color:var(--gray);
+    font-size:14px;
+}
+
+.stat-value{
+    font-size:35px;
+    color:var(--navy);
+    margin-top:10px;
+}
+
+.stat-note{
+    color:var(--velvet);
+    font-size:13px;
+    margin-top:6px;
+}
+
+.dashboard-columns{
+    margin-top:25px;
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:20px;
+}
+
+.panel{
+    background:var(--paper);
+    border:1px solid var(--line);
+    padding:25px;
+}
+
+.panel-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.panel-header h2{
+    color:var(--navy);
+    font-weight:normal;
+    font-size:25px;
+}
+
+/* ================= FORMS ================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:17px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    color:var(--navy);
+    font-size:15px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    width:100%;
+    border:1px solid var(--line);
+    background:white;
+    padding:13px;
+    font-size:16px;
+    outline:none;
+}
+
+.form-group textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+    border-color:var(--velvet);
+}
+
+.primary{
+    background:var(--navy);
+    color:white;
+    border:0;
+    padding:13px 20px;
+    font-size:16px;
+}
+
+.secondary{
+    background:white;
+    color:var(--navy);
+    border:1px solid var(--navy);
+    padding:12px 18px;
+}
+
+.danger{
+    background:var(--red);
+    color:white;
+    border:0;
+    padding:9px 13px;
+}
+
+.success{
+    background:var(--green);
+    color:white;
+    border:0;
+    padding:9px 13px;
+}
+
+.warning{
+    background:var(--gold);
+    color:white;
+    border:0;
+    padding:9px 13px;
+}
+
+.actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+/* ================= UPLOAD ================= */
+
+.upload-area{
+    border:2px dashed #bbb5aa;
+    background:#faf8f3;
+    padding:25px;
+    text-align:center;
+    transition:.2s;
+}
+
+.upload-area.dragover{
+    border-color:var(--velvet);
+    background:#f5eaf2;
+}
+
+.upload-area input{
+    display:none;
+}
+
+.upload-label{
+    display:inline-block;
+    border:1px solid var(--navy);
+    color:var(--navy);
+    padding:11px 18px;
+    cursor:pointer;
+    background:white;
+}
+
+.file-name{
+    margin-top:10px;
+    color:var(--gray);
+    font-size:14px;
+}
+
+.upload-status{
+    display:none;
+    margin-top:18px;
+}
+
+.upload-status.show{
+    display:block;
+}
+
+.upload-status-row{
+    display:flex;
+    justify-content:space-between;
+    color:var(--navy);
+    margin-bottom:7px;
+}
+
+.progress-track{
+    height:10px;
+    background:#ddd8cf;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:0;
+    background:var(--velvet);
+    transition:width:.2s;
+}
+
+.upload-message{
+    margin-top:9px;
+    font-size:14px;
+}
+
+.spinner{
+    width:18px;
+    height:18px;
+    border:2px solid #ddd;
+    border-top-color:var(--velvet);
+    border-radius:50%;
+    display:inline-block;
+    animation:spin .8s linear infinite;
+    vertical-align:middle;
+    margin-right:7px;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.preview{
+    margin-top:15px;
+    display:none;
+}
+
+.preview img{
+    width:150px;
+    height:100px;
+    object-fit:cover;
+    border:1px solid var(--line);
+}
+
+/* ================= TABLE ================= */
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:13px;
+    border-bottom:1px solid var(--line);
+    text-align:left;
+    vertical-align:middle;
+}
+
+th{
+    background:#f0ece5;
+    color:var(--navy);
+    font-weight:normal;
+}
+
+td{
+    font-size:15px;
+}
+
+.thumb{
+    width:65px;
+    height:50px;
+    object-fit:cover;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    font-size:12px;
+}
+
+.badge-green{
+    background:#e0efe7;
+    color:var(--green);
+}
+
+.badge-red{
+    background:#f3dfdf;
+    color:var(--red);
+}
+
+.badge-gold{
+    background:#f0e8d4;
+    color:#795d21;
+}
+
+.badge-purple{
+    background:#eee1eb;
+    color:var(--velvet);
+}
+
+/* ================= PAGE TITLE ================= */
+
+.page-title{
+    margin-bottom:25px;
+}
+
+.page-title h2{
+    font-size:40px;
+    font-weight:normal;
+    color:var(--navy);
+}
+
+.page-title p{
+    color:var(--gray);
+    margin-top:7px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    background:rgba(0,0,0,.6);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    background:var(--paper);
+    width:min(800px,100%);
+    max-height:90vh;
+    overflow-y:auto;
+    padding:30px;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.modal-header h2{
+    color:var(--navy);
+    font-weight:normal;
+}
+
+.close{
+    border:0;
+    background:none;
+    font-size:28px;
+}
+
+/* ================= RATINGS ================= */
+
+.rating-big{
+    font-size:48px;
+    color:var(--velvet);
+}
+
+.stars{
+    color:var(--gold);
+    letter-spacing:3px;
+}
+
+.rating-row{
+    padding:13px 0;
+    border-bottom:1px solid var(--line);
+}
+
+/* ================= ALERT ================= */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    z-index:5000;
+    max-width:380px;
+    background:var(--navy);
+    color:white;
+    padding:16px 20px;
+    box-shadow:var(--shadow);
+    transform:translateY(150px);
+    opacity:0;
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+.toast.success-toast{
+    background:var(--green);
+}
+
+.toast.error-toast{
+    background:var(--red);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:1100px){
+
+    .dashboard-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .dashboard-columns{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.3s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .topbar{
+        padding:0 18px;
+    }
+
+    .content{
+        padding:18px;
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+}
+
+@media(max-width:520px){
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+    .topbar h1{
+        font-size:21px;
+    }
+
+    .view-site{
+        display:none;
+    }
+
+    .page-title h2{
+        font-size:32px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+
+<!-- =========================================================
+     ADMIN LOGIN
+========================================================= -->
+
+<div class="login-screen" id="loginScreen">
+
+    <div class="login-card">
+
+        <div class="logo-circle">R</div>
+
+        <h1>Rumba Admin</h1>
+
+        <p>
+            Sign in with the authorised Google account to manage
+            Rumba Fastfood and Dhindo Ghar.
+        </p>
+
+        <button class="google-btn" id="googleLogin">
+            Continue with Google
+        </button>
+
+        <div class="login-error" id="loginError"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     ADMIN APP
+========================================================= -->
+
+<div class="app hidden" id="adminApp">
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+        <h2>Rumba Admin</h2>
+        <p>Fastfood & Dhindo Ghar</p>
+    </div>
+
+    <div class="admin-profile">
+
+        <img id="adminPhoto"
+             src="https://via.placeholder.com/80"
+             alt="Admin">
+
+        <span id="adminName">Administrator</span>
+
+    </div>
+
+    <div class="nav-title">Management</div>
+
+    <button class="side-link active" data-section="dashboard">
+        Dashboard
+    </button>
+
+    <button class="side-link" data-section="banners">
+        Banners
+    </button>
+
+    <button class="side-link" data-section="rooms">
+        Rooms
+    </button>
+
+    <button class="side-link" data-section="food">
+        Food
+    </button>
+
+    <button class="side-link" data-section="bookings">
+        Bookings
+    </button>
+
+    <button class="side-link" data-section="orders">
+        Food Orders
+    </button>
+
+    <button class="side-link" data-section="ratings">
+        Customer Ratings
+    </button>
+
+    <div class="nav-title">People</div>
+
+    <button class="side-link" data-section="customers">
+        Customers
+    </button>
+
+    <button class="side-link" data-section="staff">
+        Hotel Staff
+    </button>
+
+    <button class="side-link" data-section="users">
+        User Roles
+    </button>
+
+    <div class="nav-title">Website</div>
+
+    <button class="side-link" data-section="contact">
+        Contact Details
+    </button>
+
+    <button class="side-link" data-section="appSettings">
+        App Settings
+    </button>
+
+    <button class="side-link" data-section="settings">
+        Hotel Settings
+    </button>
+
+    <button class="side-link" data-section="aiSettings">
+        Rumba AI
+    </button>
+
+    <button class="side-link" data-section="notifications">
+        Notifications
+    </button>
+
+    <button class="side-link" data-section="activity">
+        Activity Log
+    </button>
+
+    <button class="logout" id="logout">
+        Sign Out
+    </button>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div style="display:flex;align-items:center;gap:12px">
+
+            <button class="mobile-menu" id="mobileMenu">
+                ⋮
+            </button>
+
+            <h1 id="pageTitle">
+                Dashboard
+            </h1>
+
+        </div>
+
+        <div class="topbar-right">
+
+            <a href="index.html"
+               target="_blank"
+               class="view-site">
+                View Website
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <div class="content">
+
+
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
+<section class="section active" id="dashboard">
+
+    <div class="page-title">
+        <h2>Dashboard</h2>
+        <p>
+            Everything happening at Rumba in one place.
+        </p>
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div class="stat">
+            <div class="stat-label">Rooms</div>
+            <div class="stat-value" id="statRooms">0</div>
+            <div class="stat-note">Total rooms</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Food Items</div>
+            <div class="stat-value" id="statFood">0</div>
+            <div class="stat-note">Menu items</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Bookings</div>
+            <div class="stat-value" id="statBookings">0</div>
+            <div class="stat-note">Room bookings</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Orders</div>
+            <div class="stat-value" id="statOrders">0</div>
+            <div class="stat-note">Food orders</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Customers</div>
+            <div class="stat-value" id="statCustomers">0</div>
+            <div class="stat-note">Registered customers</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Staff</div>
+            <div class="stat-value" id="statStaff">0</div>
+            <div class="stat-note">Hotel staff</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Average Rating</div>
+            <div class="stat-value" id="statRating">0.0</div>
+            <div class="stat-note" id="statRatingCount">
+                0 reviews
+            </div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Unread Notifications</div>
+            <div class="stat-value" id="statNotifications">0</div>
+            <div class="stat-note">Needs attention</div>
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-columns">
+
+        <div class="panel">
+
+            <div class="panel-header">
+                <h2>Recent Bookings</h2>
+
+                <button class="secondary"
+                        onclick="showSection('bookings')">
+                    View All
+                </button>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Room</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="recentBookings">
+                        <tr>
+                            <td colspan="4">
+                                Loading...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div class="panel-header">
+                <h2>Customer Rating</h2>
+
+                <button class="secondary"
+                        onclick="showSection('ratings')">
+                    Reviews
+                </button>
+            </div>
+
+            <div>
+                <div class="rating-big"
+                     id="dashboardRating">
+                    0.0
+                </div>
+
+                <div class="stars"
+                     id="dashboardStars">
+                    ☆☆☆☆☆
+                </div>
+
+                <p style="color:var(--gray);margin-top:10px"
+                   id="dashboardRatingText">
+                    No reviews yet.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     BANNERS
+========================================================= -->
+
+<section class="section" id="banners">
+
+    <div class="page-title">
+        <h2>Website Banners</h2>
+        <p>
+            Upload and control the homepage banner slideshow.
+            The public website changes banners every 3 seconds.
+        </p>
+    </div>
+
+
+    <div class="panel">
+
+        <form id="bannerForm">
+
+            <div class="form-grid">
+
+                <div class="form-group full">
+
+                    <label>Banner Image</label>
+
+                    <div class="upload-area"
+                         data-upload-area="banner">
+
+                        <label class="upload-label">
+                            Choose Banner Image
+
+                            <input
+                                type="file"
+                                id="bannerImage"
+                                accept="image/*">
+                        </label>
+
+                        <div class="file-name"
+                             id="bannerFileName">
+                            No image selected
+                        </div>
+
+                        <div class="upload-status"
+                             id="bannerUploadStatus">
+
+                            <div class="upload-status-row">
+
+                                <span>
+                                    <span class="spinner"></span>
+                                    Uploading image...
+                                </span>
+
+                                <span id="bannerProgressText">
+                                    0%
+                                </span>
+
+                            </div>
+
+                            <div class="progress-track">
+                                <div class="progress-bar"
+                                     id="bannerProgress">
+                                </div>
+                            </div>
+
+                            <div class="upload-message"
+                                 id="bannerUploadMessage">
+                            </div>
+
+                        </div>
+
+                        <div class="preview"
+                             id="bannerPreview">
+                            <img id="bannerPreviewImage"
+                                 alt="Preview">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Banner Title</label>
+                    <input id="bannerTitle"
+                           placeholder="Welcome to Rumba">
+                </div>
+
+                <div class="form-group">
+                    <label>Subtitle</label>
+                    <input id="bannerSubtitle"
+                           placeholder="Food, rooms and hospitality">
+                </div>
+
+                <div class="form-group">
+                    <label>Display Status</label>
+
+                    <select id="bannerActive">
+                        <option value="true">Active</option>
+                        <option value="false">Hidden</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Order</label>
+                    <input id="bannerOrder"
+                           type="number"
+                           value="1">
+                </div>
+
+            </div>
+
+            <br>
+
+            <button class="primary"
+                    id="bannerSave">
+                Upload Banner
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <br>
+
+    <div class="panel">
+
+        <div class="panel-header">
+            <h2>Existing Banners</h2>
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Order</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="bannerTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ROOMS
+========================================================= -->
+
+<section class="section" id="rooms">
+
+    <div class="page-title">
+        <h2>Rooms</h2>
+        <p>
+            Manage room information, prices, availability,
+            facilities and images.
+        </p>
+    </div>
+
+    <div class="panel">
+
+        <form id="roomForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Room Name</label>
+                    <input id="roomName"
+                           required
+                           placeholder="Deluxe Room">
+                </div>
+
+                <div class="form-group">
+                    <label>Room Number</label>
+                    <input id="roomNumber"
+                           placeholder="201">
+                </div>
+
+                <div class="form-group">
+                    <label>Floor</label>
+                    <input id="roomFloor"
+                           placeholder="2">
+                </div>
+
+                <div class="form-group">
+                    <label>Price Per Night</label>
+                    <input id="roomPrice"
+                           type="number"
+                           required
+                           placeholder="2500">
+                </div>
+
+                <div class="form-group">
+                    <label>Maximum Guests</label>
+                    <input id="roomGuests"
+                           type="number"
+                           value="2">
+                </div>
+
+                <div class="form-group">
+                    <label>Room Type</label>
+                    <select id="roomType">
+                        <option>Standard</option>
+                        <option>Deluxe</option>
+                        <option>Family</option>
+                        <option>Premium</option>
+                        <option>Suite</option>
+                    </select>
+                </div>
+
+                <div class="form-group full">
+                    <label>Room Description</label>
+                    <textarea id="roomDescription"
+                              placeholder="Describe the room..."></textarea>
+                </div>
+
+                <div class="form-group full">
+
+                    <label>Room Image</label>
+
+                    <div class="upload-area">
+
+                        <label class="upload-label">
+                            Choose Room Image
+
+                            <input type="file"
+                                   id="roomImage"
+                                   accept="image/*">
+                        </label>
+
+                        <div class="file-name"
+                             id="roomFileName">
+                            No image selected
+                        </div>
+
+                        <div class="upload-status"
+                             id="roomUploadStatus">
+
+                            <div class="upload-status-row">
+                                <span>
+                                    <span class="spinner"></span>
+                                    Uploading room image...
+                                </span>
+
+                                <span id="roomProgressText">
+                                    0%
+                                </span>
+                            </div>
+
+                            <div class="progress-track">
+                                <div class="progress-bar"
+                                     id="roomProgress">
+                                </div>
+                            </div>
+
+                            <div class="upload-message"
+                                 id="roomUploadMessage">
+                            </div>
+
+                        </div>
+
+                        <div class="preview"
+                             id="roomPreview">
+                            <img id="roomPreviewImage"
+                                 alt="Room preview">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Availability</label>
+
+                    <select id="roomAvailable">
+                        <option value="true">Available</option>
+                        <option value="false">Unavailable</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Featured Room</label>
+
+                    <select id="roomFeatured">
+                        <option value="false">No</option>
+                        <option value="true">Yes</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group full">
+
+                    <label>Room Facilities</label>
+
+                    <input id="roomFacilities"
+                           placeholder="WiFi, attached bathroom, TV, hot water">
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <button class="primary"
+                    id="roomSave">
+                Add Room
+            </button>
+
+            <button type="button"
+                    class="secondary hidden"
+                    id="roomCancel">
+                Cancel Edit
+            </button>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <div class="panel">
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Room</th>
+                        <th>Floor</th>
+                        <th>Price</th>
+                        <th>Rating</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="roomTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOD
+========================================================= -->
+
+<section class="section" id="food">
+
+    <div class="page-title">
+        <h2>Food Menu</h2>
+        <p>
+            Manage food, prices, categories, availability and photographs.
+        </p>
+    </div>
+
+    <div class="panel">
+
+        <form id="foodForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Food Name</label>
+                    <input id="foodName"
+                           required
+                           placeholder="Traditional Dhindo Set">
+                </div>
+
+                <div class="form-group">
+                    <label>Price</label>
+                    <input id="foodPrice"
+                           required
+                           type="number"
+                           placeholder="350">
+                </div>
+
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="foodCategory">
+                        <option>Dhindo</option>
+                        <option>Traditional Nepali</option>
+                        <option>Fast Food</option>
+                        <option>Breakfast</option>
+                        <option>Lunch</option>
+                        <option>Dinner</option>
+                        <option>Drinks</option>
+                        <option>Snacks</option>
+                        <option>Special</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Preparation Time</label>
+                    <input id="foodTime"
+                           placeholder="15 minutes">
+                </div>
+
+                <div class="form-group full">
+                    <label>Description</label>
+                    <textarea id="foodDescription"
+                              placeholder="Describe the food..."></textarea>
+                </div>
+
+                <div class="form-group full">
+
+                    <label>Food Image</label>
+
+                    <div class="upload-area">
+
+                        <label class="upload-label">
+
+                            Choose Food Image
+
+                            <input type="file"
+                                   id="foodImage"
+                                   accept="image/*">
+
+                        </label>
+
+                        <div class="file-name"
+                             id="foodFileName">
+                            No image selected
+                        </div>
+
+                        <div class="upload-status"
+                             id="foodUploadStatus">
+
+                            <div class="upload-status-row">
+
+                                <span>
+                                    <span class="spinner"></span>
+                                    Uploading food image...
+                                </span>
+
+                                <span id="foodProgressText">
+                                    0%
+                                </span>
+
+                            </div>
+
+                            <div class="progress-track">
+                                <div class="progress-bar"
+                                     id="foodProgress">
+                                </div>
+                            </div>
+
+                            <div class="upload-message"
+                                 id="foodUploadMessage">
+                            </div>
+
+                        </div>
+
+                        <div class="preview"
+                             id="foodPreview">
+
+                            <img id="foodPreviewImage"
+                                 alt="Food preview">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Available</label>
+
+                    <select id="foodAvailable">
+                        <option value="true">Available</option>
+                        <option value="false">Unavailable</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Featured</label>
+
+                    <select id="foodFeatured">
+                        <option value="false">No</option>
+                        <option value="true">Yes</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <br>
+
+            <button class="primary"
+                    id="foodSave">
+                Add Food
+            </button>
+
+            <button type="button"
+                    class="secondary hidden"
+                    id="foodCancel">
+                Cancel Edit
+            </button>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <div class="panel">
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Rating</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="foodTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     BOOKINGS
+========================================================= -->
+
+<section class="section" id="bookings">
+
+    <div class="page-title">
+        <h2>Room Bookings</h2>
+        <p>
+            Track room booking requests and reservation status.
+        </p>
+    </div>
+
+    <div class="panel">
+
+        <div class="actions" style="margin-bottom:20px">
+
+            <button class="secondary"
+                    onclick="loadBookings()">
+                Refresh
+            </button>
+
+            <button class="secondary"
+                    onclick="exportCollection('bookings')">
+                Export Data
+            </button>
+
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                        <th>Room</th>
+                        <th>Check In</th>
+                        <th>Check Out</th>
+                        <th>Guests</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="bookingTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ORDERS
+========================================================= -->
+
+<section class="section" id="orders">
+
+    <div class="page-title">
+        <h2>Food Orders</h2>
+        <p>
+            Manage incoming food orders and their status.
+        </p>
+    </div>
+
+    <div class="panel">
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Food</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="orderTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     RATINGS
+========================================================= -->
+
+<section class="section" id="ratings">
+
+    <div class="page-title">
+        <h2>Customer Ratings</h2>
+        <p>
+            Real customer ratings stored in Firebase.
+            The website can show the calculated mean rating.
+        </p>
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Overall Rating
+            </div>
+
+            <div class="stat-value"
+                 id="ratingAverage">
+                0.0
+            </div>
+
+            <div class="stars"
+                 id="ratingStars">
+                ☆☆☆☆☆
+            </div>
+
+            <div class="stat-note"
+                 id="ratingTotal">
+                0 reviews
+            </div>
+
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">5 Star</div>
+            <div class="stat-value" id="fiveStar">0</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">4 Star</div>
+            <div class="stat-value" id="fourStar">0</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">3 Star</div>
+            <div class="stat-value" id="threeStar">0</div>
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="panel">
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Rating</th>
+                        <th>Type</th>
+                        <th>Comment</th>
+                        <th>Date</th>
+                        <th>Published</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="ratingTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CUSTOMERS
+========================================================= -->
+
+<section class="section" id="customers">
+
+    <div class="page-title">
+        <h2>Customers</h2>
+        <p>
+            Registered customers who have used Google login.
+        </p>
+    </div>
+
+    <div class="panel">
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Photo</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Role</th>
+                        <th>Joined</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="customerTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     STAFF
+========================================================= -->
+
+<section class="section" id="staff">
+
+    <div class="page-title">
+        <h2>Hotel Staff</h2>
+        <p>
+            Manage staff accounts and their responsibilities.
+        </p>
+    </div>
+
+    <div class="panel">
+
+        <form id="staffForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Staff Name</label>
+                    <input id="staffName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input id="staffEmail" type="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input id="staffPhone">
+                </div>
+
+                <div class="form-group">
+                    <label>Position</label>
+
+                    <select id="staffPosition">
+                        <option>Manager</option>
+                        <option>Reception</option>
+                        <option>Kitchen</option>
+                        <option>Waiter</option>
+                        <option>Housekeeping</option>
+                        <option>Accountant</option>
+                        <option>Other</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Permission</label>
+
+                    <select id="staffPermission">
+                        <option value="staff">Staff</option>
+                        <option value="manager">Manager</option>
+                        <option value="admin">Admin</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+
+                    <select id="staffStatus">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <button class="primary">
+                Add Staff
+            </button>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <div class="panel">
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Position</th>
+                        <th>Permission</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="staffTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     USER ROLES
+========================================================= -->
+
+<section class="section" id="users">
+
+    <div class="page-title">
+        <h2>User Roles</h2>
+        <p>
+            Customer, hotel staff, manager and administrator roles.
+        </p>
+    </div>
+
+    <div class="panel">
+
+        <form id="roleForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>User Email</label>
+                    <input id="roleEmail"
+                           type="email"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label>Role</label>
+
+                    <select id="roleValue">
+                        <option value="customer">Customer</option>
+                        <option value="staff">Hotel Staff</option>
+                        <option value="manager">Manager</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <button class="primary">
+                Save User Role
+            </button>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <div class="panel">
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="userTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
+<section class="section" id="contact">
+
+    <div class="page-title">
+        <h2>Contact Details</h2>
+        <p>
+            Update phone, email, address and Google Maps location.
+        </p>
+    </div>
+
+    <div class="panel">
+
+        <form id="contactForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Business Name</label>
+                    <input id="businessName">
+                </div>
+
+                <div class="form-group">
+                    <label>Nepali Name</label>
+                    <input id="businessNepali">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input id="businessPhone">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input id="businessEmail">
+                </div>
+
+                <div class="form-group">
+                    <label>Address</label>
+                    <input id="businessAddress">
+                </div>
+
+                <div class="form-group">
+                    <label>Google Maps URL</label>
+                    <input id="businessMap">
+                </div>
+
+                <div class="form-group">
+                    <label>WhatsApp Number</label>
+                    <input id="businessWhatsApp">
+                </div>
+
+                <div class="form-group">
+                    <label>Website Status</label>
+
+                    <select id="siteStatus">
+                        <option value="open">Open</option>
+                        <option value="closed">Temporarily Closed</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <button class="primary">
+                Save Contact Details
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     APP SETTINGS
+========================================================= -->
+
+<section class="section" id="appSettings">
+
+    <div class="page-title">
+        <h2>Mobile App</h2>
+        <p>
+            Control the Android application download shown on the website.
+        </p>
+    </div>
+
+    <div class="panel">
+
+        <form id="appForm">
+
+            <div class="form-grid">
+
+                <div class="form-group full">
+                    <label>APK Download URL</label>
+                    <input id="apkUrl"
+                           placeholder="https://...">
+                </div>
+
+                <div class="form-group full">
+                    <label>App Description</label>
+                    <textarea id="appDescription"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>App Version</label>
+                    <input id="appVersion"
+                           placeholder="1.0.0">
+                </div>
+
+                <div class="form-group">
+                    <label>Minimum Android Version</label>
+                    <input id="androidVersion"
+                           placeholder="Android 8+">
+                </div>
+
+            </div>
+
+            <br>
+
+            <button class="primary">
+                Save App Settings
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HOTEL SETTINGS
+========================================================= -->
+
+<section class="section" id="settings">
+
+    <div class="page-title">
+        <h2>Hotel Settings</h2>
+        <p>
+            Operational information displayed across the website.
+        </p>
+    </div>
+
+    <div class="panel">
+
+        <form id="hotelSettingsForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Check In Time</label>
+                    <input id="checkIn"
+                           type="time">
+                </div>
+
+                <div class="form-group">
+                    <label>Check Out Time</label>
+                    <input id="checkOut"
+                           type="time">
+                </div>
+
+                <div class="form-group">
+                    <label>Restaurant Opening</label>
+                    <input id="restaurantOpen"
+                           type="time">
+                </div>
+
+                <div class="form-group">
+                    <label>Restaurant Closing</label>
+                    <input id="restaurantClose"
+                           type="time">
+                </div>
+
+                <div class="form-group">
+                    <label>Currency</label>
+                    <input id="currency"
+                           value="NPR">
+                </div>
+
+                <div class="form-group">
+                    <label>Booking Confirmation</label>
+
+                    <select id="bookingConfirmation">
+                        <option value="manual">Manual</option>
+                        <option value="automatic">Automatic</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group full">
+                    <label>Hotel Description</label>
+                    <textarea id="hotelDescription"></textarea>
+                </div>
+
+            </div>
+
+            <br>
+
+            <button class="primary">
+                Save Hotel Settings
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     AI SETTINGS
+========================================================= -->
+
+<section class="section" id="aiSettings">
+
+    <div class="page-title">
+        <h2>Rumba AI</h2>
+        <p>
+            Configure the digital concierge used by customers.
+        </p>
+    </div>
+
+    <div class="panel">
+
+        <form id="aiForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>AI Name</label>
+                    <input id="aiName"
+                           value="Rumba AI">
+                </div>
+
+                <div class="form-group">
+                    <label>AI Enabled</label>
+
+                    <select id="aiEnabled">
+                        <option value="true">Enabled</option>
+                        <option value="false">Disabled</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group full">
+                    <label>Welcome Message</label>
+                    <textarea id="aiWelcome"></textarea>
+                </div>
+
+                <div class="form-group full">
+                    <label>AI Instructions</label>
+                    <textarea id="aiInstructions"
+                              placeholder="The AI should only use real food, room and business information from Firebase."></textarea>
+                </div>
+
+            </div>
+
+            <br>
+
+            <button class="primary">
+                Save AI Settings
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     NOTIFICATIONS
+========================================================= -->
+
+<section class="section" id="notifications">
+
+    <div class="page-title">
+        <h2>Notifications</h2>
+        <p>
+            Important events and alerts.
+        </p>
+    </div>
+
+    <div class="panel">
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Message</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Read</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="notificationTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ACTIVITY LOG
+========================================================= -->
+
+<section class="section" id="activity">
+
+    <div class="page-title">
+        <h2>Activity Log</h2>
+        <p>
+            Track important administrator actions.
+        </p>
+    </div>
+
+    <div class="panel">
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Admin</th>
+                        <th>Target</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+
+                <tbody id="activityTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+    </div>
+
+</main>
+
+</div>
+
+
+<!-- =========================================================
+     EDIT MODAL
+========================================================= -->
+
+<div class="modal" id="editModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2 id="editModalTitle">
+                Edit
+            </h2>
+
+            <button class="close"
+                    onclick="closeModal()">
+                ×
+            </button>
+
+        </div>
+
+        <div id="editModalBody"></div>
+
+    </div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<!-- =========================================================
+     FIREBASE
+========================================================= -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    onAuthStateChanged,
+    signOut
+}
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    setDoc,
+    getDoc,
+    getDocs,
+    updateDoc,
+    deleteDoc,
+    doc,
+    query,
+    orderBy,
+    limit,
+    serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+    apiKey:"AIzaSyCpe1GUs7pnHTki7wTq3gQT6PfIFec7wt8",
+    authDomain:"rumba-fastfood-and-dhindo-ghar.firebaseapp.com",
+    projectId:"rumba-fastfood-and-dhindo-ghar",
+    storageBucket:"rumba-fastfood-and-dhindo-ghar.firebasestorage.app",
+    messagingSenderId:"761242605317",
+    appId:"1:761242605317:web:9b46e6e9a0d2efdbc4c96c",
+    measurementId:"G-RY5TGZ0VTM"
+};
+
+const app=initializeApp(firebaseConfig);
+
+const auth=getAuth(app);
+
+const db=getFirestore(app);
+
+const provider=new GoogleAuthProvider();
+
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const ADMIN_EMAIL="bishalxtha17@gmail.com";
+
+const IMAGEBB_KEY=
+"c077a7dd2031a6ac352c597f8de1d48c";
+
+
+/* =========================================================
+   AUTHENTICATION
+========================================================= */
+
+const loginScreen=
+document.getElementById("loginScreen");
+
+const adminApp=
+document.getElementById("adminApp");
+
+const loginError=
+document.getElementById("loginError");
+
+
+document.getElementById("googleLogin")
+.addEventListener("click",async()=>{
+
+    loginError.textContent="";
+
+    try{
+
+        const result=
+            await signInWithPopup(auth,provider);
+
+        const user=result.user;
+
+        if(user.email.toLowerCase() !==
+           ADMIN_EMAIL.toLowerCase()){
+
+            await signOut(auth);
+
+            loginError.textContent=
+                "This Google account is not authorised as administrator.";
+
+            return;
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        loginError.textContent=
+            "Google login failed. Please try again.";
+
+    }
+
+});
+
+
+onAuthStateChanged(auth,async user=>{
+
+    if(!user){
+
+        loginScreen.classList.remove("hidden");
+
+        adminApp.classList.add("hidden");
+
+        return;
+    }
+
+    if(
+        !user.email ||
+        user.email.toLowerCase() !==
+        ADMIN_EMAIL.toLowerCase()
+    ){
+
+        await signOut(auth);
+
+        return;
+    }
+
+    loginScreen.classList.add("hidden");
+
+    adminApp.classList.remove("hidden");
+
+    document.getElementById("adminName")
+        .textContent=user.displayName || user.email;
+
+    if(user.photoURL){
+
+        document.getElementById("adminPhoto")
+            .src=user.photoURL;
+
+    }
+
+    await initialiseAdmin();
+
+});
+
+
+document.getElementById("logout")
+.addEventListener("click",()=>{
+
+    signOut(auth);
+
+});
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+const pageTitles={
+    dashboard:"Dashboard",
+    banners:"Banners",
+    rooms:"Rooms",
+    food:"Food",
+    bookings:"Bookings",
+    orders:"Food Orders",
+    ratings:"Customer Ratings",
+    customers:"Customers",
+    staff:"Hotel Staff",
+    users:"User Roles",
+    contact:"Contact Details",
+    appSettings:"App Settings",
+    settings:"Hotel Settings",
+    aiSettings:"Rumba AI",
+    notifications:"Notifications",
+    activity:"Activity Log"
+};
+
+
+document.querySelectorAll(".side-link")
+.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        showSection(button.dataset.section);
+
+    });
+
+});
+
+
+window.showSection=function(name){
+
+    document.querySelectorAll(".section")
+    .forEach(section=>{
+        section.classList.remove("active");
+    });
+
+    const target=
+        document.getElementById(name);
+
+    if(target){
+        target.classList.add("active");
+    }
+
+    document.querySelectorAll(".side-link")
+    .forEach(button=>{
+        button.classList.toggle(
+            "active",
+            button.dataset.section===name
+        );
+    });
+
+    document.getElementById("pageTitle")
+        .textContent=pageTitles[name] || "Rumba Admin";
+
+    document.getElementById("sidebar")
+        .classList.remove("open");
+
+};
+
+
+document.getElementById("mobileMenu")
+.addEventListener("click",()=>{
+
+    document.getElementById("sidebar")
+        .classList.toggle("open");
+
+});
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function toast(message,type=""){
+
+    const element=
+        document.getElementById("toast");
+
+    element.textContent=message;
+
+    element.className="toast show";
+
+    if(type==="success"){
+        element.classList.add("success-toast");
+    }
+
+    if(type==="error"){
+        element.classList.add("error-toast");
+    }
+
+    setTimeout(()=>{
+        element.className="toast";
+    },3500);
+
+}
+
+
+/* =========================================================
+   IMAGEBB UPLOAD
+   REAL XHR PROGRESS
+========================================================= */
+
+function uploadImage(file,config){
+
+    return new Promise((resolve,reject)=>{
+
+        if(!file){
+
+            reject(
+                new Error("Please select an image.")
+            );
+
+            return;
+        }
+
+        const maxSize=10*1024*1024;
+
+        if(file.size>maxSize){
+
+            reject(
+                new Error(
+                    "Image is too large. Maximum size is 10 MB."
+                )
+            );
+
+            return;
+        }
+
+        const status=
+            document.getElementById(config.status);
+
+        const progress=
+            document.getElementById(config.progress);
+
+        const progressText=
+            document.getElementById(config.progressText);
+
+        const message=
+            document.getElementById(config.message);
+
+        status.classList.add("show");
+
+        progress.style.width="0%";
+
+        progressText.textContent="0%";
+
+        message.innerHTML=
+            '<span class="spinner"></span> Connecting to ImageBB...';
+
+        const formData=new FormData();
+
+        formData.append(
+            "image",
+            file
+        );
+
+        const xhr=new XMLHttpRequest();
+
+        xhr.open(
+            "POST",
+            "https://api.imgbb.com/1/upload?key="+
+            IMAGEBB_KEY
+        );
+
+        xhr.upload.addEventListener(
+            "progress",
+            event=>{
+
+                if(event.lengthComputable){
+
+                    const percent=
+                        Math.round(
+                            event.loaded/event.total*100
+                        );
+
+                    progress.style.width=
+                        percent+"%";
+
+                    progressText.textContent=
+                        percent+"%";
+
+                    if(percent<100){
+
+                        message.innerHTML=
+                            '<span class="spinner"></span>'+
+                            "Uploading image...";
+
+                    }else{
+
+                        message.textContent=
+                            "Processing image...";
+
+                    }
+
+                }
+
+            }
+        );
+
+        xhr.onload=()=>{
+
+            try{
+
+                const result=
+                    JSON.parse(xhr.responseText);
+
+                if(
+                    xhr.status>=200 &&
+                    xhr.status<300 &&
+                    result.success
+                ){
+
+                    progress.style.width="100%";
+
+                    progressText.textContent="100%";
+
+                    message.textContent=
+                        "Upload complete.";
+
+                    resolve(
+                        result.data.url
+                    );
+
+                }else{
+
+                    reject(
+                        new Error(
+                            result.error?.message ||
+                            "ImageBB upload failed."
+                        )
+                    );
+
+                }
+
+            }catch(error){
+
+                reject(
+                    new Error(
+                        "Invalid ImageBB response."
+                    )
+                );
+
+            }
+
+        };
+
+        xhr.onerror=()=>{
+
+            reject(
+                new Error(
+                    "Network error during image upload."
+                )
+            );
+
+        };
+
+        xhr.ontimeout=()=>{
+
+            reject(
+                new Error(
+                    "Image upload timed out."
+                )
+            );
+
+        };
+
+        xhr.timeout=120000;
+
+        xhr.send(formData);
+
+    });
+
+}
+
+
+/* =========================================================
+   FILE PREVIEW
+========================================================= */
+
+function setupFilePreview(
+    inputId,
+    nameId,
+    previewId,
+    previewImageId
+){
+
+    const input=
+        document.getElementById(inputId);
+
+    input.addEventListener("change",()=>{
+
+        const file=input.files[0];
+
+        if(!file) return;
+
+        document.getElementById(nameId)
+            .textContent=
+            file.name+
+            " ("+
+            Math.round(file.size/1024)+
+            " KB)";
+
+        const reader=new FileReader();
+
+        reader.onload=event=>{
+
+            document.getElementById(previewImageId)
+                .src=event.target.result;
+
+            document.getElementById(previewId)
+                .style.display="block";
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+
+
+setupFilePreview(
+    "bannerImage",
+    "bannerFileName",
+    "bannerPreview",
+    "bannerPreviewImage"
+);
+
+setupFilePreview(
+    "roomImage",
+    "roomFileName",
+    "roomPreview",
+    "roomPreviewImage"
+);
+
+setupFilePreview(
+    "foodImage",
+    "foodFileName",
+    "foodPreview",
+    "foodPreviewImage"
+);
+
+
+/* =========================================================
+   BANNER
+========================================================= */
+
+document.getElementById("bannerForm")
+.addEventListener("submit",async event=>{
+
+    event.preventDefault();
+
+    const button=
+        document.getElementById("bannerSave");
+
+    const file=
+        document.getElementById("bannerImage")
+        .files[0];
+
+    if(!file){
+
+        toast("Please choose a banner image.","error");
+
+        return;
+    }
+
+    button.disabled=true;
+
+    button.textContent="Uploading...";
+
+    try{
+
+        const imageUrl=
+            await uploadImage(file,{
+                status:"bannerUploadStatus",
+                progress:"bannerProgress",
+                progressText:"bannerProgressText",
+                message:"bannerUploadMessage"
+            });
+
+        await addDoc(
+            collection(db,"banners"),
+            {
+                imageUrl:imageUrl,
+                title:document.getElementById("bannerTitle").value.trim(),
+                subtitle:document.getElementById("bannerSubtitle").value.trim(),
+                active:
+                    document.getElementById("bannerActive").value==="true",
+                order:
+                    Number(
+                        document.getElementById("bannerOrder").value
+                    ) || 1,
+                createdAt:serverTimestamp(),
+                updatedAt:serverTimestamp()
+            }
+        );
+
+        await logActivity(
+            "Added banner",
+            "banners"
+        );
+
+        event.target.reset();
+
+        document.getElementById("bannerPreview")
+            .style.display="none";
+
+        document.getElementById("bannerFileName")
+            .textContent="No image selected";
+
+        toast(
+            "Banner uploaded successfully.",
+            "success"
+        );
+
+        loadBanners();
+
+    }catch(error){
+
+        console.error(error);
+
+        document.getElementById("bannerUploadMessage")
+            .textContent=error.message;
+
+        toast(
+            error.message,
+            "error"
+        );
+
+    }finally{
+
+        button.disabled=false;
+
+        button.textContent="Upload Banner";
+
+    }
+
+});
+
+
+async function loadBanners(){
+
+    const table=
+        document.getElementById("bannerTable");
+
+    table.innerHTML=
+        `<tr><td colspan="5">Loading...</td></tr>`;
+
+    try{
+
+        const snapshot=
+            await getDocs(
+                collection(db,"banners")
+            );
+
+        const rows=[];
+
+        snapshot.forEach(item=>{
+
+            const data=item.data();
+
+            rows.push(`
+                <tr>
+
+                    <td>
+                        <img class="thumb"
+                             src="${escapeHtml(data.imageUrl || "")}">
+                    </td>
+
+                    <td>
+                        ${escapeHtml(data.title || "Untitled")}
+                    </td>
+
+                    <td>
+                        ${data.order || 0}
+                    </td>
+
+                    <td>
+                        <span class="badge ${
+                            data.active
+                            ?"badge-green"
+                            :"badge-red"
+                        }">
+                            ${data.active?"Active":"Hidden"}
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="warning"
+                                onclick="toggleBanner('${item.id}',${!!data.active})">
+                                ${data.active?"Hide":"Show"}
+                            </button>
+
+                            <button
+                                class="danger"
+                                onclick="deleteItem('banners','${item.id}')">
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+            `);
+
+        });
+
+        table.innerHTML=
+            rows.length
+            ? rows.join("")
+            : `<tr><td colspan="5">
+                No banners yet.
+              </td></tr>`;
+
+    }catch(error){
+
+        table.innerHTML=
+            `<tr><td colspan="5">
+                ${escapeHtml(error.message)}
+             </td></tr>`;
+
+    }
+
+}
+
+
+window.toggleBanner=async function(id,current){
+
+    await updateDoc(
+        doc(db,"banners",id),
+        {
+            active:!current,
+            updatedAt:serverTimestamp()
+        }
+    );
+
+    await logActivity(
+        current?"Hidden banner":"Activated banner",
+        id
+    );
+
+    loadBanners();
+
+};
+
+
+/* =========================================================
+   ROOMS
+========================================================= */
+
+let editingRoomId=null;
+
+
+document.getElementById("roomForm")
+.addEventListener("submit",async event=>{
+
+    event.preventDefault();
+
+    const button=
+        document.getElementById("roomSave");
+
+    button.disabled=true;
+
+    try{
+
+        let imageUrl=null;
+
+        const file=
+            document.getElementById("roomImage")
+            .files[0];
+
+        if(file){
+
+            imageUrl=
+                await uploadImage(file,{
+                    status:"roomUploadStatus",
+                    progress:"roomProgress",
+                    progressText:"roomProgressText",
+                    message:"roomUploadMessage"
+                });
+
+        }
+
+        const data={
+            name:document.getElementById("roomName").value.trim(),
+            roomNumber:document.getElementById("roomNumber").value.trim(),
+            floor:document.getElementById("roomFloor").value.trim(),
+            price:Number(document.getElementById("roomPrice").value)||0,
+            maxGuests:Number(document.getElementById("roomGuests").value)||2,
+            type:document.getElementById("roomType").value,
+            description:document.getElementById("roomDescription").value.trim(),
+            available:document.getElementById("roomAvailable").value==="true",
+            featured:document.getElementById("roomFeatured").value==="true",
+            facilities:document.getElementById("roomFacilities").value.trim(),
+            updatedAt:serverTimestamp()
+        };
+
+        if(imageUrl){
+            data.imageUrl=imageUrl;
+        }
+
+        if(editingRoomId){
+
+            await updateDoc(
+                doc(db,"rooms",editingRoomId),
+                data
+            );
+
+            await logActivity(
+                "Updated room",
+                editingRoomId
+            );
+
+            toast(
+                "Room updated successfully.",
+                "success"
+            );
+
+        }else{
+
+            data.createdAt=serverTimestamp();
+
+            await addDoc(
+                collection(db,"rooms"),
+                data
+            );
+
+            await logActivity(
+                "Added room",
+                data.name
+            );
+
+            toast(
+                "Room added successfully.",
+                "success"
+            );
+
+        }
+
+        resetRoomForm();
+
+        loadRooms();
+
+    }catch(error){
+
+        console.error(error);
+
+        toast(
+            error.message,
+            "error"
+        );
+
+    }finally{
+
+        button.disabled=false;
+
+    }
+
+});
+
+
+async function loadRooms(){
+
+    const table=
+        document.getElementById("roomTable");
+
+    table.innerHTML=
+        `<tr><td colspan="7">Loading...</td></tr>`;
+
+    try{
+
+        const snapshot=
+            await getDocs(
+                collection(db,"rooms")
+            );
+
+        const rows=[];
+
+        snapshot.forEach(item=>{
+
+            const r=item.data();
+
+            rows.push(`
+                <tr>
+
+                    <td>
+                        <img class="thumb"
+                             src="${escapeHtml(r.imageUrl || "")}">
+                    </td>
+
+                    <td>
+                        ${escapeHtml(r.name || "")}
+                        <br>
+                        <small>
+                            ${escapeHtml(r.roomNumber || "")}
+                        </small>
+                    </td>
+
+                    <td>
+                        ${escapeHtml(r.floor || "")}
+                    </td>
+
+                    <td>
+                        Rs. ${Number(r.price||0).toLocaleString()}
+                    </td>
+
+                    <td>
+                        ${awaitRating("room",item.id)}
+                    </td>
+
+                    <td>
+                        <span class="badge ${
+                            r.available
+                            ?"badge-green"
+                            :"badge-red"
+                        }">
+                            ${r.available?"Available":"Unavailable"}
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="warning"
+                                onclick="editRoom('${item.id}')">
+                                Edit
+                            </button>
+
+                            <button
+                                class="danger"
+                                onclick="deleteItem('rooms','${item.id}')">
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+            `);
+
+        });
+
+        table.innerHTML=
+            rows.length
+            ? rows.join("")
+            : `<tr><td colspan="7">
+                No rooms yet.
+              </td></tr>`;
+
+        document.getElementById("statRooms")
+            .textContent=snapshot.size;
+
+    }catch(error){
+
+        table.innerHTML=
+            `<tr><td colspan="7">
+                ${escapeHtml(error.message)}
+             </td></tr>`;
+
+    }
+
+}
+
+
+window.editRoom=async function(id){
+
+    const snapshot=
+        await getDoc(
+            doc(db,"rooms",id)
+        );
+
+    if(!snapshot.exists()) return;
+
+    const r=snapshot.data();
+
+    editingRoomId=id;
+
+    document.getElementById("roomName").value=r.name||"";
+    document.getElementById("roomNumber").value=r.roomNumber||"";
+    document.getElementById("roomFloor").value=r.floor||"";
+    document.getElementById("roomPrice").value=r.price||"";
+    document.getElementById("roomGuests").value=r.maxGuests||2;
+    document.getElementById("roomType").value=r.type||"Standard";
+    document.getElementById("roomDescription").value=r.description||"";
+    document.getElementById("roomAvailable").value=
+        String(r.available!==false);
+    document.getElementById("roomFeatured").value=
+        String(!!r.featured);
+    document.getElementById("roomFacilities").value=
+        r.facilities||"";
+
+    document.getElementById("roomSave")
+        .textContent="Update Room";
+
+    document.getElementById("roomCancel")
+        .classList.remove("hidden");
+
+    showSection("rooms");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+};
+
+
+document.getElementById("roomCancel")
+.addEventListener("click",resetRoomForm);
+
+
+function resetRoomForm(){
+
+    editingRoomId=null;
+
+    document.getElementById("roomForm")
+        .reset();
+
+    document.getElementById("roomSave")
+        .textContent="Add Room";
+
+    document.getElementById("roomCancel")
+        .classList.add("hidden");
+
+    document.getElementById("roomFileName")
+        .textContent="No image selected";
+
+}
+
+
+/* =========================================================
+   FOOD
+========================================================= */
+
+let editingFoodId=null;
+
+
+document.getElementById("foodForm")
+.addEventListener("submit",async event=>{
+
+    event.preventDefault();
+
+    const button=
+        document.getElementById("foodSave");
+
+    button.disabled=true;
+
+    try{
+
+        let imageUrl=null;
+
+        const file=
+            document.getElementById("foodImage")
+            .files[0];
+
+        if(file){
+
+            imageUrl=
+                await uploadImage(file,{
+                    status:"foodUploadStatus",
+                    progress:"foodProgress",
+                    progressText:"foodProgressText",
+                    message:"foodUploadMessage"
+                });
+
+        }
+
+        const data={
+
+            name:
+                document.getElementById("foodName")
+                .value.trim(),
+
+            price:
+                Number(
+                    document.getElementById("foodPrice")
+                    .value
+                )||0,
+
+            category:
+                document.getElementById("foodCategory")
+                .value,
+
+            preparationTime:
+                document.getElementById("foodTime")
+                .value.trim(),
+
+            description:
+                document.getElementById("foodDescription")
+                .value.trim(),
+
+            available:
+                document.getElementById("foodAvailable")
+                .value==="true",
+
+            featured:
+                document.getElementById("foodFeatured")
+                .value==="true",
+
+            updatedAt:
+                serverTimestamp()
+
+        };
+
+        if(imageUrl){
+            data.imageUrl=imageUrl;
+        }
+
+        if(editingFoodId){
+
+            await updateDoc(
+                doc(db,"foods",editingFoodId),
+                data
+            );
+
+            await logActivity(
+                "Updated food",
+                editingFoodId
+            );
+
+            toast(
+                "Food updated successfully.",
+                "success"
+            );
+
+        }else{
+
+            data.createdAt=serverTimestamp();
+
+            await addDoc(
+                collection(db,"foods"),
+                data
+            );
+
+            await logActivity(
+                "Added food",
+                data.name
+            );
+
+            toast(
+                "Food added successfully.",
+                "success"
+            );
+
+        }
+
+        resetFoodForm();
+
+        loadFood();
+
+    }catch(error){
+
+        console.error(error);
+
+        toast(
+            error.message,
+            "error"
+        );
+
+    }finally{
+
+        button.disabled=false;
+
+    }
+
+});
+
+
+async function loadFood(){
+
+    const table=
+        document.getElementById("foodTable");
+
+    table.innerHTML=
+        `<tr><td colspan="7">Loading...</td></tr>`;
+
+    try{
+
+        const snapshot=
+            await getDocs(
+                collection(db,"foods")
+            );
+
+        const rows=[];
+
+        snapshot.forEach(item=>{
+
+            const f=item.data();
+
+            rows.push(`
+                <tr>
+
+                    <td>
+                        <img class="thumb"
+                             src="${escapeHtml(f.imageUrl || "")}">
+                    </td>
+
+                    <td>
+                        ${escapeHtml(f.name || "")}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(f.category || "")}
+                    </td>
+
+                    <td>
+                        Rs. ${Number(f.price||0).toLocaleString()}
+                    </td>
+
+                    <td>
+                        ${awaitRating("food",item.id)}
+                    </td>
+
+                    <td>
+                        <span class="badge ${
+                            f.available
+                            ?"badge-green"
+                            :"badge-red"
+                        }">
+                            ${f.available?"Available":"Unavailable"}
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="warning"
+                                onclick="editFood('${item.id}')">
+                                Edit
+                            </button>
+
+                            <button
+                                class="danger"
+                                onclick="deleteItem('foods','${item.id}')">
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+            `);
+
+        });
+
+        table.innerHTML=
+            rows.length
+            ? rows.join("")
+            : `<tr><td colspan="7">
+                No food items yet.
+              </td></tr>`;
+
+        document.getElementById("statFood")
+            .textContent=snapshot.size;
+
+    }catch(error){
+
+        table.innerHTML=
+            `<tr><td colspan="7">
+                ${escapeHtml(error.message)}
+             </td></tr>`;
+
+    }
+
+}
+
+
+window.editFood=async function(id){
+
+    const snapshot=
+        await getDoc(
+            doc(db,"foods",id)
+        );
+
+    if(!snapshot.exists()) return;
+
+    const f=snapshot.data();
+
+    editingFoodId=id;
+
+    document.getElementById("foodName").value=f.name||"";
+    document.getElementById("foodPrice").value=f.price||"";
+    document.getElementById("foodCategory").value=f.category||"Fast Food";
+    document.getElementById("foodTime").value=f.preparationTime||"";
+    document.getElementById("foodDescription").value=f.description||"";
+    document.getElementById("foodAvailable").value=
+        String(f.available!==false);
+    document.getElementById("foodFeatured").value=
+        String(!!f.featured);
+
+    document.getElementById("foodSave")
+        .textContent="Update Food";
+
+    document.getElementById("foodCancel")
+        .classList.remove("hidden");
+
+    showSection("food");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+};
+
+
+document.getElementById("foodCancel")
+.addEventListener("click",resetFoodForm);
+
+
+function resetFoodForm(){
+
+    editingFoodId=null;
+
+    document.getElementById("foodForm")
+        .reset();
+
+    document.getElementById("foodSave")
+        .textContent="Add Food";
+
+    document.getElementById("foodCancel")
+        .classList.add("hidden");
+
+    document.getElementById("foodFileName")
+        .textContent="No image selected";
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+window.deleteItem=async function(collectionName,id){
+
+    if(
+        !confirm(
+            "Are you sure you want to permanently delete this item?"
+        )
+    ){
+        return;
+    }
+
+    try{
+
+        await deleteDoc(
+            doc(db,collectionName,id)
+        );
+
+        await logActivity(
+            "Deleted item",
+            collectionName+"/"+id
+        );
+
+        toast(
+            "Item deleted successfully.",
+            "success"
+        );
+
+        if(collectionName==="rooms"){
+            loadRooms();
+        }
+
+        if(collectionName==="foods"){
+            loadFood();
+        }
+
+        if(collectionName==="banners"){
+            loadBanners();
+        }
+
+    }catch(error){
+
+        toast(
+            error.message,
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   RATINGS
+========================================================= */
+
+async function loadRatings(){
+
+    const table=
+        document.getElementById("ratingTable");
+
+    table.innerHTML=
+        `<tr><td colspan="7">Loading...</td></tr>`;
+
+    try{
+
+        const snapshot=
+            await getDocs(
+                collection(db,"ratings")
+            );
+
+        let total=0;
+        let count=0;
+
+        let five=0;
+        let four=0;
+        let three=0;
+
+        const rows=[];
+
+        snapshot.forEach(item=>{
+
+            const r=item.data();
+
+            const rating=
+                Number(r.rating)||0;
+
+            total+=rating;
+
+            count++;
+
+            if(rating===5) five++;
+            if(rating===4) four++;
+            if(rating===3) three++;
+
+            rows.push(`
+                <tr>
+
+                    <td>
+                        ${escapeHtml(
+                            r.userName || "Customer"
+                        )}
+                    </td>
+
+                    <td>
+                        <span class="stars">
+                            ${ratingStars(rating)}
+                        </span>
+                        ${rating}/5
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            r.type || "General"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            r.comment || ""
+                        )}
+                    </td>
+
+                    <td>
+                        ${formatDate(r.createdAt)}
+                    </td>
+
+                    <td>
+                        <span class="badge ${
+                            r.published!==false
+                            ?"badge-green"
+                            :"badge-red"
+                        }">
+                            ${r.published!==false
+                                ?"Published"
+                                :"Hidden"}
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="warning"
+                            onclick="toggleRating('${item.id}',${r.published!==false})">
+                            ${r.published!==false
+                                ?"Hide"
+                                :"Publish"}
+                        </button>
+
+                    </td>
+
+                </tr>
+            `);
+
+        });
+
+        const average=
+            count
+            ? (total/count).toFixed(1)
+            : "0.0";
+
+        document.getElementById("ratingAverage")
+            .textContent=average;
+
+        document.getElementById("ratingTotal")
+            .textContent=
+            count+" review"+(count===1?"":"s");
+
+        document.getElementById("fiveStar")
+            .textContent=five;
+
+        document.getElementById("fourStar")
+            .textContent=four;
+
+        document.getElementById("threeStar")
+            .textContent=three;
+
+        document.getElementById("dashboardRating")
+            .textContent=average;
+
+        document.getElementById("dashboardStars")
+            .textContent=ratingStars(
+                Math.round(Number(average))
+            );
+
+        document.getElementById("dashboardRatingText")
+            .textContent=
+            count
+            ? average+" / 5 from "+count+" customer reviews."
+            : "No reviews yet.";
+
+        document.getElementById("statRating")
+            .textContent=average;
+
+        document.getElementById("statRatingCount")
+            .textContent=count+" reviews";
+
+        table.innerHTML=
+            rows.length
+            ? rows.join("")
+            : `<tr><td colspan="7">
+                No customer ratings yet.
+              </td></tr>`;
+
+    }catch(error){
+
+        table.innerHTML=
+            `<tr><td colspan="7">
+                ${escapeHtml(error.message)}
+              </td></tr>`;
+
+    }
+
+}
+
+
+window.toggleRating=async function(id,current){
+
+    await updateDoc(
+        doc(db,"ratings",id),
+        {
+            published:!current,
+            updatedAt:serverTimestamp()
+        }
+    );
+
+    loadRatings();
+
+};
+
+
+function ratingStars(number){
+
+    return "★".repeat(number)+
+           "☆".repeat(5-number);
+
+}
+
+
+async function awaitRating(type,id){
+
+    try{
+
+        const snapshot=
+            await getDocs(
+                collection(db,"ratings")
+            );
+
+        let total=0;
+        let count=0;
+
+        snapshot.forEach(item=>{
+
+            const r=item.data();
+
+            if(
+                r.type===type &&
+                r.itemId===id &&
+                r.published!==false
+            ){
+
+                total+=Number(r.rating)||0;
+
+                count++;
+
+            }
+
+        });
+
+        return count
+            ? (total/count).toFixed(1)+"/5"
+            : "No rating";
+
+    }catch(error){
+
+        return "—";
+
+    }
+
+}
+
+
+/* =========================================================
+   BOOKINGS
+========================================================= */
+
+window.loadBookings=async function(){
+
+    const table=
+        document.getElementById("bookingTable");
+
+    table.innerHTML=
+        `<tr><td colspan="8">Loading...</td></tr>`;
+
+    try{
+
+        const snapshot=
+            await getDocs(
+                collection(db,"bookings")
+            );
+
+        document.getElementById("statBookings")
+            .textContent=snapshot.size;
+
+        const rows=[];
+
+        snapshot.forEach(item=>{
+
+            const b=item.data();
+
+            rows.push(`
+                <tr>
+
+                    <td>
+                        ${escapeHtml(
+                            b.customerName || "Guest"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            b.phone || ""
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            b.roomName || ""
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            b.checkIn || ""
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            b.checkOut || ""
+                        )}
+                    </td>
+
+                    <td>
+                        ${b.guests || 1}
+                    </td>
+
+                    <td>
+                        <span class="badge badge-purple">
+                            ${escapeHtml(
+                                b.status || "pending"
+                            )}
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <select
+                            onchange="updateStatus('bookings','${item.id}',this.value)">
+
+                            <option value="pending"
+                                ${b.status==="pending"?"selected":""}>
+                                Pending
+                            </option>
+
+                            <option value="confirmed"
+                                ${b.status==="confirmed"?"selected":""}>
+                                Confirmed
+                            </option>
+
+                            <option value="cancelled"
+                                ${b.status==="cancelled"?"selected":""}>
+                                Cancelled
+                            </option>
+
+                            <option value="completed"
+                                ${b.status==="completed"?"selected":""}>
+                                Completed
+                            </option>
+
+                        </select>
+
+                    </td>
+
+                </tr>
+            `);
+
+        });
+
+        table.innerHTML=
+            rows.length
+            ? rows.join("")
+            : `<tr><td colspan="8">
+                No bookings.
+              </td></tr>`;
+
+    }catch(error){
+
+        table.innerHTML=
+            `<tr><td colspan="8">
+                ${escapeHtml(error.message)}
+              </td></tr>`;
+
+    }
+
+};
+
+
+/* =========================================================
+   ORDERS
+========================================================= */
+
+async function loadOrders(){
+
+    const table=
+        document.getElementById("orderTable");
+
+    try{
+
+        const snapshot=
+            await getDocs(
+                collection(db,"orders")
+            );
+
+        document.getElementById("statOrders")
+            .textContent=snapshot.size;
+
+        const rows=[];
+
+        snapshot.forEach(item=>{
+
+            const o=item.data();
+
+            rows.push(`
+                <tr>
+
+                    <td>
+                        ${escapeHtml(
+                            o.customerName || "Guest"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            o.foodName || ""
+                        )}
+                    </td>
+
+                    <td>
+                        ${o.quantity || 1}
+                    </td>
+
+                    <td>
+                        Rs. ${Number(
+                            o.total || o.price || 0
+                        ).toLocaleString()}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(o.phone || "")}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            o.status || "pending"
+                        )}
+                    </td>
+
+                    <td>
+
+                        <select
+                            onchange="updateStatus('orders','${item.id}',this.value)">
+
+                            <option value="pending">Pending</option>
+                            <option value="preparing">Preparing</option>
+                            <option value="ready">Ready</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+
+                        </select>
+
+                    </td>
+
+                </tr>
+            `);
+
+        });
+
+        table.innerHTML=
+            rows.length
+            ? rows.join("")
+            : `<tr><td colspan="7">
+                No food orders.
+              </td></tr>`;
+
+    }catch(error){
+
+        table.innerHTML=
+            `<tr><td colspan="7">
+                ${escapeHtml(error.message)}
+              </td></tr>`;
+
+    }
+
+}
+
+
+window.updateStatus=async function(
+    collectionName,
+    id,
+    status
+){
+
+    await updateDoc(
+        doc(db,collectionName,id),
+        {
+            status:status,
+            updatedAt:serverTimestamp()
+        }
+    );
+
+    await logActivity(
+        "Changed status to "+status,
+        collectionName+"/"+id
+    );
+
+    toast(
+        "Status updated.",
+        "success"
+    );
+
+    if(collectionName==="bookings"){
+        loadBookings();
+    }
+
+    if(collectionName==="orders"){
+        loadOrders();
+    }
+
+};
+
+
+/* =========================================================
+   CUSTOMERS
+========================================================= */
+
+async function loadCustomers(){
+
+    const table=
+        document.getElementById("customerTable");
+
+    try{
+
+        const snapshot=
+            await getDocs(
+                collection(db,"users")
+            );
+
+        let count=0;
+
+        const rows=[];
+
+        snapshot.forEach(item=>{
+
+            const u=item.data();
+
+            if(
+                !u.role ||
+                u.role==="customer"
+            ){
+
+                count++;
+
+                rows.push(`
+                    <tr>
+
+                        <td>
+                            <img
+                                class="thumb"
+                                style="border-radius:50%"
+                                src="${escapeHtml(
+                                    u.photoURL ||
+                                    "https://via.placeholder.com/80"
+                                )}">
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                u.name || ""
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                u.email || ""
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                u.phone || ""
+                            )}
+                        </td>
+
+                        <td>
+                            <span class="badge badge-purple">
+                                ${escapeHtml(
+                                    u.role || "customer"
+                                )}
+                            </span>
+                        </td>
+
+                        <td>
+                            ${formatDate(u.createdAt)}
+                        </td>
+
+                        <td>
+                            ${u.disabled
+                                ?"Disabled"
+                                :"Active"}
+                        </td>
+
+                    </tr>
+                `);
+
+            }
+
+        });
+
+        document.getElementById("statCustomers")
+            .textContent=count;
+
+        table.innerHTML=
+            rows.length
+            ? rows.join("")
+            : `<tr><td colspan="7">
+                No customers found.
+              </td></tr>`;
+
+    }catch(error){
+
+        table.innerHTML=
+            `<tr><td colspan="7">
+                ${escapeHtml(error.message)}
+              </td></tr>`;
+
+    }
+
+}
+
+
+/* =========================================================
+   STAFF
+========================================================= */
+
+document.getElementById("staffForm")
+.addEventListener("submit",async event=>{
+
+    event.preventDefault();
+
+    const data={
+
+        name:
+            document.getElementById("staffName")
+            .value.trim(),
+
+        email:
+            document.getElementById("staffEmail")
+            .value.trim()
+            .toLowerCase(),
+
+        phone:
+            document.getElementById("staffPhone")
+            .value.trim(),
+
+        position:
+            document.getElementById("staffPosition")
+            .value,
+
+        role:
+            document.getElementById("staffPermission")
+            .value,
+
+        status:
+            document.getElementById("staffStatus")
+            .value,
+
+        createdAt:
+            serverTimestamp(),
+
+        updatedAt:
+            serverTimestamp()
+
+    };
+
+    try{
+
+        await addDoc(
+            collection(db,"staff"),
+            data
+        );
+
+        await logActivity(
+            "Added staff member",
+            data.email
+        );
+
+        event.target.reset();
+
+        toast(
+            "Staff member added.",
+            "success"
+        );
+
+        loadStaff();
+
+    }catch(error){
+
+        toast(
+            error.message,
+            "error"
+        );
+
+    }
+
+});
+
+
+async function loadStaff(){
+
+    const table=
+        document.getElementById("staffTable");
+
+    try{
+
+        const snapshot=
+            await getDocs(
+                collection(db,"staff")
+            );
+
+        document.getElementById("statStaff")
+            .textContent=snapshot.size;
+
+        const rows=[];
+
+        snapshot.forEach(item=>{
+
+            const s=item.data();
+
+            rows.push(`
+                <tr>
+
+                    <td>${escapeHtml(s.name||"")}</td>
+                    <td>${escapeHtml(s.email||"")}</td>
+                    <td>${escapeHtml(s.phone||"")}</td>
+                    <td>${escapeHtml(s.position||"")}</td>
+                    <td>${escapeHtml(s.role||"staff")}</td>
+
+                    <td>
+                        <span class="badge badge-green">
+                            ${escapeHtml(s.status||"active")}
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="danger"
+                            onclick="deleteItem('staff','${item.id}')">
+                            Remove
+                        </button>
+
+                    </td>
+
+                </tr>
+            `);
+
+        });
+
+        table.innerHTML=
+            rows.length
+            ? rows.join("")
+            : `<tr><td colspan="7">
+                No staff members.
+              </td></tr>`;
+
+    }catch(error){
+
+        table.innerHTML=
+            `<tr><td colspan="7">
+                ${escapeHtml(error.message)}
+              </td></tr>`;
+
+    }
+
+}
+
+
+/* =========================================================
+   USER ROLES
+========================================================= */
+
+document.getElementById("roleForm")
+.addEventListener("submit",async event=>{
+
+    event.preventDefault();
+
+    const email=
+        document.getElementById("roleEmail")
+        .value.trim()
+        .toLowerCase();
+
+    const role=
+        document.getElementById("roleValue")
+        .value;
+
+    try{
+
+        await setDoc(
+            doc(db,"userRoles",email),
+            {
+                email:email,
+                role:role,
+                updatedAt:serverTimestamp()
+            },
+            {merge:true}
+        );
+
+        await logActivity(
+            "Changed user role to "+role,
+            email
+        );
+
+        event.target.reset();
+
+        toast(
+            "User role saved.",
+            "success"
+        );
+
+        loadRoles();
+
+    }catch(error){
+
+        toast(
+            error.message,
+            "error"
+        );
+
+    }
+
+});
+
+
+async function loadRoles(){
+
+    const table=
+        document.getElementById("userTable");
+
+    try{
+
+        const snapshot=
+            await getDocs(
+                collection(db,"userRoles")
+            );
+
+        const rows=[];
+
+        snapshot.forEach(item=>{
+
+            const u=item.data();
+
+            rows.push(`
+                <tr>
+
+                    <td>${escapeHtml(u.email||"")}</td>
+
+                    <td>${escapeHtml(u.name||"")}</td>
+
+                    <td>
+                        <span class="badge badge-purple">
+                            ${escapeHtml(u.role||"customer")}
+                        </span>
+                    </td>
+
+                    <td>
+                        ${u.disabled
+                            ?"Disabled"
+                            :"Active"}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="danger"
+                            onclick="deleteItem('userRoles','${item.id}')">
+                            Remove Role
+                        </button>
+
+                    </td>
+
+                </tr>
+            `);
+
+        });
+
+        table.innerHTML=
+            rows.length
+            ? rows.join("")
+            : `<tr><td colspan="5">
+                No custom roles.
+              </td></tr>`;
+
+    }catch(error){
+
+        table.innerHTML=
+            `<tr><td colspan="5">
+                ${escapeHtml(error.message)}
+              </td></tr>`;
+
+    }
+
+}
+
+
+/* =========================================================
+   CONTACT SETTINGS
+========================================================= */
+
+document.getElementById("contactForm")
+.addEventListener("submit",async event=>{
+
+    event.preventDefault();
+
+    const data={
+
+        businessName:
+            document.getElementById("businessName").value.trim(),
+
+        businessNepali:
+            document.getElementById("businessNepali").value.trim(),
+
+        phone:
+            document.getElementById("businessPhone").value.trim(),
+
+        email:
+            document.getElementById("businessEmail").value.trim(),
+
+        address:
+            document.getElementById("businessAddress").value.trim(),
+
+        mapUrl:
+            document.getElementById("businessMap").value.trim(),
+
+        whatsapp:
+            document.getElementById("businessWhatsApp").value.trim(),
+
+        siteStatus:
+            document.getElementById("siteStatus").value,
+
+        updatedAt:
+            serverTimestamp()
+
+    };
+
+    await setDoc(
+        doc(db,"settings","contact"),
+        data,
+        {merge:true}
+    );
+
+    await logActivity(
+        "Updated contact details",
+        "settings/contact"
+    );
+
+    toast(
+        "Contact details saved.",
+        "success"
+    );
+
+});
+
+
+async function loadContact(){
+
+    try{
+
+        const snapshot=
+            await getDoc(
+                doc(db,"settings","contact")
+            );
+
+        if(!snapshot.exists()) return;
+
+        const d=snapshot.data();
+
+        document.getElementById("businessName").value=
+            d.businessName||"Rumba Fastfood and Dhindo Ghar";
+
+        document.getElementById("businessNepali").value=
+            d.businessNepali||"रुम्बा फाष्टफुड एण्ड ढिँडो घर";
+
+        document.getElementById("businessPhone").value=
+            d.phone||"+977 984-1541691";
+
+        document.getElementById("businessEmail").value=
+            d.email||"bishalxtha17@gmail.com";
+
+        document.getElementById("businessAddress").value=
+            d.address||"Gajuri, Dhading, Nepal";
+
+        document.getElementById("businessMap").value=
+            d.mapUrl||
+            "https://maps.app.goo.gl/MyUkmEkMCYmoafPH7";
+
+        document.getElementById("businessWhatsApp").value=
+            d.whatsapp||"9779841541691";
+
+        document.getElementById("siteStatus").value=
+            d.siteStatus||"open";
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =========================================================
+   APP SETTINGS
+========================================================= */
+
+document.getElementById("appForm")
+.addEventListener("submit",async event=>{
+
+    event.preventDefault();
+
+    await setDoc(
+        doc(db,"settings","app"),
+        {
+            apkUrl:
+                document.getElementById("apkUrl").value.trim(),
+
+            description:
+                document.getElementById("appDescription").value.trim(),
+
+            version:
+                document.getElementById("appVersion").value.trim(),
+
+            androidVersion:
+                document.getElementById("androidVersion").value.trim(),
+
+            updatedAt:serverTimestamp()
+
+        },
+        {merge:true}
+    );
+
+    await logActivity(
+        "Updated app settings",
+        "settings/app"
+    );
+
+    toast(
+        "App settings saved.",
+        "success"
+    );
+
+});
+
+
+async function loadAppSettings(){
+
+    const snapshot=
+        await getDoc(
+            doc(db,"settings","app")
+        );
+
+    if(!snapshot.exists()) return;
+
+    const d=snapshot.data();
+
+    document.getElementById("apkUrl").value=
+        d.apkUrl||"";
+
+    document.getElementById("appDescription").value=
+        d.description||"";
+
+    document.getElementById("appVersion").value=
+        d.version||"";
+
+    document.getElementById("androidVersion").value=
+        d.androidVersion||"";
+
+}
+
+
+/* =========================================================
+   HOTEL SETTINGS
+========================================================= */
+
+document.getElementById("hotelSettingsForm")
+.addEventListener("submit",async event=>{
+
+    event.preventDefault();
+
+    await setDoc(
+        doc(db,"settings","hotel"),
+        {
+
+            checkIn:
+                document.getElementById("checkIn").value,
+
+            checkOut:
+                document.getElementById("checkOut").value,
+
+            restaurantOpen:
+                document.getElementById("restaurantOpen").value,
+
+            restaurantClose:
+                document.getElementById("restaurantClose").value,
+
+            currency:
+                document.getElementById("currency").value,
+
+            bookingConfirmation:
+                document.getElementById("bookingConfirmation").value,
+
+            description:
+                document.getElementById("hotelDescription").value,
+
+            updatedAt:serverTimestamp()
+
+        },
+        {merge:true}
+    );
+
+    await logActivity(
+        "Updated hotel settings",
+        "settings/hotel"
+    );
+
+    toast(
+        "Hotel settings saved.",
+        "success"
+    );
+
+});
+
+
+async function loadHotelSettings(){
+
+    const snapshot=
+        await getDoc(
+            doc(db,"settings","hotel")
+        );
+
+    if(!snapshot.exists()) return;
+
+    const d=snapshot.data();
+
+    document.getElementById("checkIn").value=
+        d.checkIn||"14:00";
+
+    document.getElementById("checkOut").value=
+        d.checkOut||"12:00";
+
+    document.getElementById("restaurantOpen").value=
+        d.restaurantOpen||"07:00";
+
+    document.getElementById("restaurantClose").value=
+        d.restaurantClose||"22:00";
+
+    document.getElementById("currency").value=
+        d.currency||"NPR";
+
+    document.getElementById("bookingConfirmation").value=
+        d.bookingConfirmation||"manual";
+
+    document.getElementById("hotelDescription").value=
+        d.description||"";
+
+}
+
+
+/* =========================================================
+   AI SETTINGS
+========================================================= */
+
+document.getElementById("aiForm")
+.addEventListener("submit",async event=>{
+
+    event.preventDefault();
+
+    await setDoc(
+        doc(db,"settings","ai"),
+        {
+
+            name:
+                document.getElementById("aiName").value,
+
+            enabled:
+                document.getElementById("aiEnabled").value==="true",
+
+            welcome:
+                document.getElementById("aiWelcome").value,
+
+            instructions:
+                document.getElementById("aiInstructions").value,
+
+            updatedAt:serverTimestamp()
+
+        },
+        {merge:true}
+    );
+
+    await logActivity(
+        "Updated AI settings",
+        "settings/ai"
+    );
+
+    toast(
+        "AI settings saved.",
+        "success"
+    );
+
+});
+
+
+async function loadAISettings(){
+
+    const snapshot=
+        await getDoc(
+            doc(db,"settings","ai")
+        );
+
+    if(!snapshot.exists()) return;
+
+    const d=snapshot.data();
+
+    document.getElementById("aiName").value=
+        d.name||"Rumba AI";
+
+    document.getElementById("aiEnabled").value=
+        String(d.enabled!==false);
+
+    document.getElementById("aiWelcome").value=
+        d.welcome||
+        "Welcome to Rumba. How can I help you?";
+
+    document.getElementById("aiInstructions").value=
+        d.instructions||
+        "Use only real information from Firebase.";
+
+}
+
+
+/* =========================================================
+   ACTIVITY LOG
+========================================================= */
+
+async function logActivity(action,target){
+
+    try{
+
+        const user=auth.currentUser;
+
+        await addDoc(
+            collection(db,"activityLogs"),
+            {
+
+                action:action,
+
+                target:target,
+
+                adminEmail:
+                    user?.email||ADMIN_EMAIL,
+
+                adminName:
+                    user?.displayName||"Administrator",
+
+                createdAt:
+                    serverTimestamp()
+
+            }
+        );
+
+    }catch(error){
+
+        console.error(
+            "Activity log error:",
+            error
+        );
+
+    }
+
+}
+
+
+async function loadActivity(){
+
+    const table=
+        document.getElementById("activityTable");
+
+    try{
+
+        const q=
+            query(
+                collection(db,"activityLogs"),
+                orderBy("createdAt","desc"),
+                limit(100)
+            );
+
+        const snapshot=
+            await getDocs(q);
+
+        const rows=[];
+
+        snapshot.forEach(item=>{
+
+            const a=item.data();
+
+            rows.push(`
+                <tr>
+
+                    <td>
+                        ${escapeHtml(a.action||"")}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            a.adminName ||
+                            a.adminEmail ||
+                            ""
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(a.target||"")}
+                    </td>
+
+                    <td>
+                        ${formatDate(a.createdAt)}
+                    </td>
+
+                </tr>
+            `);
+
+        });
+
+        table.innerHTML=
+            rows.length
+            ? rows.join("")
+            : `<tr><td colspan="4">
+                No activity recorded.
+              </td></tr>`;
+
+    }catch(error){
+
+        table.innerHTML=
+            `<tr><td colspan="4">
+                ${escapeHtml(error.message)}
+              </td></tr>`;
+
+    }
+
+}
+
+
+/* =========================================================
+   NOTIFICATIONS
+========================================================= */
+
+async function loadNotifications(){
+
+    const table=
+        document.getElementById("notificationTable");
+
+    try{
+
+        const q=
+            query(
+                collection(db,"notifications"),
+                orderBy("createdAt","desc"),
+                limit(50)
+            );
+
+        const snapshot=
+            await getDocs(q);
+
+        let unread=0;
+
+        const rows=[];
+
+        snapshot.forEach(item=>{
+
+            const n=item.data();
+
+            if(!n.read) unread++;
+
+            rows.push(`
+                <tr>
+
+                    <td>
+                        ${escapeHtml(n.message||"")}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(n.type||"info")}
+                    </td>
+
+                    <td>
+                        ${formatDate(n.createdAt)}
+                    </td>
+
+                    <td>
+                        ${n.read?"Yes":"No"}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="warning"
+                            onclick="markNotification('${item.id}')">
+                            Mark Read
+                        </button>
+
+                    </td>
+
+                </tr>
+            `);
+
+        });
+
+        document.getElementById(
+            "statNotifications"
+        ).textContent=unread;
+
+        table.innerHTML=
+            rows.length
+            ? rows.join("")
+            : `<tr><td colspan="5">
+                No notifications.
+              </td></tr>`;
+
+    }catch(error){
+
+        table.innerHTML=
+            `<tr><td colspan="5">
+                ${escapeHtml(error.message)}
+              </td></tr>`;
+
+    }
+
+}
+
+
+window.markNotification=async function(id){
+
+    await updateDoc(
+        doc(db,"notifications",id),
+        {
+            read:true,
+            readAt:serverTimestamp()
+        }
+    );
+
+    loadNotifications();
+
+};
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function formatDate(timestamp){
+
+    if(!timestamp) return "—";
+
+    try{
+
+        const date=
+            timestamp.toDate
+            ? timestamp.toDate()
+            : new Date(timestamp);
+
+        return date.toLocaleString(
+            "en-NP",
+            {
+                dateStyle:"medium",
+                timeStyle:"short"
+            }
+        );
+
+    }catch(error){
+
+        return "—";
+
+    }
+
+}
+
+
+/* =========================================================
+   EXPORT
+========================================================= */
+
+window.exportCollection=async function(collectionName){
+
+    try{
+
+        const snapshot=
+            await getDocs(
+                collection(db,collectionName)
+            );
+
+        const data=[];
+
+        snapshot.forEach(item=>{
+
+            const value=item.data();
+
+            data.push({
+                id:item.id,
+                ...value
+            });
+
+        });
+
+        const blob=
+            new Blob(
+                [
+                    JSON.stringify(
+                        data,
+                        null,
+                        2
+                    )
+                ],
+                {
+                    type:"application/json"
+                }
+            );
+
+        const url=
+            URL.createObjectURL(blob);
+
+        const a=
+            document.createElement("a");
+
+        a.href=url;
+
+        a.download=
+            "rumba-"+collectionName+".json";
+
+        a.click();
+
+        URL.revokeObjectURL(url);
+
+    }catch(error){
+
+        toast(
+            error.message,
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   INITIALISE
+========================================================= */
+
+async function initialiseAdmin(){
+
+    await Promise.allSettled([
+
+        loadBanners(),
+
+        loadRooms(),
+
+        loadFood(),
+
+        loadBookings(),
+
+        loadOrders(),
+
+        loadRatings(),
+
+        loadCustomers(),
+
+        loadStaff(),
+
+        loadRoles(),
+
+        loadContact(),
+
+        loadAppSettings(),
+
+        loadHotelSettings(),
+
+        loadAISettings(),
+
+        loadNotifications(),
+
+        loadActivity()
+
+    ]);
+
+}
+
+
+/* =========================================================
+   STARTUP
+========================================================= */
+
+</script>
+
+</body>
+</html>
+
