@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://rumbahotelandlodge.com.np/sitemap.xml
