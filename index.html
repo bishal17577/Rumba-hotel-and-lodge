@@ -2176,12 +2176,16 @@ function getImage(item){
 }
 
 
-function whatsapp(message){
-    // Safari often blocks a blank popup that is redirected after an async Firebase call.
-    // Navigate the current tab instead: this reliably opens WhatsApp Web/app with the message prefilled.
+function whatsapp(message, preopenedWindow=null){
+    // Open the tab synchronously from the user's click before awaiting Firebase.
+    // This avoids Safari blocking the WhatsApp tab after an asynchronous database request.
     const phone = String(WHATSAPP).replace(/\D/g, "");
     const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
-    window.location.assign(url);
+    if (preopenedWindow && !preopenedWindow.closed) {
+        try { preopenedWindow.location.href = url; return; } catch (err) { console.warn("Could not navigate WhatsApp tab", err); }
+    }
+    // Popup-blocker fallback: navigate the current page rather than silently failing.
+    window.location.href = url;
 }
 
 
@@ -2997,6 +3001,9 @@ document.getElementById("bookingForm").addEventListener("submit",async e=>{
         message: document.getElementById("bookingMessage").value.trim()
     };
     if(data.phone.replace(/\D/g,"").length < 7){ showToast("Please enter a valid phone number."); return; }
+    // Must happen during the submit gesture so Safari allows the WhatsApp tab.
+    const waWindow = window.open("about:blank", "_blank");
+    if (waWindow) { try { waWindow.opener = null; waWindow.document.title = "Opening WhatsApp…"; waWindow.document.body.textContent = "Preparing your RUMBA booking…"; } catch (_) {} }
     const submit = e.target.querySelector('[type="submit"]');
     submit.disabled = true; submit.textContent = "Checking availability…";
     try{
@@ -3005,7 +3012,7 @@ document.getElementById("bookingForm").addEventListener("submit",async e=>{
         closeModal("bookingModal");
         const message = `Hello RUMBA Hotel and Lodge,\n\nI submitted a room booking request.\nReference: ${response.bookingCode || "Pending"}\nRoom: ${room.name || "Room"}\nPrice per night: ${formatPrice(room.price)}\nNights: ${dates.nights}\nEstimated total: ${formatPrice(dates.total)}\nName: ${data.userName}\nPhone: ${data.phone}\nCheck-in: ${data.checkIn}\nCheck-out: ${data.checkOut}\nGuests: ${data.guests}\nRoom photo: ${getImage(room)}\n\nPlease confirm my booking. The room photo link is included above.`;
         showToast(`Request saved: ${response.bookingCode || "pending confirmation"}. Opening WhatsApp…`);
-        whatsapp(message);
+        whatsapp(message, waWindow);
         e.target.reset();
     }catch(error){
         console.error("Booking save error; opening WhatsApp fallback:",error);
@@ -3014,7 +3021,7 @@ document.getElementById("bookingForm").addEventListener("submit",async e=>{
             showToast("Those dates may be unavailable. Opening WhatsApp so the hotel can help.");
         }
         const fallbackMessage = `Hello RUMBA Hotel and Lodge,\n\nI want to request a room booking.\nRoom: ${room.name || "Room"}\nPrice per night: ${formatPrice(room.price)}\nNights: ${dates.nights}\nEstimated total: ${formatPrice(dates.total)}\nName: ${data.userName}\nPhone: ${data.phone}\nCheck-in: ${data.checkIn}\nCheck-out: ${data.checkOut}\nGuests: ${data.guests}\nRoom photo: ${getImage(room)}\n\nPlease check availability and confirm my booking. The booking could not be saved online, so please confirm it here.`;
-        whatsapp(fallbackMessage);
+        whatsapp(fallbackMessage, waWindow);
     }finally{ submit.disabled = false; submit.textContent = "Send Booking Request"; }
 });
 
@@ -3112,6 +3119,10 @@ document.getElementById("orderForm")
         return;
     }
 
+    // Open during the original tap so Safari does not block it after Firestore finishes.
+    const waWindow = window.open("about:blank", "_blank");
+    if (waWindow) { try { waWindow.opener = null; waWindow.document.title = "Opening WhatsApp…"; waWindow.document.body.textContent = "Preparing your RUMBA order…"; } catch (_) {} }
+
     try{
 
         await addDoc(
@@ -3143,14 +3154,14 @@ Message:
 ${data.message || "No additional message."}`;
 
         showToast("Order saved. Opening WhatsApp…");
-        whatsapp(message);
+        whatsapp(message, waWindow);
 
         e.target.reset();
 
     }catch(error){
         console.error("Order save error; opening WhatsApp fallback:",error);
         const fallbackMessage = `Hello RUMBA Hotel and Lodge,\n\nI want to order food.\nFood: ${data.foodName}\nPrice: ${formatPrice(data.price)}\nQuantity: ${data.quantity}\nEstimated total: ${formatPrice(data.price * data.quantity)}\nName: ${data.userName}\nPhone: ${data.phone}\nFood photo: ${data.imageUrl}\nMessage: ${data.message || "No additional message."}\n\nThe website could not save this order online. Please confirm it here on WhatsApp.`;
-        whatsapp(fallbackMessage);
+        whatsapp(fallbackMessage, waWindow);
     }
 
 });
