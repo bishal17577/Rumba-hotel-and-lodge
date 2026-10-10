@@ -3,13 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
 <meta name="theme-color" content="#111827">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-<title>Rumba Fastfood & Dhindo Ghar</title>
-<meta name="description" content="Rumba Fastfood and Dhindo Ghar - Food, rooms and hospitality in Gajuri, Dhading.">
-<meta name="keywords" content="Rumba Fastfood, Dhindo Ghar, Gajuri, Dhading, hotel, food, rooms">
+<title>RUMBA Hotel and Lodge | Gajuri, Dhading, Nepal</title>
+<meta name="description" content="RUMBA Hotel and Lodge in Gajuri, Dhading, Nepal. Find rooms, food, estimated prices and direct booking requests at RUMBA Hotel and Lodge in Gajuri, Dhading, Nepal.">
+<meta name="keywords" content="RUMBA Hotel and Lodge, Rumba Hotel Gajuri, Rumba Gajuri Hotel, hotel in Gajuri, lodge in Gajuri, hotel in Dhading, rooms in Gajuri, restaurant in Gajuri">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="RUMBA Hotel and Lodge">
+<link rel="canonical" href="https://rumba.com.np/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RUMBA Hotel and Lodge">
+<meta property="og:title" content="RUMBA Hotel and Lodge | Hotel in Gajuri, Dhading">
+<meta property="og:description" content="Find rooms, food and direct booking at RUMBA Hotel and Lodge in Gajuri, Dhading, Nepal.">
+<meta property="og:url" content="https://rumba.com.np/">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Hotel",
+  "name": "RUMBA Hotel and Lodge",
+  "url": "https://rumba.com.np/",
+  "email": "som.lama16@yahoo.com",
+  "telephone": "+9779841541691",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Gajuri",
+    "addressRegion": "Bagmati Province",
+    "addressCountry": "NP"
+  },
+  "sameAs": ["https://maps.app.goo.gl/MyUkmEkMCYmoafPH7"]
+}
+</script>
 
 <style>
 *{
@@ -493,15 +522,22 @@ section{
 }
 
 .cardImage{
-    height:250px;
+    width:100%;
+    aspect-ratio:4 / 3;
+    height:auto;
     position:relative;
-    background:#ddd;
+    overflow:hidden;
+    background:#eeece7;
 }
 
 .cardImage img{
     width:100%;
     height:100%;
+    position:absolute;
+    inset:0;
     object-fit:cover;
+    object-position:center;
+    display:block;
 }
 
 .cardTag{
@@ -600,13 +636,22 @@ section{
 }
 
 .foodImg{
-    height:210px;
+    width:100%;
+    aspect-ratio:4 / 3;
+    height:auto;
+    overflow:hidden;
+    background:#eeece7;
+    position:relative;
 }
 
 .foodImg img{
     width:100%;
     height:100%;
+    position:absolute;
+    inset:0;
     object-fit:cover;
+    object-position:center;
+    display:block;
 }
 
 .foodInfo{
@@ -835,203 +880,6 @@ footer{
     border-top:1px solid rgba(255,255,255,.1);
     color:#777f8c;
     font-size:13px;
-}
-
-/* =========================
-   AI BUTTON
-========================= */
-
-.aiButton{
-    position:fixed;
-    right:22px;
-    bottom:22px;
-    z-index:7000;
-    width:66px;
-    height:66px;
-    border:0;
-    border-radius:22px;
-    background:var(--purple);
-    color:white;
-    box-shadow:0 15px 40px rgba(86,52,107,.35);
-    font-weight:bold;
-    font-size:13px;
-}
-
-.aiButton span{
-    display:block;
-    font-size:22px;
-    margin-bottom:2px;
-}
-
-/* =========================
-   AI PANEL
-========================= */
-
-.aiPanel{
-    position:fixed;
-    z-index:8000;
-    right:22px;
-    bottom:100px;
-    width:min(430px,calc(100vw - 25px));
-    height:min(690px,calc(100vh - 125px));
-    background:#f7f5f1;
-    border:1px solid var(--border);
-    border-radius:28px;
-    box-shadow:0 25px 80px rgba(0,0,0,.25);
-    display:none;
-    flex-direction:column;
-    overflow:hidden;
-}
-
-.aiPanel.open{
-    display:flex;
-}
-
-.aiHeader{
-    background:var(--navy);
-    color:white;
-    padding:18px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.aiTitle{
-    display:flex;
-    gap:10px;
-    align-items:center;
-}
-
-.aiIcon{
-    width:40px;
-    height:40px;
-    background:var(--purple);
-    border-radius:13px;
-    display:grid;
-    place-items:center;
-}
-
-.aiHeader small{
-    display:block;
-    color:#9da6b4;
-    margin-top:3px;
-}
-
-.aiClose{
-    background:none;
-    border:0;
-    color:white;
-    font-size:25px;
-}
-
-.aiQuick{
-    display:flex;
-    gap:7px;
-    overflow-x:auto;
-    padding:12px;
-    background:white;
-    border-bottom:1px solid var(--border);
-}
-
-.aiQuick button{
-    white-space:nowrap;
-    border:1px solid var(--border);
-    background:#f7f5f1;
-    border-radius:20px;
-    padding:8px 12px;
-}
-
-.aiMessages{
-    flex:1;
-    overflow-y:auto;
-    padding:15px;
-}
-
-.aiMsg{
-    max-width:86%;
-    margin-bottom:12px;
-}
-
-.aiMsg.user{
-    margin-left:auto;
-}
-
-.aiBubble{
-    padding:12px 14px;
-    border-radius:16px;
-    background:white;
-    border:1px solid var(--border);
-    line-height:1.45;
-    font-size:14px;
-}
-
-.aiMsg.user .aiBubble{
-    background:var(--navy);
-    color:white;
-    border:0;
-}
-
-.aiCard{
-    margin-top:10px;
-    background:white;
-    border:1px solid var(--border);
-    border-radius:16px;
-    overflow:hidden;
-}
-
-.aiCard img{
-    width:100%;
-    height:150px;
-    object-fit:cover;
-}
-
-.aiCardBody{
-    padding:13px;
-}
-
-.aiCardBody strong{
-    display:block;
-    font-size:18px;
-}
-
-.aiCardBody span{
-    color:var(--purple);
-    font-weight:bold;
-}
-
-.aiCardBody button{
-    width:100%;
-    margin-top:10px;
-    border:0;
-    background:var(--navy);
-    color:white;
-    padding:10px;
-    border-radius:10px;
-}
-
-.aiInput{
-    display:flex;
-    gap:7px;
-    padding:12px;
-    background:white;
-    border-top:1px solid var(--border);
-}
-
-.aiInput input{
-    flex:1;
-    min-width:0;
-    border:1px solid var(--border);
-    outline:0;
-    border-radius:14px;
-    padding:12px;
-}
-
-.aiSend{
-    width:45px;
-    border:0;
-    border-radius:13px;
-    background:var(--purple);
-    color:white;
 }
 
 /* =========================
@@ -1301,7 +1149,8 @@ footer{
     }
 
     .foodImg{
-        height:160px;
+        aspect-ratio: 4 / 3;
+        height:auto;
     }
 
     .foodInfo{
@@ -1358,19 +1207,6 @@ footer{
     .footerBrand{
         grid-column:1/-1;
     }
-
-    .aiButton{
-        right:15px;
-        bottom:15px;
-    }
-
-    .aiPanel{
-        right:10px;
-        bottom:88px;
-        width:calc(100vw - 20px);
-        height:calc(100vh - 105px);
-        border-radius:24px;
-    }
 }
 
 @media(max-width:420px){
@@ -1390,6 +1226,144 @@ footer{
         grid-column:auto;
     }
 }
+
+/* Consistent photo framing for uploaded room and food images */
+.cardImage, .foodImg, .aiCard{
+    isolation:isolate;
+}
+.cardImage img, .foodImg img, .aiCard img{
+    max-width:100%;
+}
+.cardImage img, .foodImg img{
+    transition:transform .35s ease;
+}
+.card:hover .cardImage img, .foodCard:hover .foodImg img{
+    transform:scale(1.025);
+}
+@media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important;}
+}
+
+/* Fast, stable image rendering */
+.cardImage, .foodImg, .aboutVisual { contain: layout paint; }
+.roomGalleryThumbs{display:flex;gap:7px;padding:8px 14px 0;overflow-x:auto;scrollbar-width:thin}
+.roomGalleryThumbs a{flex:0 0 64px;width:64px;height:48px;border-radius:7px;overflow:hidden;background:#e9e5dd}
+.roomGalleryThumbs img{width:100%;height:100%;object-fit:cover;transition:transform .2s}
+.roomGalleryThumbs a:hover img{transform:scale(1.06)}
+.cardImage img, .foodImg img, .aboutVisual img { background:#eeece7; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior:auto !important; animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+
+
+/* rumba-loader-failsafe */
+#pageLoader { transition: opacity .18s ease; }
+
+.bookingSummary{display:grid;gap:10px;padding:14px;border:1px solid var(--border);border-radius:14px;background:#f8f6f1;margin:12px 0 18px}
+.bookingSummary>div{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.bookingSummary span,.bookingSummary small{color:#656565}
+.bookingSummary strong{color:var(--navy);font-size:1.05rem}
+.bookingSummary small{line-height:1.5}
+.cardImage img,.foodImg img{width:100%;height:100%;object-fit:cover;background:#e8e4dc;transition:transform .35s}
+.cardImage,.foodImg{overflow:hidden;background:linear-gradient(110deg,#eee9e1 8%,#faf8f4 18%,#eee9e1 33%);background-size:200% 100%}
+.cardImage img[loading="lazy"],.foodImg img[loading="lazy"]{content-visibility:auto}
+
+/* RUMBA luxury refresh: horizontal swipe carousels, touch-friendly booking */
+:root{--rumba-ink:#171c22;--rumba-cream:#f7f4ee;--rumba-gold:#b99a62;--rumba-line:#e6dfd3}
+body{background:var(--rumba-cream);color:var(--rumba-ink)}
+header{backdrop-filter:blur(16px)}
+.logoMark{background:linear-gradient(145deg,#d7bd83,#9b7842);box-shadow:0 8px 22px #9b784233}
+.sectionHead{align-items:end;gap:18px}
+.sectionTitle h2{letter-spacing:-.035em}
+.carouselControls{display:flex;gap:8px;flex-shrink:0}
+.carouselArrow{width:42px;height:42px;border:1px solid #d8cfbf;background:#fff;color:#29241c;border-radius:50%;font-size:22px;display:grid;place-items:center;transition:background .2s,transform .2s}
+.carouselArrow:hover{background:#e8dcc6;transform:translateY(-1px)}
+#roomsGrid,.grid#roomsGrid,.foodGrid#foodGrid{display:flex!important;gap:18px;overflow-x:auto;overflow-y:hidden;padding:8px 2px 18px;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#c5b28f transparent;-webkit-overflow-scrolling:touch}
+#roomsGrid>.card,#foodGrid>.foodCard{flex:0 0 clamp(260px,31vw,355px);width:clamp(260px,31vw,355px);max-width:86vw;scroll-snap-align:start;margin:0;min-width:0}
+#roomsGrid>.empty,#foodGrid>.empty{flex:0 0 100%;width:100%}
+.card,.foodCard{border-radius:22px!important;border-color:#e4ddd1!important;box-shadow:0 10px 35px #31291b0a;transition:transform .25s,box-shadow .25s}
+.card:hover,.foodCard:hover{transform:translateY(-3px);box-shadow:0 18px 38px #31291b12}
+.cardImage,.foodImg{aspect-ratio:4/3!important;height:auto!important}
+.cardImage img,.foodImg img{width:100%;height:100%;object-fit:cover;display:block}
+.cardBody,.foodInfo{padding:18px!important}
+.cardTag{background:rgba(20,24,28,.78)!important;backdrop-filter:blur(8px)}
+.bookBtn,.formBtn,.foodInfo button,.primary{background:linear-gradient(135deg,#b79a63,#8c6e3e)!important;color:#fff!important;border-radius:12px!important}
+.secondary,.detailBtn{border-radius:12px!important}
+.modal{padding:12px;align-items:center}
+.modalBox{width:min(560px,100%);max-height:calc(100dvh - 24px);overflow-y:auto;border-radius:22px!important;padding:clamp(18px,4vw,28px)!important;overscroll-behavior:contain}
+.formGroup input[type=date]{min-height:49px;width:100%;font-size:16px;padding:12px;display:block;color-scheme:light;touch-action:manipulation}
+.dateQuick{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.dateQuick button{background:#f0eadf;color:#383025;border:1px solid #e0d4c1;border-radius:999px;padding:8px 12px;font-size:13px}
+.dateQuick button:hover{background:#e6d7bd}
+.dateGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bookingSummary{border-color:#e2d6c2!important;background:#faf7f0!important}
+.orderPhotoPreview{width:100%;height:130px;object-fit:cover;border-radius:12px;margin:8px 0 14px;background:#f0ece5}
+@media(max-width:640px){
+  section#rooms,section#food{padding-left:16px!important;padding-right:16px!important}
+  .sectionHead{align-items:center}
+  .sectionTitle h2{font-size:clamp(27px,8vw,36px)}
+  #roomsGrid,#foodGrid{margin-right:-16px;padding-right:16px;gap:13px;scrollbar-width:none}
+  #roomsGrid::-webkit-scrollbar,#foodGrid::-webkit-scrollbar{display:none}
+  #roomsGrid>.card,#foodGrid>.foodCard{flex:0 0 min(82vw,330px);width:min(82vw,330px);max-width:330px}
+  .carouselArrow{width:38px;height:38px}
+  .dateGrid{grid-template-columns:1fr;gap:0}
+  .modalBox{padding:18px!important}
+  .formBtn{min-height:48px;width:100%}
+}
+@media(min-width:641px){#roomsGrid,#foodGrid{scrollbar-width:none}#roomsGrid::-webkit-scrollbar,#foodGrid::-webkit-scrollbar{display:none}}
+
+
+/* RUMBA mobile-first polish and resilience */
+:root{scroll-padding-top:90px}
+body{min-height:100vh;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+button,a{touch-action:manipulation}
+:focus-visible{outline:3px solid #b99a62!important;outline-offset:3px}
+img{background:linear-gradient(110deg,#eee9df 8%,#f8f6f1 18%,#eee9df 33%);background-size:200% 100%}
+img.imgFailed{object-fit:contain!important;padding:22px;background:#eee8dc!important;color:#54452e}
+.reveal-on-scroll{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+.reveal-on-scroll.is-visible{opacity:1;transform:none}
+#rumbaScrollProgress{position:fixed;z-index:100001;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#d7bd83,#8c6e3e);pointer-events:none}
+#rumbaBackTop{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:8000;width:46px;height:46px;border:1px solid #d9c8a8;border-radius:50%;background:#171c22;color:#fff;box-shadow:0 8px 24px #0002;display:none;align-items:center;justify-content:center;font-size:20px}
+#rumbaBackTop.visible{display:flex}
+#rumbaNetworkNotice{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:100002;padding:11px 14px;border-radius:12px;background:#332b20;color:#fff;text-align:center;font:14px/1.4 Arial,sans-serif;box-shadow:0 8px 25px #0002;display:none}
+#rumbaNetworkNotice.show{display:block}
+button:disabled{opacity:.62;cursor:wait;filter:saturate(.7)}
+.modal{overscroll-behavior:contain}
+.modalBox input,.modalBox select,.modalBox textarea{font-size:16px!important}
+@media(max-width:640px){
+  body{padding-bottom:env(safe-area-inset-bottom)}
+  header{padding-top:env(safe-area-inset-top);min-height:64px}
+  .modal{align-items:flex-end!important;padding:8px!important}
+  .modalBox{width:100%!important;max-height:calc(100dvh - 16px - env(safe-area-inset-top))!important;border-radius:22px 22px 14px 14px!important;padding:20px 16px calc(18px + env(safe-area-inset-bottom))!important}
+  .modalBox h2{font-size:clamp(25px,7vw,32px)}
+  .formGroup{margin-bottom:12px}
+  .formGroup input,.formGroup select,.formGroup textarea{min-height:46px}
+  .dateQuick{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .dateQuick button{min-height:40px;padding:8px 6px}
+  .dateQuick button:last-child{grid-column:1/-1}
+  .bookingSummary{padding:12px;margin:10px 0 14px}
+  .sectionHead{gap:12px}
+  .carouselControls{gap:6px}
+  .carouselArrow{min-width:40px;min-height:40px}
+  #rumbaBackTop{right:12px;bottom:calc(12px + env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal-on-scroll{opacity:1;transform:none}}
+
+
+/* RUMBA mobile-first luxury polish */
+:root{scroll-behavior:smooth;scroll-padding-top:90px}
+body{ -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility }
+img{background:linear-gradient(110deg,#eee9df 8%,#f8f5ef 18%,#eee9df 33%);background-size:200% 100%}
+button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+button,a{touch-action:manipulation}
+:focus-visible{outline:2px solid #b99a61;outline-offset:3px}
+@media(max-width:640px){
+  .modal,.modal-content,.booking-modal,.order-modal{max-height:calc(100dvh - 20px);overflow-y:auto;overscroll-behavior:contain}
+  input,select,textarea{font-size:16px!important}
+  button{min-height:42px}
+  .room-card,.food-card{scroll-snap-align:start}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
 
@@ -1403,7 +1377,7 @@ footer{
     <div class="loaderBox">
         <div class="loaderLogo">R</div>
         <div class="loaderLine"><span></span></div>
-        <div>Rumba</div>
+        <div>RUMBA</div>
     </div>
 </div>
 
@@ -1418,8 +1392,8 @@ footer{
     <a href="#home" class="logo">
         <div class="logoMark">R</div>
         <div class="logoText">
-            <strong>Rumba</strong>
-            <span>Fastfood & Dhindo Ghar</span>
+            <strong>RUMBA</strong>
+            <span>Hotel and Lodge</span>
         </div>
     </a>
 
@@ -1432,7 +1406,6 @@ footer{
     </nav>
 
     <div class="navRight">
-        <button class="navBtn" onclick="openAI()">Rumba AI</button>
         <button class="navBtn loginBtn" id="loginBtn">Google Login</button>
         <button class="mobileMenuBtn" id="mobileMenuBtn">⋮</button>
     </div>
@@ -1445,7 +1418,6 @@ footer{
     <a href="#food">Food</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
-    <button onclick="openAI()">Rumba AI</button>
     <button id="mobileLoginBtn">Google Login</button>
 </div>
 
@@ -1468,13 +1440,12 @@ footer{
         </div>
 
         <h1>
-            Taste the
-            <span>real Nepal.</span>
+            RUMBA Hotel
+            <span>and Lodge.</span>
         </h1>
 
         <div class="heroText">
-            Fast food, traditional Dhindo, comfortable rooms and
-            a warm place to stop, eat and stay.
+            Comfortable rooms, local food and warm hospitality in Gajuri, Dhading, Nepal.
         </div>
 
         <div class="heroActions">
@@ -1486,9 +1457,6 @@ footer{
                 View Rooms
             </button>
 
-            <button class="secondary" onclick="openAI()">
-                Ask Rumba AI
-            </button>
         </div>
 
     </div>
@@ -1537,9 +1505,10 @@ footer{
         <p>Choose a room and book directly.</p>
     </div>
 
-    <button class="viewAll" onclick="openAIWith('best room')">
-        Find a room
-    </button>
+    <div class="carouselControls" aria-label="Room gallery controls">
+      <button class="carouselArrow" type="button" aria-label="Previous rooms" onclick="slideCarousel('roomsGrid',-1)">‹</button>
+      <button class="carouselArrow" type="button" aria-label="Next rooms" onclick="slideCarousel('roomsGrid',1)">›</button>
+    </div>
 
 </div>
 
@@ -1559,13 +1528,14 @@ footer{
 
     <div class="sectionTitle">
         <small>Eat</small>
-        <h2>Food & Dhindo</h2>
+        <h2>Dining</h2>
         <p>Discover what is available today.</p>
     </div>
 
-    <button class="viewAll" onclick="openAIWith('best food')">
-        Recommend food
-    </button>
+    <div class="carouselControls" aria-label="Food gallery controls">
+      <button class="carouselArrow" type="button" aria-label="Previous food" onclick="slideCarousel('foodGrid',-1)">‹</button>
+      <button class="carouselArrow" type="button" aria-label="Next food" onclick="slideCarousel('foodGrid',1)">›</button>
+    </div>
 
 </div>
 
@@ -1586,11 +1556,11 @@ footer{
     <div class="aboutVisual">
 
         <img id="aboutImage"
-             src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1200&q=85"
-             alt="Rumba food">
+             src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=800&q=60"
+             alt="RUMBA Hotel and Lodge in Gajuri, Dhading" loading="lazy" decoding="async">
 
         <div class="aboutBox">
-            <strong>Rumba Fastfood & Dhindo Ghar</strong>
+            <strong>RUMBA Hotel and Lodge</strong>
             <span>Gajuri, Dhading</span>
         </div>
 
@@ -1602,7 +1572,7 @@ footer{
             RUMBA
         </small>
 
-        <h2>Food, stay & local hospitality.</h2>
+        <h2>Comfortable stays & warm hospitality.</h2>
 
         <p id="aboutText">
             A place in Gajuri where traditional taste and modern
@@ -1613,11 +1583,11 @@ footer{
 
             <div class="feature">
                 <strong>Dhindo</strong>
-                <div>Traditional Nepal</div>
+                <div>Local hospitality</div>
             </div>
 
             <div class="feature">
-                <strong>Fast Food</strong>
+                <strong>Dining</strong>
                 <div>Quick & fresh</div>
             </div>
 
@@ -1666,8 +1636,8 @@ footer{
             <button
                 class="primary"
                 style="margin-top:20px"
-                onclick="openRatingModal('hotel','hotel','Rumba Fastfood & Dhindo Ghar')">
-                Rate Rumba
+                onclick="openRatingModal('hotel','hotel','RUMBA Hotel and Lodge')">
+                Rate RUMBA
             </button>
 
         </div>
@@ -1704,7 +1674,7 @@ footer{
     <div class="sectionTitle">
         <small>Reach us</small>
         <h2>Contact</h2>
-        <p>Talk to Rumba directly.</p>
+        <p>Talk to RUMBA directly.</p>
     </div>
 
 </div>
@@ -1713,7 +1683,7 @@ footer{
 
     <div class="contactCard">
         <strong>Phone</strong>
-        <span>Call Rumba</span>
+        <span>Call RUMBA</span>
         <a href="tel:+9779841541691">
             +977 984-1541691
         </a>
@@ -1746,16 +1716,24 @@ footer{
      FOOTER
 ========================= -->
 
+<section class="section" id="policies" aria-labelledby="policyTitle"><div class="sectionHead"><span class="eyebrow">BEFORE YOU BOOK</span><h2 id="policyTitle">Booking policies</h2></div><div style="max-width:850px;margin:20px auto;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><article style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px"><h3>Confirmation</h3><p>Online requests are pending until confirmed directly by the hotel.</p></article><article style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px"><h3>Price</h3><p>The total shown is an estimate based on the displayed nightly price. Confirm taxes and additional charges with the hotel.</p></article><article style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px"><h3>Cancellation</h3><p>Please contact the hotel directly to ask about cancellation, changes, refunds, and check-in/check-out times before booking.</p></article></div></section>
+<section class="section" id="faq" aria-labelledby="faqTitle"><div class="sectionHead"><span class="eyebrow">HELP & INFORMATION</span><h2 id="faqTitle">Frequently asked questions</h2><p>Quick answers about staying at RUMBA Hotel and Lodge in Gajuri, Dhading.</p></div><div class="faqList" style="max-width:850px;margin:24px auto;display:grid;gap:12px">
+<details style="padding:18px;border:1px solid var(--border);border-radius:14px;background:#fff"><summary style="font-weight:bold;cursor:pointer">How do I reserve a room?</summary><p style="padding-top:12px">Choose a room, select your check-in and check-out dates, enter your name and phone number, and submit the request. The hotel will check availability and confirm it with you.</p></details>
+<details style="padding:18px;border:1px solid var(--border);border-radius:14px;background:#fff"><summary style="font-weight:bold;cursor:pointer">How is the room price calculated?</summary><p style="padding-top:12px">The estimate is the listed room price multiplied by the number of nights. Confirm the final price and any extra charges directly with the hotel.</p></details>
+<details style="padding:18px;border:1px solid var(--border);border-radius:14px;background:#fff"><summary style="font-weight:bold;cursor:pointer">Where is RUMBA Hotel and Lodge?</summary><p style="padding-top:12px">RUMBA Hotel and Lodge is in Gajuri, Dhading, Nepal. Use the Google Maps directions link on this website before travelling.</p></details>
+<details style="padding:18px;border:1px solid var(--border);border-radius:14px;background:#fff"><summary style="font-weight:bold;cursor:pointer">Is my booking confirmed when I submit the form?</summary><p style="padding-top:12px">No. A booking request remains pending until the hotel reviews it and marks it confirmed. Please contact the hotel if you need an immediate answer.</p></details>
+<details style="padding:18px;border:1px solid var(--border);border-radius:14px;background:#fff"><summary style="font-weight:bold;cursor:pointer">How can I contact the hotel?</summary><p style="padding-top:12px">Call 9841541691, message WhatsApp, or email som.lama16@yahoo.com.</p></details></div></section>
+
 <footer>
 
 <div class="footerInner">
 
     <div class="footerBrand">
 
-        <h2>Rumba</h2>
+        <h2>RUMBA</h2>
 
         <p>
-            Fastfood, Dhindo Ghar and comfortable rooms
+            Hotel, lodge and comfortable rooms
             in Gajuri, Dhading.
         </p>
 
@@ -1780,8 +1758,8 @@ footer{
             +977 984-1541691
         </a>
 
-        <a href="mailto:bishalxtha17@gmail.com">
-            Email
+        <a href="mailto:som.lama16@yahoo.com">
+            som.lama16@yahoo.com
         </a>
 
     </div>
@@ -1795,92 +1773,18 @@ footer{
             Google Maps
         </a>
 
-        <a href="https://wa.me/9779841541691"
-           target="_blank">
-            WhatsApp
-        </a>
+        <a href="https://wa.me/9779841541691" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="admin.html">Staff / Admin</a>
 
     </div>
 
 </div>
 
 <div class="footerBottom">
-    © <span id="year"></span> Rumba Fastfood & Dhindo Ghar
+    © <span id="year"></span> RUMBA Hotel and Lodge
 </div>
 
 </footer>
-
-<!-- =========================
-     AI
-========================= -->
-
-<button class="aiButton" onclick="openAI()">
-    <span>R</span>
-    AI
-</button>
-
-<div class="aiPanel" id="aiPanel">
-
-    <div class="aiHeader">
-
-        <div class="aiTitle">
-
-            <div class="aiIcon">R</div>
-
-            <div>
-                <strong>Rumba AI</strong>
-                <small id="aiStatus">
-                    Your local Rumba assistant
-                </small>
-            </div>
-
-        </div>
-
-        <button class="aiClose" onclick="closeAI()">×</button>
-
-    </div>
-
-    <div class="aiQuick">
-
-        <button onclick="sendAI('Hi')">Hi</button>
-
-        <button onclick="sendAI('Best food')">
-            Best Food
-        </button>
-
-        <button onclick="sendAI('Best room')">
-            Best Room
-        </button>
-
-        <button onclick="sendAI('What can I order?')">
-            Recommend
-        </button>
-
-        <button onclick="sendAI('Contact')">
-            Contact
-        </button>
-
-    </div>
-
-    <div class="aiMessages" id="aiMessages"></div>
-
-    <div class="aiInput">
-
-        <input
-            id="aiInput"
-            type="text"
-            autocomplete="off"
-            placeholder="Ask Rumba AI...">
-
-        <button
-            class="aiSend"
-            onclick="sendAI()">
-            →
-        </button>
-
-    </div>
-
-</div>
 
 <!-- =========================
      BOOKING MODAL
@@ -1920,33 +1824,42 @@ footer{
                    placeholder="+977">
         </div>
 
-        <div class="formGroup">
-            <label>Check In</label>
-            <input id="checkIn"
-                   type="date"
-                   required>
+        <div class="dateGrid">
+          <div class="formGroup">
+              <label for="checkIn">Check-in date</label>
+              <input id="checkIn" type="date" required autocomplete="off" aria-describedby="dateHelp">
+          </div>
+          <div class="formGroup">
+              <label for="checkOut">Check-out date</label>
+              <input id="checkOut" type="date" required autocomplete="off" aria-describedby="dateHelp">
+          </div>
         </div>
-
-        <div class="formGroup">
-            <label>Check Out</label>
-            <input id="checkOut"
-                   type="date"
-                   required>
+        <div class="dateQuick" aria-label="Quick date selection">
+          <button type="button" onclick="setStayPreset(0)">Today · 1 night</button>
+          <button type="button" onclick="setStayPreset(1)">Tomorrow · 1 night</button>
+          <button type="button" onclick="setStayPreset(0,2)">Today · 2 nights</button>
         </div>
+        <small id="dateHelp" style="display:block;margin:8px 0 4px;color:#6b6254">Tap a date field to open your phone's calendar. The total updates automatically.</small>
 
         <div class="formGroup">
             <label>Guests</label>
             <select id="bookingGuests">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5+</option>
+                <option value="1">1 guest</option>
+                <option value="2">2 guests</option>
+                <option value="3">3 guests</option>
+                <option value="4">4 guests</option>
+                <option value="5">5 guests</option>
             </select>
         </div>
 
+        <div class="bookingSummary" aria-live="polite">
+            <div><span>Number of nights</span><strong id="bookingNights">—</strong></div>
+            <div><span>Estimated total</span><strong id="bookingTotal">—</strong></div>
+            <small>Submitting a request does not confirm the room. The hotel will confirm availability.</small>
+        </div>
+
         <div class="formGroup">
-            <label>Message</label>
+            <label>Message (optional)</label>
             <textarea id="bookingMessage"
                       placeholder="Anything we should know?"></textarea>
         </div>
@@ -1985,6 +1898,7 @@ footer{
         <div class="formGroup">
             <label>Food</label>
             <input id="orderFoodDisplay" readonly>
+            <img id="orderFoodPreview" class="orderPhotoPreview" alt="Selected food photo" loading="lazy">
         </div>
 
         <div class="formGroup">
@@ -2040,7 +1954,7 @@ footer{
         ×
     </button>
 
-    <h2>Rate Rumba</h2>
+    <h2>Rate RUMBA</h2>
 
     <form id="ratingForm">
 
@@ -2112,9 +2026,12 @@ import {
     addDoc,
     updateDoc,
     query,
+    where,
     limit,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-functions.js";
 
 
 /* =====================================================
@@ -2134,6 +2051,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const functions = getFunctions(app, "us-central1");
+const createBookingRequest = httpsCallable(functions, "createBookingRequest");
 
 const provider = new GoogleAuthProvider();
 
@@ -2154,10 +2073,10 @@ let selectedRating = 0;
 const WHATSAPP = "9779841541691";
 
 const fallbackBanner = {
-    title:"Taste the real Nepal.",
-    subtitle:"Fastfood, Dhindo and comfortable rooms in Gajuri.",
+    title:"Stay in comfort.",
+    subtitle:"Hotel, lodge and comfortable rooms in Gajuri.",
     image:
-    "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1800&q=85"
+    "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1200&q=65"
 };
 
 
@@ -2187,6 +2106,26 @@ window.closeModal = function(id){
     document.getElementById(id).classList.remove("open");
 };
 
+
+window.slideCarousel = function(id, direction){
+    const track = document.getElementById(id);
+    if(!track) return;
+    const card = track.querySelector('.card, .foodCard');
+    const step = card ? card.getBoundingClientRect().width + 18 : track.clientWidth * 0.8;
+    track.scrollBy({left: direction * step, behavior: 'smooth'});
+};
+
+window.setStayPreset = function(startOffset=0, nights=1){
+    const ci=document.getElementById('checkIn');
+    const co=document.getElementById('checkOut');
+    const today=new Date();
+    today.setHours(0,0,0,0);
+    today.setDate(today.getDate()+Number(startOffset||0));
+    const out=new Date(today); out.setDate(out.getDate()+Number(nights||1));
+    const iso=d=>{const local=new Date(d.getTime()-d.getTimezoneOffset()*60000);return local.toISOString().slice(0,10)};
+    ci.value=iso(today); co.value=iso(out); co.min=ci.value;
+    calculateBookingTotal();
+};
 
 window.scrollToFood = function(){
 
@@ -2238,14 +2177,11 @@ function getImage(item){
 
 
 function whatsapp(message){
-
-    const url =
-        "https://wa.me/" +
-        WHATSAPP +
-        "?text=" +
-        encodeURIComponent(message);
-
-    window.open(url,"_blank");
+    // Safari often blocks a blank popup that is redirected after an async Firebase call.
+    // Navigate the current tab instead: this reliably opens WhatsApp Web/app with the message prefilled.
+    const phone = String(WHATSAPP).replace(/\D/g, "");
+    const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+    window.location.assign(url);
 }
 
 
@@ -2339,7 +2275,7 @@ async function saveUser(){
 
         name:
             currentUser.displayName ||
-            "Rumba Customer",
+            "RUMBA Customer",
 
         email:
             currentUser.email || "",
@@ -2389,17 +2325,7 @@ onAuthStateChanged(auth,async user=>{
             console.error("User save error:",error);
         }
 
-        const name =
-            user.displayName ||
-            user.email?.split("@")[0] ||
-            "there";
 
-        addAIMessage(
-            "ai",
-            "Hi, " +
-            escapeHTML(name) +
-            ". Welcome to Rumba. I can help you find food, rooms, prices, contact details and more."
-        );
 
     }
 
@@ -2478,7 +2404,7 @@ function renderBanners(){
 
             <img
                 src="${escapeHTML(getImage(banner))}"
-                alt="${escapeHTML(banner.title || "Rumba")}">
+                alt="${escapeHTML((banner.title || "RUMBA Hotel and Lodge") + " in Gajuri, Dhading")}" width="1600" height="900" loading="${index === 0 ? "eager" : "lazy"}" decoding="async" fetchpriority="${index === 0 ? "high" : "low"}">
 
             <div class="bannerOverlay"></div>
 
@@ -2612,7 +2538,7 @@ function renderRooms(){
 
                 <img
                     src="${escapeHTML(getImage(room))}"
-                    alt="${escapeHTML(room.name || "Room")}">
+                    alt="${escapeHTML((room.name || "Room") + " at RUMBA Hotel and Lodge, Gajuri")}" loading="lazy" decoding="async" fetchpriority="low" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=640&q=55'">
 
                 <div class="cardTag">
                     ${escapeHTML(
@@ -2623,6 +2549,8 @@ function renderRooms(){
                 </div>
 
             </div>
+
+            ${(Array.isArray(room.gallery) ? room.gallery : []).filter(Boolean).slice(0,4).length ? `<div class="roomGalleryThumbs" aria-label="More photos of ${escapeHTML(room.name || 'room')}">${(Array.isArray(room.gallery) ? room.gallery : []).filter(Boolean).slice(0,4).map((url,photoIndex)=>`<a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer" aria-label="Open room photo ${photoIndex+1}"><img src="${escapeHTML(url)}" alt="${escapeHTML((room.name || 'Room') + ' photo ' + (photoIndex+1))}" loading="lazy" decoding="async" onerror="this.closest('a').style.display='none'"></a>`).join('')}</div>` : ''}
 
             <div class="cardBody">
 
@@ -2677,8 +2605,8 @@ function renderRooms(){
 
                     <button
                         class="detailBtn"
-                        onclick="askRoom('${room.id}')">
-                        Ask AI
+                        onclick="openBooking('${room.id}')">
+                        Room details
                     </button>
 
                 </div>
@@ -2763,7 +2691,7 @@ function renderFoods(){
 
                 <img
                     src="${escapeHTML(getImage(food))}"
-                    alt="${escapeHTML(food.name || "Food")}">
+                    alt="${escapeHTML((food.name || "Food") + " at RUMBA Hotel and Lodge, Gajuri")}" loading="lazy" decoding="async" fetchpriority="low" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=640&q=55'">
 
             </div>
 
@@ -2864,6 +2792,7 @@ async function loadRatings(){
             await getDocs(
                 query(
                     collection(db,"ratings"),
+                    where("status","==","approved"),
                     limit(100)
                 )
             );
@@ -2926,7 +2855,7 @@ function renderRatings(){
 
         reviewList.innerHTML = `
             <div class="review">
-                Be the first to rate Rumba.
+                Be the first to rate RUMBA.
             </div>
         `;
 
@@ -2999,111 +2928,95 @@ window.openBooking = function(roomId){
 
     }
 
+    document.getElementById("bookingPhone").value = "";
+    document.getElementById("bookingMessage").value = "";
+    document.getElementById("bookingGuests").value = "2";
+    document.getElementById("checkIn").value = "";
+    document.getElementById("checkOut").value = "";
+    setBookingDateLimits();
     document.getElementById("bookingModal")
         .classList.add("open");
 
 };
 
 
-document.getElementById("bookingForm")
-.addEventListener("submit",async e=>{
-
-    e.preventDefault();
-
-    if(!currentUser){
-
-        showToast("Please login with Google first.");
-
-        await login();
-
-        return;
+function calculateBookingTotal(){
+    const inValue = document.getElementById("checkIn").value;
+    const outValue = document.getElementById("checkOut").value;
+    const roomId = document.getElementById("bookingRoomId").value;
+    const room = rooms.find(r => r.id === roomId);
+    const nightsEl = document.getElementById("bookingNights");
+    const totalEl = document.getElementById("bookingTotal");
+    let nights = 0;
+    if(inValue && outValue){
+        const a = new Date(inValue + "T00:00:00");
+        const b = new Date(outValue + "T00:00:00");
+        nights = Math.round((b-a)/86400000);
     }
+    if(nightsEl) nightsEl.textContent = nights > 0 ? String(nights) : "—";
+    if(totalEl) totalEl.textContent = room && nights > 0 ? formatPrice(Number(room.price || 0) * nights) : "—";
+    return {nights, total: room && nights > 0 ? Number(room.price || 0) * nights : 0};
+}
 
-    const roomId =
-        document.getElementById("bookingRoomId").value;
-
-    const room =
-        rooms.find(r=>r.id === roomId);
-
-    if(!room) return;
-
-    const data = {
-
-        userId:currentUser.uid,
-
-        userName:
-            document.getElementById("bookingName").value.trim(),
-
-        phone:
-            document.getElementById("bookingPhone").value.trim(),
-
-        roomId:room.id,
-
-        roomName:
-            room.name || "Room",
-
-        price:
-            room.price || "",
-
-        checkIn:
-            document.getElementById("checkIn").value,
-
-        checkOut:
-            document.getElementById("checkOut").value,
-
-        guests:
-            document.getElementById("bookingGuests").value,
-
-        message:
-            document.getElementById("bookingMessage").value.trim(),
-
-        status:"pending",
-
-        createdAt:serverTimestamp()
-
-    };
-
-    try{
-
-        await addDoc(
-            collection(db,"bookings"),
-            data
-        );
-
-        closeModal("bookingModal");
-
-        const message =
-`Hello Rumba Fastfood & Dhindo Ghar,
-
-I want to book a room.
-
-Room: ${data.roomName}
-Price: ${formatPrice(data.price)}
-Name: ${data.userName}
-Phone: ${data.phone}
-Check-in: ${data.checkIn}
-Check-out: ${data.checkOut}
-Guests: ${data.guests}
-
-Message:
-${data.message || "No additional message."}`;
-
-        whatsapp(message);
-
-        showToast("Booking request saved.");
-
-        e.target.reset();
-
-    }catch(error){
-
-        console.error(error);
-
-        showToast("Could not save booking.");
-
-    }
-
+function setBookingDateLimits(){
+    const today = new Date();
+    const local = new Date(today.getTime() - today.getTimezoneOffset()*60000).toISOString().slice(0,10);
+    const ci = document.getElementById("checkIn");
+    const co = document.getElementById("checkOut");
+    ci.min = local;
+    if(!ci.value || ci.value < local) ci.value = local;
+    co.min = ci.value;
+    const next = new Date(ci.value + "T00:00:00"); next.setDate(next.getDate()+1);
+    const nextLocal = new Date(next.getTime()-next.getTimezoneOffset()*60000).toISOString().slice(0,10);
+    if(!co.value || co.value <= ci.value) co.value = nextLocal;
+    calculateBookingTotal();
+}
+document.getElementById("checkIn").addEventListener("change",()=>{
+    const ci = document.getElementById("checkIn").value;
+    const co = document.getElementById("checkOut");
+    co.min = ci;
+    if(co.value <= ci){ const d = new Date(ci+"T00:00:00"); d.setDate(d.getDate()+1); co.value = new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10); }
+    calculateBookingTotal();
 });
+document.getElementById("checkOut").addEventListener("change",calculateBookingTotal);
 
+document.getElementById("bookingForm").addEventListener("submit",async e=>{
+    e.preventDefault();
+    const roomId = document.getElementById("bookingRoomId").value;
+    const room = rooms.find(r=>r.id===roomId);
+    if(!room){ showToast("Please select a room again."); return; }
+    const dates = calculateBookingTotal();
+    if(dates.nights < 1){ showToast("Check-out must be after check-in."); return; }
+    const data = {
+        roomId: room.id,
+        userName: document.getElementById("bookingName").value.trim(),
+        phone: document.getElementById("bookingPhone").value.trim(),
+        checkIn: document.getElementById("checkIn").value,
+        checkOut: document.getElementById("checkOut").value,
+        guests: Number(document.getElementById("bookingGuests").value.replace("+", "")),
+        message: document.getElementById("bookingMessage").value.trim()
+    };
+    if(data.phone.replace(/\D/g,"").length < 7){ showToast("Please enter a valid phone number."); return; }
+    const submit = e.target.querySelector('[type="submit"]');
+    submit.disabled = true; submit.textContent = "Checking availability…";
+    try{
+        const result = await createBookingRequest(data);
+        const response = result.data || {};
+        closeModal("bookingModal");
+        const message = `Hello RUMBA Hotel and Lodge,\n\nI submitted a room booking request.\nReference: ${response.bookingCode || "Pending"}\nRoom: ${room.name || "Room"}\nPrice per night: ${formatPrice(room.price)}\nNights: ${dates.nights}\nEstimated total: ${formatPrice(dates.total)}\nName: ${data.userName}\nPhone: ${data.phone}\nCheck-in: ${data.checkIn}\nCheck-out: ${data.checkOut}\nGuests: ${data.guests}\nRoom photo: ${getImage(room)}\n\nPlease confirm my booking. The room photo link is included above.`;
+        showToast(`Request saved: ${response.bookingCode || "pending confirmation"}. Opening WhatsApp…`);
+        whatsapp(message);
+        e.target.reset();
+    }catch(error){
+        console.error("Booking save error; opening WhatsApp fallback:",error);
+        const code = error?.code || "";
+        if(code.includes("already-exists") || code.includes("failed-precondition")){
+            showToast("Those dates may be unavailable. Opening WhatsApp so the hotel can help.");
+        }
+        const fallbackMessage = `Hello RUMBA Hotel and Lodge,\n\nI want to request a room booking.\nRoom: ${room.name || "Room"}\nPrice per night: ${formatPrice(room.price)}\nNights: ${dates.nights}\nEstimated total: ${formatPrice(dates.total)}\nName: ${data.userName}\nPhone: ${data.phone}\nCheck-in: ${data.checkIn}\nCheck-out: ${data.checkOut}\nGuests: ${data.guests}\nRoom photo: ${getImage(room)}\n\nPlease check availability and confirm my booking. The booking could not be saved online, so please confirm it here.`;
+        whatsapp(fallbackMessage);
+    }finally{ submit.disabled = false; submit.textContent = "Send Booking Request"; }
+});
 
 /* =====================================================
    FOOD ORDER
@@ -3130,6 +3043,8 @@ window.openOrder = function(foodId){
         (food.name || "Food") +
         " — " +
         formatPrice(food.price);
+    const photoPreview=document.getElementById("orderFoodPreview");
+    if(photoPreview){photoPreview.src=getImage(food);photoPreview.alt=(food.name||"Food")+" photo";}
 
     if(currentUser){
 
@@ -3149,16 +3064,6 @@ document.getElementById("orderForm")
 .addEventListener("submit",async e=>{
 
     e.preventDefault();
-
-    if(!currentUser){
-
-        showToast("Please login with Google first.");
-
-        await login();
-
-        return;
-    }
-
     const foodId =
         document.getElementById("orderFoodId").value;
 
@@ -3174,7 +3079,7 @@ document.getElementById("orderForm")
 
     const data = {
 
-        userId:currentUser.uid,
+        userId:currentUser ? currentUser.uid : null,
 
         userName:
             document.getElementById("orderName").value.trim(),
@@ -3197,9 +3102,15 @@ document.getElementById("orderForm")
 
         status:"pending",
 
+        imageUrl:getImage(food),
         createdAt:serverTimestamp()
 
     };
+
+    if(!data.userName || data.userName.length > 100 || data.phone.replace(/\D/g,"").length < 7 || !Number.isInteger(quantity) || quantity < 1 || quantity > 20){
+        showToast("Please enter your name, a valid phone number and quantity from 1 to 20.");
+        return;
+    }
 
     try{
 
@@ -3214,7 +3125,7 @@ document.getElementById("orderForm")
             data.price * data.quantity;
 
         const message =
-`Hello Rumba Fastfood & Dhindo Ghar,
+`Hello RUMBA Hotel and Lodge,
 
 I want to order food.
 
@@ -3226,21 +3137,20 @@ Estimated total: ${formatPrice(total)}
 Name: ${data.userName}
 Phone: ${data.phone}
 
+Food photo: ${data.imageUrl}
+
 Message:
 ${data.message || "No additional message."}`;
 
+        showToast("Order saved. Opening WhatsApp…");
         whatsapp(message);
-
-        showToast("Order request saved.");
 
         e.target.reset();
 
     }catch(error){
-
-        console.error(error);
-
-        showToast("Could not save order.");
-
+        console.error("Order save error; opening WhatsApp fallback:",error);
+        const fallbackMessage = `Hello RUMBA Hotel and Lodge,\n\nI want to order food.\nFood: ${data.foodName}\nPrice: ${formatPrice(data.price)}\nQuantity: ${data.quantity}\nEstimated total: ${formatPrice(data.price * data.quantity)}\nName: ${data.userName}\nPhone: ${data.phone}\nFood photo: ${data.imageUrl}\nMessage: ${data.message || "No additional message."}\n\nThe website could not save this order online. Please confirm it here on WhatsApp.`;
+        whatsapp(fallbackMessage);
     }
 
 });
@@ -3376,6 +3286,8 @@ document.getElementById("ratingForm")
                 "ratingReview"
             ).value.trim(),
 
+        status:"pending",
+        approved:false,
         createdAt:serverTimestamp()
 
     };
@@ -3401,521 +3313,6 @@ document.getElementById("ratingForm")
         console.error(error);
 
         showToast("Could not save rating.");
-
-    }
-
-});
-
-
-/* =====================================================
-   AI
-===================================================== */
-
-window.openAI = function(){
-
-    const panel =
-        document.getElementById("aiPanel");
-
-    panel.classList.add("open");
-
-    const messages =
-        document.getElementById("aiMessages");
-
-    if(!messages.children.length){
-
-        addAIMessage(
-            "ai",
-            currentUser
-            ? "Hi, " +
-              escapeHTML(
-                  currentUser.displayName ||
-                  "there"
-              ) +
-              ". What would you like?"
-            : "Hi. I am Rumba AI. Ask me about food, rooms, prices, booking, ordering, location or contact."
-        );
-
-    }
-
-    setTimeout(()=>{
-        document.getElementById("aiInput").focus();
-    },100);
-
-};
-
-
-window.closeAI = function(){
-
-    document
-        .getElementById("aiPanel")
-        .classList.remove("open");
-
-};
-
-
-window.openAIWith = function(text){
-
-    openAI();
-
-    setTimeout(()=>{
-        sendAI(text);
-    },200);
-
-};
-
-
-function addAIMessage(type,html){
-
-    const container =
-        document.getElementById("aiMessages");
-
-    const div =
-        document.createElement("div");
-
-    div.className =
-        "aiMsg " + type;
-
-    div.innerHTML =
-        `<div class="aiBubble">${html}</div>`;
-
-    container.appendChild(div);
-
-    container.scrollTop =
-        container.scrollHeight;
-
-}
-
-
-function addAIProductCard(type,item){
-
-    const container =
-        document.getElementById("aiMessages");
-
-    const div =
-        document.createElement("div");
-
-    div.className = "aiMsg ai";
-
-    const isRoom = type === "room";
-
-    div.innerHTML = `
-
-        <div class="aiBubble">
-
-            ${isRoom
-                ? "I found this room for you:"
-                : "This food may be a good choice:"
-            }
-
-        </div>
-
-        <div class="aiCard">
-
-            <img
-                src="${escapeHTML(getImage(item))}"
-                alt="${escapeHTML(
-                    item.name || ""
-                )}">
-
-            <div class="aiCardBody">
-
-                <strong>
-                    ${escapeHTML(
-                        item.name ||
-                        (isRoom ? "Room" : "Food")
-                    )}
-                </strong>
-
-                <span>
-                    ${formatPrice(item.price)}
-                </span>
-
-                <button
-                    onclick="${
-                        isRoom
-                        ? `openBooking('${item.id}')`
-                        : `openOrder('${item.id}')`
-                    }">
-
-                    ${
-                        isRoom
-                        ? "Book Now"
-                        : "Order Now"
-                    }
-
-                </button>
-
-            </div>
-
-        </div>
-    `;
-
-    container.appendChild(div);
-
-    container.scrollTop =
-        container.scrollHeight;
-
-}
-
-
-window.askRoom = function(id){
-
-    openAI();
-
-    setTimeout(()=>{
-
-        const room =
-            rooms.find(r=>r.id === id);
-
-        if(room){
-
-            addAIMessage(
-                "user",
-                "Tell me about this room"
-            );
-
-            addAIProductCard("room",room);
-
-        }
-
-    },100);
-
-};
-
-
-function normalize(text){
-
-    return String(text || "")
-        .toLowerCase()
-        .trim();
-
-}
-
-
-async function aiResponse(raw){
-
-    const text =
-        normalize(raw);
-
-    /* GREETING */
-
-    if(
-        /^(hi|hello|hey|namaste|नमस्ते|good morning|good evening|good afternoon)\b/i
-        .test(text)
-    ){
-
-        const name =
-            currentUser?.displayName;
-
-        return {
-            text:
-                name
-                ? `Hi ${escapeHTML(name)}. Welcome to Rumba.`
-                : "Hi. Welcome to Rumba Fastfood & Dhindo Ghar."
-        };
-
-    }
-
-
-    /* THANKS */
-
-    if(
-        text.includes("thank") ||
-        text.includes("thanks") ||
-        text.includes("धन्यवाद")
-    ){
-
-        return {
-            text:"You're welcome. I am here whenever you need Rumba."
-        };
-
-    }
-
-
-    /* BEST FOOD */
-
-    if(
-        text.includes("best food") ||
-        text.includes("recommend food") ||
-        text.includes("food recommend") ||
-        text.includes("what should i eat") ||
-        text.includes("what can i eat") ||
-        text.includes("hungry") ||
-        text.includes("food")
-    ){
-
-        if(!foods.length){
-
-            return {
-                text:"The food menu is being updated. Please contact Rumba directly."
-            };
-
-        }
-
-        const item =
-            foods.find(f=>f.featured) ||
-            foods[0];
-
-        return {
-            text:"Here is a food option from the current Rumba menu.",
-            food:item
-        };
-
-    }
-
-
-    /* BEST ROOM */
-
-    if(
-        text.includes("best room") ||
-        text.includes("room") ||
-        text.includes("stay") ||
-        text.includes("hotel") ||
-        text.includes("sleep")
-    ){
-
-        if(!rooms.length){
-
-            return {
-                text:"I cannot see an available room right now. Please contact Rumba for current availability."
-            };
-
-        }
-
-        const room =
-            rooms.find(r=>r.featured) ||
-            rooms[0];
-
-        return {
-            text:"Here is a room from the current Rumba availability.",
-            room:room
-        };
-
-    }
-
-
-    /* PRICE */
-
-    if(
-        text.includes("price") ||
-        text.includes("cost") ||
-        text.includes("rate") ||
-        text.includes("कति")
-    ){
-
-        return {
-            text:
-                "I can show the current prices directly from Rumba's menu. Try “best food” or “best room”."
-        };
-
-    }
-
-
-    /* BOOK */
-
-    if(
-        text.includes("book") ||
-        text.includes("booking") ||
-        text.includes("reserve")
-    ){
-
-        if(rooms.length){
-
-            return {
-                text:
-                    "Sure. Choose a room below and I will open the booking form.",
-                room:
-                    rooms.find(r=>r.featured) ||
-                    rooms[0]
-            };
-
-        }
-
-        return {
-            text:
-                "Room booking is available when rooms are listed. You can also call Rumba directly."
-        };
-
-    }
-
-
-    /* ORDER */
-
-    if(
-        text.includes("order") ||
-        text.includes("खाना")
-    ){
-
-        if(foods.length){
-
-            return {
-                text:
-                    "Sure. Choose a food item and I will open the order form.",
-                food:
-                    foods.find(f=>f.featured) ||
-                    foods[0]
-            };
-
-        }
-
-        return {
-            text:
-                "The current menu is not loaded yet. Please contact Rumba."
-        };
-
-    }
-
-
-    /* CONTACT */
-
-    if(
-        text.includes("contact") ||
-        text.includes("phone") ||
-        text.includes("call") ||
-        text.includes("whatsapp")
-    ){
-
-        return {
-            text:
-                `You can contact Rumba at +977 984-1541691 or open WhatsApp.`
-        };
-
-    }
-
-
-    /* LOCATION */
-
-    if(
-        text.includes("where") ||
-        text.includes("location") ||
-        text.includes("address") ||
-        text.includes("map") ||
-        text.includes("gajuri")
-    ){
-
-        return {
-            text:
-                `Rumba Fastfood & Dhindo Ghar is in Gajuri, Dhading, Nepal.`
-        };
-
-    }
-
-
-    /* HOURS */
-
-    if(
-        text.includes("open") ||
-        text.includes("time") ||
-        text.includes("hours")
-    ){
-
-        return {
-            text:
-                "For today's exact opening hours, please check the current information or contact Rumba directly."
-        };
-
-    }
-
-
-    /* HELP */
-
-    if(
-        text.includes("help") ||
-        text.includes("what can you do")
-    ){
-
-        return {
-            text:
-                "I can help with food recommendations, rooms, prices, orders, bookings, contact, location, greetings and customer ratings."
-        };
-
-    }
-
-
-    /* DEFAULT */
-
-    return {
-        text:
-            "I can help you with Rumba food, rooms, ordering, booking, prices, location, contact and recommendations. Try “best food” or “best room”."
-    };
-
-}
-
-
-window.sendAI = async function(preset){
-
-    const input =
-        document.getElementById("aiInput");
-
-    const text =
-        String(
-            preset !== undefined
-                ? preset
-                : input.value
-        ).trim();
-
-    if(!text) return;
-
-    if(preset === undefined){
-
-        input.value = "";
-
-    }
-
-    addAIMessage(
-        "user",
-        escapeHTML(text)
-    );
-
-    const response =
-        await aiResponse(text);
-
-    setTimeout(()=>{
-
-        addAIMessage(
-            "ai",
-            response.text
-        );
-
-        if(response.food){
-
-            setTimeout(()=>{
-                addAIProductCard(
-                    "food",
-                    response.food
-                );
-            },100);
-
-        }
-
-        if(response.room){
-
-            setTimeout(()=>{
-                addAIProductCard(
-                    "room",
-                    response.room
-                );
-            },100);
-
-        }
-
-    },180);
-
-};
-
-
-/* =====================================================
-   ENTER KEY AI
-===================================================== */
-
-document.getElementById("aiInput")
-.addEventListener("keydown",e=>{
-
-    if(e.key === "Enter"){
-
-        e.preventDefault();
-
-        sendAI();
 
     }
 
@@ -3985,8 +3382,21 @@ document.getElementById("mobileLoginBtn")
     .onclick = login;
 
 
+/* Show a lightweight local hero immediately while live content loads. */
+renderBanners();
+
+/* Never let a slow database keep the full-screen loader covering the website. */
+setTimeout(()=>{
+    const loader = document.getElementById("pageLoader");
+    if(loader){
+        loader.style.opacity = "0";
+        loader.style.pointerEvents = "none";
+        setTimeout(()=>{ loader.style.display = "none"; },180);
+    }
+}, 2200);
+
 /*
-    Load all live Firebase content.
+    Load all live Firebase content in parallel.
 */
 
 Promise.all([
@@ -3998,18 +3408,12 @@ Promise.all([
 ])
 .finally(()=>{
 
-    setTimeout(()=>{
-
-        const loader =
-            document.getElementById("pageLoader");
-
+    const loader = document.getElementById("pageLoader");
+    if(loader){
         loader.style.opacity = "0";
-
-        setTimeout(()=>{
-            loader.style.display = "none";
-        },500);
-
-    },500);
+        loader.style.pointerEvents = "none";
+        setTimeout(()=>{ loader.style.display = "none"; },180);
+    }
 
 });
 
@@ -4020,6 +3424,28 @@ Promise.all([
 
 window.scrollToFood = scrollToFood;
 window.scrollToRooms = scrollToRooms;
+
+
+/* RUMBA performance, image fallbacks, accessibility and mobile helpers */
+(function rumbaPolish(){
+  const progress=document.createElement('div'); progress.id='rumbaScrollProgress'; document.body.appendChild(progress);
+  const back=document.createElement('button'); back.id='rumbaBackTop'; back.type='button'; back.setAttribute('aria-label','Back to top'); back.title='Back to top'; back.textContent='↑'; back.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'})); document.body.appendChild(back);
+  const notice=document.createElement('div'); notice.id='rumbaNetworkNotice'; notice.setAttribute('role','status'); document.body.appendChild(notice);
+  function updateScroll(){const max=document.documentElement.scrollHeight-window.innerHeight;progress.style.width=(max>0?window.scrollY/max*100:0)+'%';back.classList.toggle('visible',window.scrollY>500)}
+  window.addEventListener('scroll',updateScroll,{passive:true}); window.addEventListener('resize',updateScroll,{passive:true}); updateScroll();
+  function network(){if(!navigator.onLine){notice.textContent='You are offline. RUMBA live rooms and food may not update until connection returns.';notice.classList.add('show')}else{notice.classList.remove('show')}}
+  window.addEventListener('offline',network);window.addEventListener('online',()=>{notice.textContent='Connection restored.';notice.classList.add('show');setTimeout(()=>notice.classList.remove('show'),2200)});network();
+  // Use a branded local fallback when an uploaded room/food/banner image is unavailable.
+  document.addEventListener('error',function(ev){const img=ev.target;if(!(img instanceof HTMLImageElement)||img.dataset.rumbaFallback)return;img.dataset.rumbaFallback='1';img.classList.add('imgFailed');img.alt=img.alt||'RUMBA Hotel and Lodge';img.src='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420"><rect width="640" height="420" fill="#eee8dc"/><rect x="250" y="105" width="140" height="140" rx="34" fill="#b99a62"/><text x="320" y="198" text-anchor="middle" font-family="Georgia,serif" font-size="86" fill="#fff">R</text><text x="320" y="292" text-anchor="middle" font-family="Georgia,serif" font-size="32" fill="#30291f">RUMBA</text><text x="320" y="328" text-anchor="middle" font-family="Georgia,serif" font-size="17" fill="#625744">HOTEL AND LODGE</text></svg>');},true);
+  // Lazy-load images that do not already specify a loading strategy.
+  document.querySelectorAll('img').forEach(img=>{if(!img.hasAttribute('loading'))img.loading='lazy';if(!img.hasAttribute('decoding'))img.decoding='async'});
+  if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:.08});document.querySelectorAll('section,.card,.foodCard').forEach(el=>{el.classList.add('reveal-on-scroll');observer.observe(el)})}
+  // Prevent accidental duplicate submissions and give clear button feedback.
+  ['bookingForm','orderForm'].forEach(id=>{const form=document.getElementById(id);if(!form)return;form.addEventListener('submit',()=>{const btn=form.querySelector('[type="submit"]');if(btn&&!btn.disabled){btn.dataset.originalLabel=btn.textContent.trim();btn.textContent=id==='bookingForm'?'Preparing booking…':'Preparing order…'}},{capture:true})});
+  // Close modals with Escape and keep the page from scrolling behind them.
+  document.addEventListener('keydown',ev=>{if(ev.key==='Escape'){document.querySelectorAll('.modal.open').forEach(m=>{if(typeof window.closeModal==='function')window.closeModal(m.id);else m.classList.remove('open')})}});
+  document.querySelectorAll('a[target="_blank"]').forEach(a=>{if(!a.rel.includes('noopener'))a.rel=(a.rel+' noopener noreferrer').trim()});
+})();
 
 </script>
 
